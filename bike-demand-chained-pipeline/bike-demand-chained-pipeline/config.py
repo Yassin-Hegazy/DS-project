@@ -14,6 +14,11 @@ TRAIN_PATH = DATA_DIR / "train.csv"
 TEST_PATH = DATA_DIR / "test.csv"
 SAMPLE_SUBMISSION_PATH = DATA_DIR / "sample_submission.csv"
 
-TEAM_IDS: list[str] = []  # e.g. ["34521", "40218", "41190"]
+TEAM_IDS: list[str] = ["16001061", "16008386", "16001322"]
+EXPECTED_SEED = 36954  # sha256 of the sorted, underscore-joined IDs, mod 100000
 VALIDATION_SIZE = 0.20
 TARGET = "cnt"
+
+PHASE1_DIR = ROOT / "experiments" / "phase1"
+PHASE1_ARTIFACT = PHASE1_DIR / "phase1_artifact.json"
+BONUS_DIR = ROOT / "experiments" / "phase1_bonus"
