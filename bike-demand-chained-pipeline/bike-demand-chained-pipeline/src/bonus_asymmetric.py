@@ -78,6 +78,20 @@ def shift_by_hour(df, y, pred_mse, pred_asym) -> pd.DataFrame:
     return table.groupby(["workingday", "hr"]).mean().reset_index()
 
 
+def buffer_by_hour(df, y, pred_mse, pred_asym) -> pd.DataFrame:
+    """Per hour x day type: upward shift of the asymmetric model over its MSE
+    model, and the asymmetric model's mean bikes short and idle per hour."""
+    error = pred_asym - y
+    table = pd.DataFrame({
+        "workingday": df["workingday"].to_numpy(),
+        "hr": df["hr"].to_numpy(),
+        "shift": pred_asym - pred_mse,
+        "short": np.maximum(-error, 0),
+        "idle": np.maximum(error, 0),
+    })
+    return table.groupby(["workingday", "hr"]).mean().reset_index()
+
+
 def residual_structure(df, residual) -> tuple[pd.DataFrame, dict[str, float]]:
     """Split MSE residuals into hour x day-type cell means and within-cell spread.
 

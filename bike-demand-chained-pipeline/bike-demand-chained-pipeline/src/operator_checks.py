@@ -69,6 +69,15 @@ def top_decile_shortfall(y, pred, edges) -> float:
     return float(np.mean(np.maximum(y[top] - pred[top], 0)))
 
 
+def top_predicted_decile_shortfall(y, pred, edges) -> float:
+    """Mean bikes short among hours the model itself predicts in the top decile
+    (no selection effect). NaN if the model predicts no hour that high."""
+    top = pred > edges[-2]
+    if not np.any(top):
+        return float("nan")
+    return float(np.mean(np.maximum(y[top] - pred[top], 0)))
+
+
 def unscaled_coefficients(weights, feature_names, mean, std) -> pd.Series:
     """Convert weights on standardized columns back to original units.
 
