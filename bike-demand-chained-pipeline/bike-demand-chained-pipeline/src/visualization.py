@@ -7,6 +7,8 @@ import matplotlib.pyplot as plt
 # Fixed categorical order (never cycled), plus ink for observed data.
 SERIES_COLORS = ["#2a78d6", "#eb6834", "#1baf7a", "#eda100", "#e87ba4", "#008300"]
 INK = "#3d3d3a"
+# One hue, light -> dark, for ordered levels such as quantile bins.
+SEQUENTIAL_BLUE = ["#b7d3f6", "#86b6ef", "#5598e7", "#2a78d6", "#1c5cab", "#104281"]
 GRID = dict(alpha=0.2)
 
 
@@ -61,6 +63,58 @@ def plot_shift_by_hour(hour_table, title: str):
         ax.set_xticks(range(0, 24, 3))
         ax.grid(**GRID)
     axes[0].set_ylabel("Mean rentals per hour (validation)")
+    axes[0].legend()
+    fig.suptitle(title)
+    fig.tight_layout()
+    return fig
+
+
+def plot_residual_profiles(panels: list, title: str):
+    """Mean Phase 1 residual by hour, one line per level of a second column.
+
+    panels: list of (panel title, cell table with columns hr / level /
+    mean_residual, level column name, ordered). Ordered levels (e.g. bins)
+    use one hue light -> dark; unordered levels use the categorical order.
+    """
+    fig, axes = plt.subplots(2, 2, figsize=(12, 8), sharex=True)
+    for ax, (panel_title, table, level, ordered) in zip(axes.flat, panels):
+        levels = list(dict.fromkeys(table[level]))
+        colors = (SEQUENTIAL_BLUE[-len(levels):] if ordered
+                  else SERIES_COLORS[:len(levels)])
+        for color, value in zip(colors, levels):
+            part = table[table[level] == value]
+            ax.plot(part["hr"], part["mean_residual"], color=color, lw=2,
+                    marker="o", ms=3, label=f"{level} = {value}")
+        ax.axhline(0, color=INK, lw=1)
+        ax.set_title(panel_title)
+        ax.set_xticks(range(0, 24, 3))
+        ax.grid(**GRID)
+        ax.legend(fontsize=8)
+    for ax in axes[1]:
+        ax.set_xlabel("Hour of day")
+    for ax in axes[:, 0]:
+        ax.set_ylabel("Mean residual, actual - predicted (bikes)")
+    fig.suptitle(title)
+    fig.tight_layout()
+    return fig
+
+
+def plot_shortfall_by_hour(tables: dict, title: str):
+    """Mean bikes short per hour, per day type, for one or more models.
+
+    tables maps a model label to an errors_by_hour_daytype table.
+    """
+    fig, axes = plt.subplots(1, 2, figsize=(12, 4.5), sharey=True)
+    for ax, (workingday, label) in zip(axes, ((0, "Non-working days"), (1, "Working days"))):
+        for color, (model, table) in zip(SERIES_COLORS, tables.items()):
+            part = table[table["workingday"] == workingday]
+            ax.plot(part["hr"], part["mean_shortfall_bikes"], color=color, lw=2,
+                    marker="o", ms=4, label=model)
+        ax.set_title(label)
+        ax.set_xlabel("Hour of day")
+        ax.set_xticks(range(0, 24, 3))
+        ax.grid(**GRID)
+    axes[0].set_ylabel("Mean shortfall (bikes per hour, validation)")
     axes[0].legend()
     fig.suptitle(title)
     fig.tight_layout()
