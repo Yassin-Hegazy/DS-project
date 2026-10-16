@@ -33,6 +33,11 @@ class LinearRegressionGD:
     loss becomes non-finite or explodes (diverged), or after max_iter updates.
     """
 
+    # The MSE loss is quadratic in w, so the loop can use the precomputed
+    # form (see _objective). A loss that is not quadratic sets this to False
+    # and the loop calls loss_and_gradient directly.
+    QUADRATIC = True
+
     def __init__(self, learning_rate=1e-2, max_iter=10_000, tol=1e-8):
         self.learning_rate = learning_rate
         self.max_iter = max_iter
@@ -41,7 +46,7 @@ class LinearRegressionGD:
         self.loss_history = []
 
     def loss_and_gradient(self, X, y, w):
-        """MSE loss and its gradient X^T (Xw - y) / n.
+        """MSE loss and its gradient X^T (Xw - y) / n: the readable form.
 
         This is the hook the asymmetric-cost bonus overrides.
         """
@@ -51,16 +56,48 @@ class LinearRegressionGD:
         gradient = X.T @ residual / n
         return loss, gradient
 
+    def _objective(self, X, y):
+        """Function w -> (loss, gradient) used inside the loop.
+
+        For the quadratic MSE loss, X^T (Xw - y) / n = H w - b with
+        H = X^T X / n and b = X^T y / n, and ||Xw - y||^2 / (2n) =
+        (w^T H w - 2 w^T b + y^T y / n) / 2. H and b are computed once per
+        fit, so an update costs p^2 operations instead of n * p.
+        """
+        if not self.QUADRATIC:
+            return lambda w: self.loss_and_gradient(X, y, w)
+        n = len(y)
+        H = X.T @ X / n
+        b = X.T @ y / n
+        y_term = y @ y / n
+
+        def objective(w):
+            Hw = H @ w
+            return (w @ Hw - 2 * (w @ b) + y_term) / 2, Hw - b
+        return objective
+
+    def _assert_matches_readable_form(self, objective, X, y, w):
+        """The loop's loss and gradient must equal the readable ones."""
+        loss, gradient = objective(w)
+        readable_loss, readable_gradient = self.loss_and_gradient(X, y, w)
+        scale = max(1.0, float(np.max(np.abs(readable_gradient))))
+        assert np.max(np.abs(gradient - readable_gradient)) <= 1e-9 * scale, \
+            "precomputed gradient differs from X^T (Xw - y) / n"
+        assert abs(loss - readable_loss) <= 1e-9 * max(1.0, abs(readable_loss)), \
+            "precomputed loss differs from ||Xw - y||^2 / (2n)"
+
     def fit(self, X, y, init_weights=None) -> GDResult:
         if init_weights is None:
             w = np.zeros(X.shape[1])
         else:
             w = np.array(init_weights, dtype=float)
+        objective = self._objective(X, y)
+        self._assert_matches_readable_form(objective, X, y, w)
         loss_history, grad_history = [], []
         status = "max_iter"
         iterations = 0
         while True:
-            loss, gradient = self.loss_and_gradient(X, y, w)
+            loss, gradient = objective(w)
             max_grad = float(np.max(np.abs(gradient)))
             loss_history.append(float(loss))
             grad_history.append(max_grad)
@@ -74,6 +111,8 @@ class LinearRegressionGD:
                 break
             w = w - self.learning_rate * gradient
             iterations += 1
+        if status != "diverged":
+            self._assert_matches_readable_form(objective, X, y, w)
         self.weights = w
         self.loss_history = loss_history
         return GDResult(w, self.learning_rate, iterations, loss_history,

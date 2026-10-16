@@ -24,8 +24,14 @@ class AsymmetricLinearRegressionGD(LinearRegressionGD):
     """Phase 1 gradient descent with only the loss/gradient hook replaced.
 
     Gradient: X^T (c * r) / n, where c = under_cost for under-predicted rows.
-    under_cost = 1 gives exactly the Phase 1 MSE model.
+    under_cost = 1 gives the Phase 1 MSE model (equal up to floating-point
+    rounding: Phase 1's loop uses the precomputed H w - b form).
     """
+
+    # The row weights c depend on the sign of each residual, so this loss is
+    # not quadratic in w and has no fixed H: every update uses the explicit
+    # gradient X^T (c * r) / n.
+    QUADRATIC = False
 
     def __init__(self, under_cost=3.0, **kwargs):
         super().__init__(**kwargs)

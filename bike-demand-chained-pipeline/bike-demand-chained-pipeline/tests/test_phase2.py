@@ -98,3 +98,15 @@ def test_no_new_groups_is_phase1(fitted):
     phase1 = fitted[4]
     features = Phase2Features(phase1, []).fit(train)
     assert np.array_equal(features.transform(val), phase1.transform(val))
+
+
+def test_precomputed_and_explicit_gradient_reach_the_same_weights(fitted):
+    """Phase 1's loop (H w - b) and the explicit X^T (Xw - y) / n loop."""
+    from src.bonus_asymmetric import AsymmetricLinearRegressionGD
+    train, _, y_train, _, phase1, phase1_result = fitted
+    X = phase1.transform(train)
+    explicit = AsymmetricLinearRegressionGD(
+        under_cost=1.0, learning_rate=phase1_result.learning_rate,
+        max_iter=50_000, tol=1e-4).fit(X, y_train)
+    assert explicit.iterations == phase1_result.iterations
+    assert np.max(np.abs(explicit.weights - phase1_result.weights)) < 1e-8
