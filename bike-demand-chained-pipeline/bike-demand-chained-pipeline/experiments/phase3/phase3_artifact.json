@@ -1,0 +1,8481 @@
+{
+  "target_step": "hour x month",
+  "target_degree": 2,
+  "target_groups": [
+    "hour x workingday",
+    "hour x yr",
+    "hour x season",
+    "hour-block x weathersit",
+    "temp x hum",
+    "hour x workingday x yr",
+    "hour x workingday x temp",
+    "hour x holiday",
+    "hour x weekday",
+    "hour x month"
+  ],
+  "feature_names": [
+    "intercept",
+    "yr",
+    "holiday",
+    "temp",
+    "hum",
+    "windspeed",
+    "hr=1",
+    "hr=2",
+    "hr=3",
+    "hr=4",
+    "hr=5",
+    "hr=6",
+    "hr=7",
+    "hr=8",
+    "hr=9",
+    "hr=10",
+    "hr=11",
+    "hr=12",
+    "hr=13",
+    "hr=14",
+    "hr=15",
+    "hr=16",
+    "hr=17",
+    "hr=18",
+    "hr=19",
+    "hr=20",
+    "hr=21",
+    "hr=22",
+    "hr=23",
+    "weekday=1",
+    "weekday=2",
+    "weekday=3",
+    "weekday=4",
+    "weekday=5",
+    "weekday=6",
+    "weathersit=2",
+    "weathersit=3",
+    "mnth=2",
+    "mnth=3",
+    "mnth=4",
+    "mnth=5",
+    "mnth=6",
+    "mnth=7",
+    "mnth=8",
+    "mnth=9",
+    "mnth=10",
+    "mnth=11",
+    "mnth=12",
+    "hr=1*workingday",
+    "hr=2*workingday",
+    "hr=3*workingday",
+    "hr=4*workingday",
+    "hr=5*workingday",
+    "hr=6*workingday",
+    "hr=7*workingday",
+    "hr=8*workingday",
+    "hr=9*workingday",
+    "hr=10*workingday",
+    "hr=11*workingday",
+    "hr=12*workingday",
+    "hr=13*workingday",
+    "hr=14*workingday",
+    "hr=15*workingday",
+    "hr=16*workingday",
+    "hr=17*workingday",
+    "hr=18*workingday",
+    "hr=19*workingday",
+    "hr=20*workingday",
+    "hr=21*workingday",
+    "hr=22*workingday",
+    "hr=23*workingday",
+    "hr=1*yr",
+    "hr=2*yr",
+    "hr=3*yr",
+    "hr=4*yr",
+    "hr=5*yr",
+    "hr=6*yr",
+    "hr=7*yr",
+    "hr=8*yr",
+    "hr=9*yr",
+    "hr=10*yr",
+    "hr=11*yr",
+    "hr=12*yr",
+    "hr=13*yr",
+    "hr=14*yr",
+    "hr=15*yr",
+    "hr=16*yr",
+    "hr=17*yr",
+    "hr=18*yr",
+    "hr=19*yr",
+    "hr=20*yr",
+    "hr=21*yr",
+    "hr=22*yr",
+    "hr=23*yr",
+    "hr=1*season=2",
+    "hr=1*season=3",
+    "hr=1*season=4",
+    "hr=2*season=2",
+    "hr=2*season=3",
+    "hr=2*season=4",
+    "hr=3*season=2",
+    "hr=3*season=3",
+    "hr=3*season=4",
+    "hr=4*season=2",
+    "hr=4*season=3",
+    "hr=4*season=4",
+    "hr=5*season=2",
+    "hr=5*season=3",
+    "hr=5*season=4",
+    "hr=6*season=2",
+    "hr=6*season=3",
+    "hr=6*season=4",
+    "hr=7*season=2",
+    "hr=7*season=3",
+    "hr=7*season=4",
+    "hr=8*season=2",
+    "hr=8*season=3",
+    "hr=8*season=4",
+    "hr=9*season=2",
+    "hr=9*season=3",
+    "hr=9*season=4",
+    "hr=10*season=2",
+    "hr=10*season=3",
+    "hr=10*season=4",
+    "hr=11*season=2",
+    "hr=11*season=3",
+    "hr=11*season=4",
+    "hr=12*season=2",
+    "hr=12*season=3",
+    "hr=12*season=4",
+    "hr=13*season=2",
+    "hr=13*season=3",
+    "hr=13*season=4",
+    "hr=14*season=2",
+    "hr=14*season=3",
+    "hr=14*season=4",
+    "hr=15*season=2",
+    "hr=15*season=3",
+    "hr=15*season=4",
+    "hr=16*season=2",
+    "hr=16*season=3",
+    "hr=16*season=4",
+    "hr=17*season=2",
+    "hr=17*season=3",
+    "hr=17*season=4",
+    "hr=18*season=2",
+    "hr=18*season=3",
+    "hr=18*season=4",
+    "hr=19*season=2",
+    "hr=19*season=3",
+    "hr=19*season=4",
+    "hr=20*season=2",
+    "hr=20*season=3",
+    "hr=20*season=4",
+    "hr=21*season=2",
+    "hr=21*season=3",
+    "hr=21*season=4",
+    "hr=22*season=2",
+    "hr=22*season=3",
+    "hr=22*season=4",
+    "hr=23*season=2",
+    "hr=23*season=3",
+    "hr=23*season=4",
+    "hour_block=1*weathersit=2",
+    "hour_block=1*weathersit=3",
+    "hour_block=2*weathersit=2",
+    "hour_block=2*weathersit=3",
+    "hour_block=3*weathersit=2",
+    "hour_block=3*weathersit=3",
+    "hour_block=4*weathersit=2",
+    "hour_block=4*weathersit=3",
+    "temp*hum",
+    "workingday*yr",
+    "hr=1*workingday*yr",
+    "hr=2*workingday*yr",
+    "hr=3*workingday*yr",
+    "hr=4*workingday*yr",
+    "hr=5*workingday*yr",
+    "hr=6*workingday*yr",
+    "hr=7*workingday*yr",
+    "hr=8*workingday*yr",
+    "hr=9*workingday*yr",
+    "hr=10*workingday*yr",
+    "hr=11*workingday*yr",
+    "hr=12*workingday*yr",
+    "hr=13*workingday*yr",
+    "hr=14*workingday*yr",
+    "hr=15*workingday*yr",
+    "hr=16*workingday*yr",
+    "hr=17*workingday*yr",
+    "hr=18*workingday*yr",
+    "hr=19*workingday*yr",
+    "hr=20*workingday*yr",
+    "hr=21*workingday*yr",
+    "hr=22*workingday*yr",
+    "hr=23*workingday*yr",
+    "hr=1*temp",
+    "hr=2*temp",
+    "hr=3*temp",
+    "hr=4*temp",
+    "hr=5*temp",
+    "hr=6*temp",
+    "hr=7*temp",
+    "hr=8*temp",
+    "hr=9*temp",
+    "hr=10*temp",
+    "hr=11*temp",
+    "hr=12*temp",
+    "hr=13*temp",
+    "hr=14*temp",
+    "hr=15*temp",
+    "hr=16*temp",
+    "hr=17*temp",
+    "hr=18*temp",
+    "hr=19*temp",
+    "hr=20*temp",
+    "hr=21*temp",
+    "hr=22*temp",
+    "hr=23*temp",
+    "workingday*temp",
+    "hr=1*workingday*temp",
+    "hr=2*workingday*temp",
+    "hr=3*workingday*temp",
+    "hr=4*workingday*temp",
+    "hr=5*workingday*temp",
+    "hr=6*workingday*temp",
+    "hr=7*workingday*temp",
+    "hr=8*workingday*temp",
+    "hr=9*workingday*temp",
+    "hr=10*workingday*temp",
+    "hr=11*workingday*temp",
+    "hr=12*workingday*temp",
+    "hr=13*workingday*temp",
+    "hr=14*workingday*temp",
+    "hr=15*workingday*temp",
+    "hr=16*workingday*temp",
+    "hr=17*workingday*temp",
+    "hr=18*workingday*temp",
+    "hr=19*workingday*temp",
+    "hr=20*workingday*temp",
+    "hr=21*workingday*temp",
+    "hr=22*workingday*temp",
+    "hr=23*workingday*temp",
+    "hr=1*holiday",
+    "hr=2*holiday",
+    "hr=3*holiday",
+    "hr=4*holiday",
+    "hr=5*holiday",
+    "hr=6*holiday",
+    "hr=7*holiday",
+    "hr=8*holiday",
+    "hr=9*holiday",
+    "hr=10*holiday",
+    "hr=11*holiday",
+    "hr=12*holiday",
+    "hr=13*holiday",
+    "hr=14*holiday",
+    "hr=15*holiday",
+    "hr=16*holiday",
+    "hr=17*holiday",
+    "hr=18*holiday",
+    "hr=19*holiday",
+    "hr=20*holiday",
+    "hr=21*holiday",
+    "hr=22*holiday",
+    "hr=23*holiday",
+    "hr=1*weekday=1",
+    "hr=1*weekday=2",
+    "hr=1*weekday=3",
+    "hr=1*weekday=4",
+    "hr=1*weekday=6",
+    "hr=2*weekday=1",
+    "hr=2*weekday=2",
+    "hr=2*weekday=3",
+    "hr=2*weekday=4",
+    "hr=2*weekday=6",
+    "hr=3*weekday=1",
+    "hr=3*weekday=2",
+    "hr=3*weekday=3",
+    "hr=3*weekday=4",
+    "hr=3*weekday=6",
+    "hr=4*weekday=1",
+    "hr=4*weekday=2",
+    "hr=4*weekday=3",
+    "hr=4*weekday=4",
+    "hr=4*weekday=6",
+    "hr=5*weekday=1",
+    "hr=5*weekday=2",
+    "hr=5*weekday=3",
+    "hr=5*weekday=4",
+    "hr=5*weekday=6",
+    "hr=6*weekday=1",
+    "hr=6*weekday=2",
+    "hr=6*weekday=3",
+    "hr=6*weekday=4",
+    "hr=6*weekday=6",
+    "hr=7*weekday=1",
+    "hr=7*weekday=2",
+    "hr=7*weekday=3",
+    "hr=7*weekday=4",
+    "hr=7*weekday=6",
+    "hr=8*weekday=1",
+    "hr=8*weekday=2",
+    "hr=8*weekday=3",
+    "hr=8*weekday=4",
+    "hr=8*weekday=6",
+    "hr=9*weekday=1",
+    "hr=9*weekday=2",
+    "hr=9*weekday=3",
+    "hr=9*weekday=4",
+    "hr=9*weekday=6",
+    "hr=10*weekday=1",
+    "hr=10*weekday=2",
+    "hr=10*weekday=3",
+    "hr=10*weekday=4",
+    "hr=10*weekday=6",
+    "hr=11*weekday=1",
+    "hr=11*weekday=2",
+    "hr=11*weekday=3",
+    "hr=11*weekday=4",
+    "hr=11*weekday=6",
+    "hr=12*weekday=1",
+    "hr=12*weekday=2",
+    "hr=12*weekday=3",
+    "hr=12*weekday=4",
+    "hr=12*weekday=6",
+    "hr=13*weekday=1",
+    "hr=13*weekday=2",
+    "hr=13*weekday=3",
+    "hr=13*weekday=4",
+    "hr=13*weekday=6",
+    "hr=14*weekday=1",
+    "hr=14*weekday=2",
+    "hr=14*weekday=3",
+    "hr=14*weekday=4",
+    "hr=14*weekday=6",
+    "hr=15*weekday=1",
+    "hr=15*weekday=2",
+    "hr=15*weekday=3",
+    "hr=15*weekday=4",
+    "hr=15*weekday=6",
+    "hr=16*weekday=1",
+    "hr=16*weekday=2",
+    "hr=16*weekday=3",
+    "hr=16*weekday=4",
+    "hr=16*weekday=6",
+    "hr=17*weekday=1",
+    "hr=17*weekday=2",
+    "hr=17*weekday=3",
+    "hr=17*weekday=4",
+    "hr=17*weekday=6",
+    "hr=18*weekday=1",
+    "hr=18*weekday=2",
+    "hr=18*weekday=3",
+    "hr=18*weekday=4",
+    "hr=18*weekday=6",
+    "hr=19*weekday=1",
+    "hr=19*weekday=2",
+    "hr=19*weekday=3",
+    "hr=19*weekday=4",
+    "hr=19*weekday=6",
+    "hr=20*weekday=1",
+    "hr=20*weekday=2",
+    "hr=20*weekday=3",
+    "hr=20*weekday=4",
+    "hr=20*weekday=6",
+    "hr=21*weekday=1",
+    "hr=21*weekday=2",
+    "hr=21*weekday=3",
+    "hr=21*weekday=4",
+    "hr=21*weekday=6",
+    "hr=22*weekday=1",
+    "hr=22*weekday=2",
+    "hr=22*weekday=3",
+    "hr=22*weekday=4",
+    "hr=22*weekday=6",
+    "hr=23*weekday=1",
+    "hr=23*weekday=2",
+    "hr=23*weekday=3",
+    "hr=23*weekday=4",
+    "hr=23*weekday=6",
+    "hr=1*mnth=2",
+    "hr=1*mnth=3",
+    "hr=1*mnth=4",
+    "hr=1*mnth=5",
+    "hr=1*mnth=7",
+    "hr=1*mnth=8",
+    "hr=1*mnth=10",
+    "hr=1*mnth=11",
+    "hr=2*mnth=2",
+    "hr=2*mnth=3",
+    "hr=2*mnth=4",
+    "hr=2*mnth=5",
+    "hr=2*mnth=7",
+    "hr=2*mnth=8",
+    "hr=2*mnth=10",
+    "hr=2*mnth=11",
+    "hr=3*mnth=2",
+    "hr=3*mnth=3",
+    "hr=3*mnth=4",
+    "hr=3*mnth=5",
+    "hr=3*mnth=7",
+    "hr=3*mnth=8",
+    "hr=3*mnth=10",
+    "hr=3*mnth=11",
+    "hr=4*mnth=2",
+    "hr=4*mnth=3",
+    "hr=4*mnth=4",
+    "hr=4*mnth=5",
+    "hr=4*mnth=7",
+    "hr=4*mnth=8",
+    "hr=4*mnth=10",
+    "hr=4*mnth=11",
+    "hr=5*mnth=2",
+    "hr=5*mnth=3",
+    "hr=5*mnth=4",
+    "hr=5*mnth=5",
+    "hr=5*mnth=7",
+    "hr=5*mnth=8",
+    "hr=5*mnth=10",
+    "hr=5*mnth=11",
+    "hr=6*mnth=2",
+    "hr=6*mnth=3",
+    "hr=6*mnth=4",
+    "hr=6*mnth=5",
+    "hr=6*mnth=7",
+    "hr=6*mnth=8",
+    "hr=6*mnth=10",
+    "hr=6*mnth=11",
+    "hr=7*mnth=2",
+    "hr=7*mnth=3",
+    "hr=7*mnth=4",
+    "hr=7*mnth=5",
+    "hr=7*mnth=7",
+    "hr=7*mnth=8",
+    "hr=7*mnth=10",
+    "hr=7*mnth=11",
+    "hr=8*mnth=2",
+    "hr=8*mnth=3",
+    "hr=8*mnth=4",
+    "hr=8*mnth=5",
+    "hr=8*mnth=7",
+    "hr=8*mnth=8",
+    "hr=8*mnth=10",
+    "hr=8*mnth=11",
+    "hr=9*mnth=2",
+    "hr=9*mnth=3",
+    "hr=9*mnth=4",
+    "hr=9*mnth=5",
+    "hr=9*mnth=7",
+    "hr=9*mnth=8",
+    "hr=9*mnth=10",
+    "hr=9*mnth=11",
+    "hr=10*mnth=2",
+    "hr=10*mnth=3",
+    "hr=10*mnth=4",
+    "hr=10*mnth=5",
+    "hr=10*mnth=7",
+    "hr=10*mnth=8",
+    "hr=10*mnth=10",
+    "hr=10*mnth=11",
+    "hr=11*mnth=2",
+    "hr=11*mnth=3",
+    "hr=11*mnth=4",
+    "hr=11*mnth=5",
+    "hr=11*mnth=7",
+    "hr=11*mnth=8",
+    "hr=11*mnth=10",
+    "hr=11*mnth=11",
+    "hr=12*mnth=2",
+    "hr=12*mnth=3",
+    "hr=12*mnth=4",
+    "hr=12*mnth=5",
+    "hr=12*mnth=7",
+    "hr=12*mnth=8",
+    "hr=12*mnth=10",
+    "hr=12*mnth=11",
+    "hr=13*mnth=2",
+    "hr=13*mnth=3",
+    "hr=13*mnth=4",
+    "hr=13*mnth=5",
+    "hr=13*mnth=7",
+    "hr=13*mnth=8",
+    "hr=13*mnth=10",
+    "hr=13*mnth=11",
+    "hr=14*mnth=2",
+    "hr=14*mnth=3",
+    "hr=14*mnth=4",
+    "hr=14*mnth=5",
+    "hr=14*mnth=7",
+    "hr=14*mnth=8",
+    "hr=14*mnth=10",
+    "hr=14*mnth=11",
+    "hr=15*mnth=2",
+    "hr=15*mnth=3",
+    "hr=15*mnth=4",
+    "hr=15*mnth=5",
+    "hr=15*mnth=7",
+    "hr=15*mnth=8",
+    "hr=15*mnth=10",
+    "hr=15*mnth=11",
+    "hr=16*mnth=2",
+    "hr=16*mnth=3",
+    "hr=16*mnth=4",
+    "hr=16*mnth=5",
+    "hr=16*mnth=7",
+    "hr=16*mnth=8",
+    "hr=16*mnth=10",
+    "hr=16*mnth=11",
+    "hr=17*mnth=2",
+    "hr=17*mnth=3",
+    "hr=17*mnth=4",
+    "hr=17*mnth=5",
+    "hr=17*mnth=7",
+    "hr=17*mnth=8",
+    "hr=17*mnth=10",
+    "hr=17*mnth=11",
+    "hr=18*mnth=2",
+    "hr=18*mnth=3",
+    "hr=18*mnth=4",
+    "hr=18*mnth=5",
+    "hr=18*mnth=7",
+    "hr=18*mnth=8",
+    "hr=18*mnth=10",
+    "hr=18*mnth=11",
+    "hr=19*mnth=2",
+    "hr=19*mnth=3",
+    "hr=19*mnth=4",
+    "hr=19*mnth=5",
+    "hr=19*mnth=7",
+    "hr=19*mnth=8",
+    "hr=19*mnth=10",
+    "hr=19*mnth=11",
+    "hr=20*mnth=2",
+    "hr=20*mnth=3",
+    "hr=20*mnth=4",
+    "hr=20*mnth=5",
+    "hr=20*mnth=7",
+    "hr=20*mnth=8",
+    "hr=20*mnth=10",
+    "hr=20*mnth=11",
+    "hr=21*mnth=2",
+    "hr=21*mnth=3",
+    "hr=21*mnth=4",
+    "hr=21*mnth=5",
+    "hr=21*mnth=7",
+    "hr=21*mnth=8",
+    "hr=21*mnth=10",
+    "hr=21*mnth=11",
+    "hr=22*mnth=2",
+    "hr=22*mnth=3",
+    "hr=22*mnth=4",
+    "hr=22*mnth=5",
+    "hr=22*mnth=7",
+    "hr=22*mnth=8",
+    "hr=22*mnth=10",
+    "hr=22*mnth=11",
+    "hr=23*mnth=2",
+    "hr=23*mnth=3",
+    "hr=23*mnth=4",
+    "hr=23*mnth=5",
+    "hr=23*mnth=7",
+    "hr=23*mnth=8",
+    "hr=23*mnth=10",
+    "hr=23*mnth=11"
+  ],
+  "lineage": {
+    "intercept": [],
+    "yr": [
+      "yr"
+    ],
+    "holiday": [
+      "holiday"
+    ],
+    "temp": [
+      "temp"
+    ],
+    "hum": [
+      "hum"
+    ],
+    "windspeed": [
+      "windspeed"
+    ],
+    "hr=1": [
+      "hr"
+    ],
+    "hr=2": [
+      "hr"
+    ],
+    "hr=3": [
+      "hr"
+    ],
+    "hr=4": [
+      "hr"
+    ],
+    "hr=5": [
+      "hr"
+    ],
+    "hr=6": [
+      "hr"
+    ],
+    "hr=7": [
+      "hr"
+    ],
+    "hr=8": [
+      "hr"
+    ],
+    "hr=9": [
+      "hr"
+    ],
+    "hr=10": [
+      "hr"
+    ],
+    "hr=11": [
+      "hr"
+    ],
+    "hr=12": [
+      "hr"
+    ],
+    "hr=13": [
+      "hr"
+    ],
+    "hr=14": [
+      "hr"
+    ],
+    "hr=15": [
+      "hr"
+    ],
+    "hr=16": [
+      "hr"
+    ],
+    "hr=17": [
+      "hr"
+    ],
+    "hr=18": [
+      "hr"
+    ],
+    "hr=19": [
+      "hr"
+    ],
+    "hr=20": [
+      "hr"
+    ],
+    "hr=21": [
+      "hr"
+    ],
+    "hr=22": [
+      "hr"
+    ],
+    "hr=23": [
+      "hr"
+    ],
+    "weekday=1": [
+      "weekday"
+    ],
+    "weekday=2": [
+      "weekday"
+    ],
+    "weekday=3": [
+      "weekday"
+    ],
+    "weekday=4": [
+      "weekday"
+    ],
+    "weekday=5": [
+      "weekday"
+    ],
+    "weekday=6": [
+      "weekday"
+    ],
+    "weathersit=2": [
+      "weathersit"
+    ],
+    "weathersit=3": [
+      "weathersit"
+    ],
+    "mnth=2": [
+      "mnth"
+    ],
+    "mnth=3": [
+      "mnth"
+    ],
+    "mnth=4": [
+      "mnth"
+    ],
+    "mnth=5": [
+      "mnth"
+    ],
+    "mnth=6": [
+      "mnth"
+    ],
+    "mnth=7": [
+      "mnth"
+    ],
+    "mnth=8": [
+      "mnth"
+    ],
+    "mnth=9": [
+      "mnth"
+    ],
+    "mnth=10": [
+      "mnth"
+    ],
+    "mnth=11": [
+      "mnth"
+    ],
+    "mnth=12": [
+      "mnth"
+    ],
+    "hr=1*workingday": [
+      "hr",
+      "workingday"
+    ],
+    "hr=2*workingday": [
+      "hr",
+      "workingday"
+    ],
+    "hr=3*workingday": [
+      "hr",
+      "workingday"
+    ],
+    "hr=4*workingday": [
+      "hr",
+      "workingday"
+    ],
+    "hr=5*workingday": [
+      "hr",
+      "workingday"
+    ],
+    "hr=6*workingday": [
+      "hr",
+      "workingday"
+    ],
+    "hr=7*workingday": [
+      "hr",
+      "workingday"
+    ],
+    "hr=8*workingday": [
+      "hr",
+      "workingday"
+    ],
+    "hr=9*workingday": [
+      "hr",
+      "workingday"
+    ],
+    "hr=10*workingday": [
+      "hr",
+      "workingday"
+    ],
+    "hr=11*workingday": [
+      "hr",
+      "workingday"
+    ],
+    "hr=12*workingday": [
+      "hr",
+      "workingday"
+    ],
+    "hr=13*workingday": [
+      "hr",
+      "workingday"
+    ],
+    "hr=14*workingday": [
+      "hr",
+      "workingday"
+    ],
+    "hr=15*workingday": [
+      "hr",
+      "workingday"
+    ],
+    "hr=16*workingday": [
+      "hr",
+      "workingday"
+    ],
+    "hr=17*workingday": [
+      "hr",
+      "workingday"
+    ],
+    "hr=18*workingday": [
+      "hr",
+      "workingday"
+    ],
+    "hr=19*workingday": [
+      "hr",
+      "workingday"
+    ],
+    "hr=20*workingday": [
+      "hr",
+      "workingday"
+    ],
+    "hr=21*workingday": [
+      "hr",
+      "workingday"
+    ],
+    "hr=22*workingday": [
+      "hr",
+      "workingday"
+    ],
+    "hr=23*workingday": [
+      "hr",
+      "workingday"
+    ],
+    "hr=1*yr": [
+      "hr",
+      "yr"
+    ],
+    "hr=2*yr": [
+      "hr",
+      "yr"
+    ],
+    "hr=3*yr": [
+      "hr",
+      "yr"
+    ],
+    "hr=4*yr": [
+      "hr",
+      "yr"
+    ],
+    "hr=5*yr": [
+      "hr",
+      "yr"
+    ],
+    "hr=6*yr": [
+      "hr",
+      "yr"
+    ],
+    "hr=7*yr": [
+      "hr",
+      "yr"
+    ],
+    "hr=8*yr": [
+      "hr",
+      "yr"
+    ],
+    "hr=9*yr": [
+      "hr",
+      "yr"
+    ],
+    "hr=10*yr": [
+      "hr",
+      "yr"
+    ],
+    "hr=11*yr": [
+      "hr",
+      "yr"
+    ],
+    "hr=12*yr": [
+      "hr",
+      "yr"
+    ],
+    "hr=13*yr": [
+      "hr",
+      "yr"
+    ],
+    "hr=14*yr": [
+      "hr",
+      "yr"
+    ],
+    "hr=15*yr": [
+      "hr",
+      "yr"
+    ],
+    "hr=16*yr": [
+      "hr",
+      "yr"
+    ],
+    "hr=17*yr": [
+      "hr",
+      "yr"
+    ],
+    "hr=18*yr": [
+      "hr",
+      "yr"
+    ],
+    "hr=19*yr": [
+      "hr",
+      "yr"
+    ],
+    "hr=20*yr": [
+      "hr",
+      "yr"
+    ],
+    "hr=21*yr": [
+      "hr",
+      "yr"
+    ],
+    "hr=22*yr": [
+      "hr",
+      "yr"
+    ],
+    "hr=23*yr": [
+      "hr",
+      "yr"
+    ],
+    "hr=1*season=2": [
+      "hr",
+      "season"
+    ],
+    "hr=1*season=3": [
+      "hr",
+      "season"
+    ],
+    "hr=1*season=4": [
+      "hr",
+      "season"
+    ],
+    "hr=2*season=2": [
+      "hr",
+      "season"
+    ],
+    "hr=2*season=3": [
+      "hr",
+      "season"
+    ],
+    "hr=2*season=4": [
+      "hr",
+      "season"
+    ],
+    "hr=3*season=2": [
+      "hr",
+      "season"
+    ],
+    "hr=3*season=3": [
+      "hr",
+      "season"
+    ],
+    "hr=3*season=4": [
+      "hr",
+      "season"
+    ],
+    "hr=4*season=2": [
+      "hr",
+      "season"
+    ],
+    "hr=4*season=3": [
+      "hr",
+      "season"
+    ],
+    "hr=4*season=4": [
+      "hr",
+      "season"
+    ],
+    "hr=5*season=2": [
+      "hr",
+      "season"
+    ],
+    "hr=5*season=3": [
+      "hr",
+      "season"
+    ],
+    "hr=5*season=4": [
+      "hr",
+      "season"
+    ],
+    "hr=6*season=2": [
+      "hr",
+      "season"
+    ],
+    "hr=6*season=3": [
+      "hr",
+      "season"
+    ],
+    "hr=6*season=4": [
+      "hr",
+      "season"
+    ],
+    "hr=7*season=2": [
+      "hr",
+      "season"
+    ],
+    "hr=7*season=3": [
+      "hr",
+      "season"
+    ],
+    "hr=7*season=4": [
+      "hr",
+      "season"
+    ],
+    "hr=8*season=2": [
+      "hr",
+      "season"
+    ],
+    "hr=8*season=3": [
+      "hr",
+      "season"
+    ],
+    "hr=8*season=4": [
+      "hr",
+      "season"
+    ],
+    "hr=9*season=2": [
+      "hr",
+      "season"
+    ],
+    "hr=9*season=3": [
+      "hr",
+      "season"
+    ],
+    "hr=9*season=4": [
+      "hr",
+      "season"
+    ],
+    "hr=10*season=2": [
+      "hr",
+      "season"
+    ],
+    "hr=10*season=3": [
+      "hr",
+      "season"
+    ],
+    "hr=10*season=4": [
+      "hr",
+      "season"
+    ],
+    "hr=11*season=2": [
+      "hr",
+      "season"
+    ],
+    "hr=11*season=3": [
+      "hr",
+      "season"
+    ],
+    "hr=11*season=4": [
+      "hr",
+      "season"
+    ],
+    "hr=12*season=2": [
+      "hr",
+      "season"
+    ],
+    "hr=12*season=3": [
+      "hr",
+      "season"
+    ],
+    "hr=12*season=4": [
+      "hr",
+      "season"
+    ],
+    "hr=13*season=2": [
+      "hr",
+      "season"
+    ],
+    "hr=13*season=3": [
+      "hr",
+      "season"
+    ],
+    "hr=13*season=4": [
+      "hr",
+      "season"
+    ],
+    "hr=14*season=2": [
+      "hr",
+      "season"
+    ],
+    "hr=14*season=3": [
+      "hr",
+      "season"
+    ],
+    "hr=14*season=4": [
+      "hr",
+      "season"
+    ],
+    "hr=15*season=2": [
+      "hr",
+      "season"
+    ],
+    "hr=15*season=3": [
+      "hr",
+      "season"
+    ],
+    "hr=15*season=4": [
+      "hr",
+      "season"
+    ],
+    "hr=16*season=2": [
+      "hr",
+      "season"
+    ],
+    "hr=16*season=3": [
+      "hr",
+      "season"
+    ],
+    "hr=16*season=4": [
+      "hr",
+      "season"
+    ],
+    "hr=17*season=2": [
+      "hr",
+      "season"
+    ],
+    "hr=17*season=3": [
+      "hr",
+      "season"
+    ],
+    "hr=17*season=4": [
+      "hr",
+      "season"
+    ],
+    "hr=18*season=2": [
+      "hr",
+      "season"
+    ],
+    "hr=18*season=3": [
+      "hr",
+      "season"
+    ],
+    "hr=18*season=4": [
+      "hr",
+      "season"
+    ],
+    "hr=19*season=2": [
+      "hr",
+      "season"
+    ],
+    "hr=19*season=3": [
+      "hr",
+      "season"
+    ],
+    "hr=19*season=4": [
+      "hr",
+      "season"
+    ],
+    "hr=20*season=2": [
+      "hr",
+      "season"
+    ],
+    "hr=20*season=3": [
+      "hr",
+      "season"
+    ],
+    "hr=20*season=4": [
+      "hr",
+      "season"
+    ],
+    "hr=21*season=2": [
+      "hr",
+      "season"
+    ],
+    "hr=21*season=3": [
+      "hr",
+      "season"
+    ],
+    "hr=21*season=4": [
+      "hr",
+      "season"
+    ],
+    "hr=22*season=2": [
+      "hr",
+      "season"
+    ],
+    "hr=22*season=3": [
+      "hr",
+      "season"
+    ],
+    "hr=22*season=4": [
+      "hr",
+      "season"
+    ],
+    "hr=23*season=2": [
+      "hr",
+      "season"
+    ],
+    "hr=23*season=3": [
+      "hr",
+      "season"
+    ],
+    "hr=23*season=4": [
+      "hr",
+      "season"
+    ],
+    "hour_block=1*weathersit=2": [
+      "hr",
+      "weathersit"
+    ],
+    "hour_block=1*weathersit=3": [
+      "hr",
+      "weathersit"
+    ],
+    "hour_block=2*weathersit=2": [
+      "hr",
+      "weathersit"
+    ],
+    "hour_block=2*weathersit=3": [
+      "hr",
+      "weathersit"
+    ],
+    "hour_block=3*weathersit=2": [
+      "hr",
+      "weathersit"
+    ],
+    "hour_block=3*weathersit=3": [
+      "hr",
+      "weathersit"
+    ],
+    "hour_block=4*weathersit=2": [
+      "hr",
+      "weathersit"
+    ],
+    "hour_block=4*weathersit=3": [
+      "hr",
+      "weathersit"
+    ],
+    "temp*hum": [
+      "hum",
+      "temp"
+    ],
+    "workingday*yr": [
+      "workingday",
+      "yr"
+    ],
+    "hr=1*workingday*yr": [
+      "hr",
+      "workingday",
+      "yr"
+    ],
+    "hr=2*workingday*yr": [
+      "hr",
+      "workingday",
+      "yr"
+    ],
+    "hr=3*workingday*yr": [
+      "hr",
+      "workingday",
+      "yr"
+    ],
+    "hr=4*workingday*yr": [
+      "hr",
+      "workingday",
+      "yr"
+    ],
+    "hr=5*workingday*yr": [
+      "hr",
+      "workingday",
+      "yr"
+    ],
+    "hr=6*workingday*yr": [
+      "hr",
+      "workingday",
+      "yr"
+    ],
+    "hr=7*workingday*yr": [
+      "hr",
+      "workingday",
+      "yr"
+    ],
+    "hr=8*workingday*yr": [
+      "hr",
+      "workingday",
+      "yr"
+    ],
+    "hr=9*workingday*yr": [
+      "hr",
+      "workingday",
+      "yr"
+    ],
+    "hr=10*workingday*yr": [
+      "hr",
+      "workingday",
+      "yr"
+    ],
+    "hr=11*workingday*yr": [
+      "hr",
+      "workingday",
+      "yr"
+    ],
+    "hr=12*workingday*yr": [
+      "hr",
+      "workingday",
+      "yr"
+    ],
+    "hr=13*workingday*yr": [
+      "hr",
+      "workingday",
+      "yr"
+    ],
+    "hr=14*workingday*yr": [
+      "hr",
+      "workingday",
+      "yr"
+    ],
+    "hr=15*workingday*yr": [
+      "hr",
+      "workingday",
+      "yr"
+    ],
+    "hr=16*workingday*yr": [
+      "hr",
+      "workingday",
+      "yr"
+    ],
+    "hr=17*workingday*yr": [
+      "hr",
+      "workingday",
+      "yr"
+    ],
+    "hr=18*workingday*yr": [
+      "hr",
+      "workingday",
+      "yr"
+    ],
+    "hr=19*workingday*yr": [
+      "hr",
+      "workingday",
+      "yr"
+    ],
+    "hr=20*workingday*yr": [
+      "hr",
+      "workingday",
+      "yr"
+    ],
+    "hr=21*workingday*yr": [
+      "hr",
+      "workingday",
+      "yr"
+    ],
+    "hr=22*workingday*yr": [
+      "hr",
+      "workingday",
+      "yr"
+    ],
+    "hr=23*workingday*yr": [
+      "hr",
+      "workingday",
+      "yr"
+    ],
+    "hr=1*temp": [
+      "hr",
+      "temp"
+    ],
+    "hr=2*temp": [
+      "hr",
+      "temp"
+    ],
+    "hr=3*temp": [
+      "hr",
+      "temp"
+    ],
+    "hr=4*temp": [
+      "hr",
+      "temp"
+    ],
+    "hr=5*temp": [
+      "hr",
+      "temp"
+    ],
+    "hr=6*temp": [
+      "hr",
+      "temp"
+    ],
+    "hr=7*temp": [
+      "hr",
+      "temp"
+    ],
+    "hr=8*temp": [
+      "hr",
+      "temp"
+    ],
+    "hr=9*temp": [
+      "hr",
+      "temp"
+    ],
+    "hr=10*temp": [
+      "hr",
+      "temp"
+    ],
+    "hr=11*temp": [
+      "hr",
+      "temp"
+    ],
+    "hr=12*temp": [
+      "hr",
+      "temp"
+    ],
+    "hr=13*temp": [
+      "hr",
+      "temp"
+    ],
+    "hr=14*temp": [
+      "hr",
+      "temp"
+    ],
+    "hr=15*temp": [
+      "hr",
+      "temp"
+    ],
+    "hr=16*temp": [
+      "hr",
+      "temp"
+    ],
+    "hr=17*temp": [
+      "hr",
+      "temp"
+    ],
+    "hr=18*temp": [
+      "hr",
+      "temp"
+    ],
+    "hr=19*temp": [
+      "hr",
+      "temp"
+    ],
+    "hr=20*temp": [
+      "hr",
+      "temp"
+    ],
+    "hr=21*temp": [
+      "hr",
+      "temp"
+    ],
+    "hr=22*temp": [
+      "hr",
+      "temp"
+    ],
+    "hr=23*temp": [
+      "hr",
+      "temp"
+    ],
+    "workingday*temp": [
+      "temp",
+      "workingday"
+    ],
+    "hr=1*workingday*temp": [
+      "hr",
+      "temp",
+      "workingday"
+    ],
+    "hr=2*workingday*temp": [
+      "hr",
+      "temp",
+      "workingday"
+    ],
+    "hr=3*workingday*temp": [
+      "hr",
+      "temp",
+      "workingday"
+    ],
+    "hr=4*workingday*temp": [
+      "hr",
+      "temp",
+      "workingday"
+    ],
+    "hr=5*workingday*temp": [
+      "hr",
+      "temp",
+      "workingday"
+    ],
+    "hr=6*workingday*temp": [
+      "hr",
+      "temp",
+      "workingday"
+    ],
+    "hr=7*workingday*temp": [
+      "hr",
+      "temp",
+      "workingday"
+    ],
+    "hr=8*workingday*temp": [
+      "hr",
+      "temp",
+      "workingday"
+    ],
+    "hr=9*workingday*temp": [
+      "hr",
+      "temp",
+      "workingday"
+    ],
+    "hr=10*workingday*temp": [
+      "hr",
+      "temp",
+      "workingday"
+    ],
+    "hr=11*workingday*temp": [
+      "hr",
+      "temp",
+      "workingday"
+    ],
+    "hr=12*workingday*temp": [
+      "hr",
+      "temp",
+      "workingday"
+    ],
+    "hr=13*workingday*temp": [
+      "hr",
+      "temp",
+      "workingday"
+    ],
+    "hr=14*workingday*temp": [
+      "hr",
+      "temp",
+      "workingday"
+    ],
+    "hr=15*workingday*temp": [
+      "hr",
+      "temp",
+      "workingday"
+    ],
+    "hr=16*workingday*temp": [
+      "hr",
+      "temp",
+      "workingday"
+    ],
+    "hr=17*workingday*temp": [
+      "hr",
+      "temp",
+      "workingday"
+    ],
+    "hr=18*workingday*temp": [
+      "hr",
+      "temp",
+      "workingday"
+    ],
+    "hr=19*workingday*temp": [
+      "hr",
+      "temp",
+      "workingday"
+    ],
+    "hr=20*workingday*temp": [
+      "hr",
+      "temp",
+      "workingday"
+    ],
+    "hr=21*workingday*temp": [
+      "hr",
+      "temp",
+      "workingday"
+    ],
+    "hr=22*workingday*temp": [
+      "hr",
+      "temp",
+      "workingday"
+    ],
+    "hr=23*workingday*temp": [
+      "hr",
+      "temp",
+      "workingday"
+    ],
+    "hr=1*holiday": [
+      "holiday",
+      "hr"
+    ],
+    "hr=2*holiday": [
+      "holiday",
+      "hr"
+    ],
+    "hr=3*holiday": [
+      "holiday",
+      "hr"
+    ],
+    "hr=4*holiday": [
+      "holiday",
+      "hr"
+    ],
+    "hr=5*holiday": [
+      "holiday",
+      "hr"
+    ],
+    "hr=6*holiday": [
+      "holiday",
+      "hr"
+    ],
+    "hr=7*holiday": [
+      "holiday",
+      "hr"
+    ],
+    "hr=8*holiday": [
+      "holiday",
+      "hr"
+    ],
+    "hr=9*holiday": [
+      "holiday",
+      "hr"
+    ],
+    "hr=10*holiday": [
+      "holiday",
+      "hr"
+    ],
+    "hr=11*holiday": [
+      "holiday",
+      "hr"
+    ],
+    "hr=12*holiday": [
+      "holiday",
+      "hr"
+    ],
+    "hr=13*holiday": [
+      "holiday",
+      "hr"
+    ],
+    "hr=14*holiday": [
+      "holiday",
+      "hr"
+    ],
+    "hr=15*holiday": [
+      "holiday",
+      "hr"
+    ],
+    "hr=16*holiday": [
+      "holiday",
+      "hr"
+    ],
+    "hr=17*holiday": [
+      "holiday",
+      "hr"
+    ],
+    "hr=18*holiday": [
+      "holiday",
+      "hr"
+    ],
+    "hr=19*holiday": [
+      "holiday",
+      "hr"
+    ],
+    "hr=20*holiday": [
+      "holiday",
+      "hr"
+    ],
+    "hr=21*holiday": [
+      "holiday",
+      "hr"
+    ],
+    "hr=22*holiday": [
+      "holiday",
+      "hr"
+    ],
+    "hr=23*holiday": [
+      "holiday",
+      "hr"
+    ],
+    "hr=1*weekday=1": [
+      "hr",
+      "weekday"
+    ],
+    "hr=1*weekday=2": [
+      "hr",
+      "weekday"
+    ],
+    "hr=1*weekday=3": [
+      "hr",
+      "weekday"
+    ],
+    "hr=1*weekday=4": [
+      "hr",
+      "weekday"
+    ],
+    "hr=1*weekday=6": [
+      "hr",
+      "weekday"
+    ],
+    "hr=2*weekday=1": [
+      "hr",
+      "weekday"
+    ],
+    "hr=2*weekday=2": [
+      "hr",
+      "weekday"
+    ],
+    "hr=2*weekday=3": [
+      "hr",
+      "weekday"
+    ],
+    "hr=2*weekday=4": [
+      "hr",
+      "weekday"
+    ],
+    "hr=2*weekday=6": [
+      "hr",
+      "weekday"
+    ],
+    "hr=3*weekday=1": [
+      "hr",
+      "weekday"
+    ],
+    "hr=3*weekday=2": [
+      "hr",
+      "weekday"
+    ],
+    "hr=3*weekday=3": [
+      "hr",
+      "weekday"
+    ],
+    "hr=3*weekday=4": [
+      "hr",
+      "weekday"
+    ],
+    "hr=3*weekday=6": [
+      "hr",
+      "weekday"
+    ],
+    "hr=4*weekday=1": [
+      "hr",
+      "weekday"
+    ],
+    "hr=4*weekday=2": [
+      "hr",
+      "weekday"
+    ],
+    "hr=4*weekday=3": [
+      "hr",
+      "weekday"
+    ],
+    "hr=4*weekday=4": [
+      "hr",
+      "weekday"
+    ],
+    "hr=4*weekday=6": [
+      "hr",
+      "weekday"
+    ],
+    "hr=5*weekday=1": [
+      "hr",
+      "weekday"
+    ],
+    "hr=5*weekday=2": [
+      "hr",
+      "weekday"
+    ],
+    "hr=5*weekday=3": [
+      "hr",
+      "weekday"
+    ],
+    "hr=5*weekday=4": [
+      "hr",
+      "weekday"
+    ],
+    "hr=5*weekday=6": [
+      "hr",
+      "weekday"
+    ],
+    "hr=6*weekday=1": [
+      "hr",
+      "weekday"
+    ],
+    "hr=6*weekday=2": [
+      "hr",
+      "weekday"
+    ],
+    "hr=6*weekday=3": [
+      "hr",
+      "weekday"
+    ],
+    "hr=6*weekday=4": [
+      "hr",
+      "weekday"
+    ],
+    "hr=6*weekday=6": [
+      "hr",
+      "weekday"
+    ],
+    "hr=7*weekday=1": [
+      "hr",
+      "weekday"
+    ],
+    "hr=7*weekday=2": [
+      "hr",
+      "weekday"
+    ],
+    "hr=7*weekday=3": [
+      "hr",
+      "weekday"
+    ],
+    "hr=7*weekday=4": [
+      "hr",
+      "weekday"
+    ],
+    "hr=7*weekday=6": [
+      "hr",
+      "weekday"
+    ],
+    "hr=8*weekday=1": [
+      "hr",
+      "weekday"
+    ],
+    "hr=8*weekday=2": [
+      "hr",
+      "weekday"
+    ],
+    "hr=8*weekday=3": [
+      "hr",
+      "weekday"
+    ],
+    "hr=8*weekday=4": [
+      "hr",
+      "weekday"
+    ],
+    "hr=8*weekday=6": [
+      "hr",
+      "weekday"
+    ],
+    "hr=9*weekday=1": [
+      "hr",
+      "weekday"
+    ],
+    "hr=9*weekday=2": [
+      "hr",
+      "weekday"
+    ],
+    "hr=9*weekday=3": [
+      "hr",
+      "weekday"
+    ],
+    "hr=9*weekday=4": [
+      "hr",
+      "weekday"
+    ],
+    "hr=9*weekday=6": [
+      "hr",
+      "weekday"
+    ],
+    "hr=10*weekday=1": [
+      "hr",
+      "weekday"
+    ],
+    "hr=10*weekday=2": [
+      "hr",
+      "weekday"
+    ],
+    "hr=10*weekday=3": [
+      "hr",
+      "weekday"
+    ],
+    "hr=10*weekday=4": [
+      "hr",
+      "weekday"
+    ],
+    "hr=10*weekday=6": [
+      "hr",
+      "weekday"
+    ],
+    "hr=11*weekday=1": [
+      "hr",
+      "weekday"
+    ],
+    "hr=11*weekday=2": [
+      "hr",
+      "weekday"
+    ],
+    "hr=11*weekday=3": [
+      "hr",
+      "weekday"
+    ],
+    "hr=11*weekday=4": [
+      "hr",
+      "weekday"
+    ],
+    "hr=11*weekday=6": [
+      "hr",
+      "weekday"
+    ],
+    "hr=12*weekday=1": [
+      "hr",
+      "weekday"
+    ],
+    "hr=12*weekday=2": [
+      "hr",
+      "weekday"
+    ],
+    "hr=12*weekday=3": [
+      "hr",
+      "weekday"
+    ],
+    "hr=12*weekday=4": [
+      "hr",
+      "weekday"
+    ],
+    "hr=12*weekday=6": [
+      "hr",
+      "weekday"
+    ],
+    "hr=13*weekday=1": [
+      "hr",
+      "weekday"
+    ],
+    "hr=13*weekday=2": [
+      "hr",
+      "weekday"
+    ],
+    "hr=13*weekday=3": [
+      "hr",
+      "weekday"
+    ],
+    "hr=13*weekday=4": [
+      "hr",
+      "weekday"
+    ],
+    "hr=13*weekday=6": [
+      "hr",
+      "weekday"
+    ],
+    "hr=14*weekday=1": [
+      "hr",
+      "weekday"
+    ],
+    "hr=14*weekday=2": [
+      "hr",
+      "weekday"
+    ],
+    "hr=14*weekday=3": [
+      "hr",
+      "weekday"
+    ],
+    "hr=14*weekday=4": [
+      "hr",
+      "weekday"
+    ],
+    "hr=14*weekday=6": [
+      "hr",
+      "weekday"
+    ],
+    "hr=15*weekday=1": [
+      "hr",
+      "weekday"
+    ],
+    "hr=15*weekday=2": [
+      "hr",
+      "weekday"
+    ],
+    "hr=15*weekday=3": [
+      "hr",
+      "weekday"
+    ],
+    "hr=15*weekday=4": [
+      "hr",
+      "weekday"
+    ],
+    "hr=15*weekday=6": [
+      "hr",
+      "weekday"
+    ],
+    "hr=16*weekday=1": [
+      "hr",
+      "weekday"
+    ],
+    "hr=16*weekday=2": [
+      "hr",
+      "weekday"
+    ],
+    "hr=16*weekday=3": [
+      "hr",
+      "weekday"
+    ],
+    "hr=16*weekday=4": [
+      "hr",
+      "weekday"
+    ],
+    "hr=16*weekday=6": [
+      "hr",
+      "weekday"
+    ],
+    "hr=17*weekday=1": [
+      "hr",
+      "weekday"
+    ],
+    "hr=17*weekday=2": [
+      "hr",
+      "weekday"
+    ],
+    "hr=17*weekday=3": [
+      "hr",
+      "weekday"
+    ],
+    "hr=17*weekday=4": [
+      "hr",
+      "weekday"
+    ],
+    "hr=17*weekday=6": [
+      "hr",
+      "weekday"
+    ],
+    "hr=18*weekday=1": [
+      "hr",
+      "weekday"
+    ],
+    "hr=18*weekday=2": [
+      "hr",
+      "weekday"
+    ],
+    "hr=18*weekday=3": [
+      "hr",
+      "weekday"
+    ],
+    "hr=18*weekday=4": [
+      "hr",
+      "weekday"
+    ],
+    "hr=18*weekday=6": [
+      "hr",
+      "weekday"
+    ],
+    "hr=19*weekday=1": [
+      "hr",
+      "weekday"
+    ],
+    "hr=19*weekday=2": [
+      "hr",
+      "weekday"
+    ],
+    "hr=19*weekday=3": [
+      "hr",
+      "weekday"
+    ],
+    "hr=19*weekday=4": [
+      "hr",
+      "weekday"
+    ],
+    "hr=19*weekday=6": [
+      "hr",
+      "weekday"
+    ],
+    "hr=20*weekday=1": [
+      "hr",
+      "weekday"
+    ],
+    "hr=20*weekday=2": [
+      "hr",
+      "weekday"
+    ],
+    "hr=20*weekday=3": [
+      "hr",
+      "weekday"
+    ],
+    "hr=20*weekday=4": [
+      "hr",
+      "weekday"
+    ],
+    "hr=20*weekday=6": [
+      "hr",
+      "weekday"
+    ],
+    "hr=21*weekday=1": [
+      "hr",
+      "weekday"
+    ],
+    "hr=21*weekday=2": [
+      "hr",
+      "weekday"
+    ],
+    "hr=21*weekday=3": [
+      "hr",
+      "weekday"
+    ],
+    "hr=21*weekday=4": [
+      "hr",
+      "weekday"
+    ],
+    "hr=21*weekday=6": [
+      "hr",
+      "weekday"
+    ],
+    "hr=22*weekday=1": [
+      "hr",
+      "weekday"
+    ],
+    "hr=22*weekday=2": [
+      "hr",
+      "weekday"
+    ],
+    "hr=22*weekday=3": [
+      "hr",
+      "weekday"
+    ],
+    "hr=22*weekday=4": [
+      "hr",
+      "weekday"
+    ],
+    "hr=22*weekday=6": [
+      "hr",
+      "weekday"
+    ],
+    "hr=23*weekday=1": [
+      "hr",
+      "weekday"
+    ],
+    "hr=23*weekday=2": [
+      "hr",
+      "weekday"
+    ],
+    "hr=23*weekday=3": [
+      "hr",
+      "weekday"
+    ],
+    "hr=23*weekday=4": [
+      "hr",
+      "weekday"
+    ],
+    "hr=23*weekday=6": [
+      "hr",
+      "weekday"
+    ],
+    "hr=1*mnth=2": [
+      "hr",
+      "mnth"
+    ],
+    "hr=1*mnth=3": [
+      "hr",
+      "mnth"
+    ],
+    "hr=1*mnth=4": [
+      "hr",
+      "mnth"
+    ],
+    "hr=1*mnth=5": [
+      "hr",
+      "mnth"
+    ],
+    "hr=1*mnth=7": [
+      "hr",
+      "mnth"
+    ],
+    "hr=1*mnth=8": [
+      "hr",
+      "mnth"
+    ],
+    "hr=1*mnth=10": [
+      "hr",
+      "mnth"
+    ],
+    "hr=1*mnth=11": [
+      "hr",
+      "mnth"
+    ],
+    "hr=2*mnth=2": [
+      "hr",
+      "mnth"
+    ],
+    "hr=2*mnth=3": [
+      "hr",
+      "mnth"
+    ],
+    "hr=2*mnth=4": [
+      "hr",
+      "mnth"
+    ],
+    "hr=2*mnth=5": [
+      "hr",
+      "mnth"
+    ],
+    "hr=2*mnth=7": [
+      "hr",
+      "mnth"
+    ],
+    "hr=2*mnth=8": [
+      "hr",
+      "mnth"
+    ],
+    "hr=2*mnth=10": [
+      "hr",
+      "mnth"
+    ],
+    "hr=2*mnth=11": [
+      "hr",
+      "mnth"
+    ],
+    "hr=3*mnth=2": [
+      "hr",
+      "mnth"
+    ],
+    "hr=3*mnth=3": [
+      "hr",
+      "mnth"
+    ],
+    "hr=3*mnth=4": [
+      "hr",
+      "mnth"
+    ],
+    "hr=3*mnth=5": [
+      "hr",
+      "mnth"
+    ],
+    "hr=3*mnth=7": [
+      "hr",
+      "mnth"
+    ],
+    "hr=3*mnth=8": [
+      "hr",
+      "mnth"
+    ],
+    "hr=3*mnth=10": [
+      "hr",
+      "mnth"
+    ],
+    "hr=3*mnth=11": [
+      "hr",
+      "mnth"
+    ],
+    "hr=4*mnth=2": [
+      "hr",
+      "mnth"
+    ],
+    "hr=4*mnth=3": [
+      "hr",
+      "mnth"
+    ],
+    "hr=4*mnth=4": [
+      "hr",
+      "mnth"
+    ],
+    "hr=4*mnth=5": [
+      "hr",
+      "mnth"
+    ],
+    "hr=4*mnth=7": [
+      "hr",
+      "mnth"
+    ],
+    "hr=4*mnth=8": [
+      "hr",
+      "mnth"
+    ],
+    "hr=4*mnth=10": [
+      "hr",
+      "mnth"
+    ],
+    "hr=4*mnth=11": [
+      "hr",
+      "mnth"
+    ],
+    "hr=5*mnth=2": [
+      "hr",
+      "mnth"
+    ],
+    "hr=5*mnth=3": [
+      "hr",
+      "mnth"
+    ],
+    "hr=5*mnth=4": [
+      "hr",
+      "mnth"
+    ],
+    "hr=5*mnth=5": [
+      "hr",
+      "mnth"
+    ],
+    "hr=5*mnth=7": [
+      "hr",
+      "mnth"
+    ],
+    "hr=5*mnth=8": [
+      "hr",
+      "mnth"
+    ],
+    "hr=5*mnth=10": [
+      "hr",
+      "mnth"
+    ],
+    "hr=5*mnth=11": [
+      "hr",
+      "mnth"
+    ],
+    "hr=6*mnth=2": [
+      "hr",
+      "mnth"
+    ],
+    "hr=6*mnth=3": [
+      "hr",
+      "mnth"
+    ],
+    "hr=6*mnth=4": [
+      "hr",
+      "mnth"
+    ],
+    "hr=6*mnth=5": [
+      "hr",
+      "mnth"
+    ],
+    "hr=6*mnth=7": [
+      "hr",
+      "mnth"
+    ],
+    "hr=6*mnth=8": [
+      "hr",
+      "mnth"
+    ],
+    "hr=6*mnth=10": [
+      "hr",
+      "mnth"
+    ],
+    "hr=6*mnth=11": [
+      "hr",
+      "mnth"
+    ],
+    "hr=7*mnth=2": [
+      "hr",
+      "mnth"
+    ],
+    "hr=7*mnth=3": [
+      "hr",
+      "mnth"
+    ],
+    "hr=7*mnth=4": [
+      "hr",
+      "mnth"
+    ],
+    "hr=7*mnth=5": [
+      "hr",
+      "mnth"
+    ],
+    "hr=7*mnth=7": [
+      "hr",
+      "mnth"
+    ],
+    "hr=7*mnth=8": [
+      "hr",
+      "mnth"
+    ],
+    "hr=7*mnth=10": [
+      "hr",
+      "mnth"
+    ],
+    "hr=7*mnth=11": [
+      "hr",
+      "mnth"
+    ],
+    "hr=8*mnth=2": [
+      "hr",
+      "mnth"
+    ],
+    "hr=8*mnth=3": [
+      "hr",
+      "mnth"
+    ],
+    "hr=8*mnth=4": [
+      "hr",
+      "mnth"
+    ],
+    "hr=8*mnth=5": [
+      "hr",
+      "mnth"
+    ],
+    "hr=8*mnth=7": [
+      "hr",
+      "mnth"
+    ],
+    "hr=8*mnth=8": [
+      "hr",
+      "mnth"
+    ],
+    "hr=8*mnth=10": [
+      "hr",
+      "mnth"
+    ],
+    "hr=8*mnth=11": [
+      "hr",
+      "mnth"
+    ],
+    "hr=9*mnth=2": [
+      "hr",
+      "mnth"
+    ],
+    "hr=9*mnth=3": [
+      "hr",
+      "mnth"
+    ],
+    "hr=9*mnth=4": [
+      "hr",
+      "mnth"
+    ],
+    "hr=9*mnth=5": [
+      "hr",
+      "mnth"
+    ],
+    "hr=9*mnth=7": [
+      "hr",
+      "mnth"
+    ],
+    "hr=9*mnth=8": [
+      "hr",
+      "mnth"
+    ],
+    "hr=9*mnth=10": [
+      "hr",
+      "mnth"
+    ],
+    "hr=9*mnth=11": [
+      "hr",
+      "mnth"
+    ],
+    "hr=10*mnth=2": [
+      "hr",
+      "mnth"
+    ],
+    "hr=10*mnth=3": [
+      "hr",
+      "mnth"
+    ],
+    "hr=10*mnth=4": [
+      "hr",
+      "mnth"
+    ],
+    "hr=10*mnth=5": [
+      "hr",
+      "mnth"
+    ],
+    "hr=10*mnth=7": [
+      "hr",
+      "mnth"
+    ],
+    "hr=10*mnth=8": [
+      "hr",
+      "mnth"
+    ],
+    "hr=10*mnth=10": [
+      "hr",
+      "mnth"
+    ],
+    "hr=10*mnth=11": [
+      "hr",
+      "mnth"
+    ],
+    "hr=11*mnth=2": [
+      "hr",
+      "mnth"
+    ],
+    "hr=11*mnth=3": [
+      "hr",
+      "mnth"
+    ],
+    "hr=11*mnth=4": [
+      "hr",
+      "mnth"
+    ],
+    "hr=11*mnth=5": [
+      "hr",
+      "mnth"
+    ],
+    "hr=11*mnth=7": [
+      "hr",
+      "mnth"
+    ],
+    "hr=11*mnth=8": [
+      "hr",
+      "mnth"
+    ],
+    "hr=11*mnth=10": [
+      "hr",
+      "mnth"
+    ],
+    "hr=11*mnth=11": [
+      "hr",
+      "mnth"
+    ],
+    "hr=12*mnth=2": [
+      "hr",
+      "mnth"
+    ],
+    "hr=12*mnth=3": [
+      "hr",
+      "mnth"
+    ],
+    "hr=12*mnth=4": [
+      "hr",
+      "mnth"
+    ],
+    "hr=12*mnth=5": [
+      "hr",
+      "mnth"
+    ],
+    "hr=12*mnth=7": [
+      "hr",
+      "mnth"
+    ],
+    "hr=12*mnth=8": [
+      "hr",
+      "mnth"
+    ],
+    "hr=12*mnth=10": [
+      "hr",
+      "mnth"
+    ],
+    "hr=12*mnth=11": [
+      "hr",
+      "mnth"
+    ],
+    "hr=13*mnth=2": [
+      "hr",
+      "mnth"
+    ],
+    "hr=13*mnth=3": [
+      "hr",
+      "mnth"
+    ],
+    "hr=13*mnth=4": [
+      "hr",
+      "mnth"
+    ],
+    "hr=13*mnth=5": [
+      "hr",
+      "mnth"
+    ],
+    "hr=13*mnth=7": [
+      "hr",
+      "mnth"
+    ],
+    "hr=13*mnth=8": [
+      "hr",
+      "mnth"
+    ],
+    "hr=13*mnth=10": [
+      "hr",
+      "mnth"
+    ],
+    "hr=13*mnth=11": [
+      "hr",
+      "mnth"
+    ],
+    "hr=14*mnth=2": [
+      "hr",
+      "mnth"
+    ],
+    "hr=14*mnth=3": [
+      "hr",
+      "mnth"
+    ],
+    "hr=14*mnth=4": [
+      "hr",
+      "mnth"
+    ],
+    "hr=14*mnth=5": [
+      "hr",
+      "mnth"
+    ],
+    "hr=14*mnth=7": [
+      "hr",
+      "mnth"
+    ],
+    "hr=14*mnth=8": [
+      "hr",
+      "mnth"
+    ],
+    "hr=14*mnth=10": [
+      "hr",
+      "mnth"
+    ],
+    "hr=14*mnth=11": [
+      "hr",
+      "mnth"
+    ],
+    "hr=15*mnth=2": [
+      "hr",
+      "mnth"
+    ],
+    "hr=15*mnth=3": [
+      "hr",
+      "mnth"
+    ],
+    "hr=15*mnth=4": [
+      "hr",
+      "mnth"
+    ],
+    "hr=15*mnth=5": [
+      "hr",
+      "mnth"
+    ],
+    "hr=15*mnth=7": [
+      "hr",
+      "mnth"
+    ],
+    "hr=15*mnth=8": [
+      "hr",
+      "mnth"
+    ],
+    "hr=15*mnth=10": [
+      "hr",
+      "mnth"
+    ],
+    "hr=15*mnth=11": [
+      "hr",
+      "mnth"
+    ],
+    "hr=16*mnth=2": [
+      "hr",
+      "mnth"
+    ],
+    "hr=16*mnth=3": [
+      "hr",
+      "mnth"
+    ],
+    "hr=16*mnth=4": [
+      "hr",
+      "mnth"
+    ],
+    "hr=16*mnth=5": [
+      "hr",
+      "mnth"
+    ],
+    "hr=16*mnth=7": [
+      "hr",
+      "mnth"
+    ],
+    "hr=16*mnth=8": [
+      "hr",
+      "mnth"
+    ],
+    "hr=16*mnth=10": [
+      "hr",
+      "mnth"
+    ],
+    "hr=16*mnth=11": [
+      "hr",
+      "mnth"
+    ],
+    "hr=17*mnth=2": [
+      "hr",
+      "mnth"
+    ],
+    "hr=17*mnth=3": [
+      "hr",
+      "mnth"
+    ],
+    "hr=17*mnth=4": [
+      "hr",
+      "mnth"
+    ],
+    "hr=17*mnth=5": [
+      "hr",
+      "mnth"
+    ],
+    "hr=17*mnth=7": [
+      "hr",
+      "mnth"
+    ],
+    "hr=17*mnth=8": [
+      "hr",
+      "mnth"
+    ],
+    "hr=17*mnth=10": [
+      "hr",
+      "mnth"
+    ],
+    "hr=17*mnth=11": [
+      "hr",
+      "mnth"
+    ],
+    "hr=18*mnth=2": [
+      "hr",
+      "mnth"
+    ],
+    "hr=18*mnth=3": [
+      "hr",
+      "mnth"
+    ],
+    "hr=18*mnth=4": [
+      "hr",
+      "mnth"
+    ],
+    "hr=18*mnth=5": [
+      "hr",
+      "mnth"
+    ],
+    "hr=18*mnth=7": [
+      "hr",
+      "mnth"
+    ],
+    "hr=18*mnth=8": [
+      "hr",
+      "mnth"
+    ],
+    "hr=18*mnth=10": [
+      "hr",
+      "mnth"
+    ],
+    "hr=18*mnth=11": [
+      "hr",
+      "mnth"
+    ],
+    "hr=19*mnth=2": [
+      "hr",
+      "mnth"
+    ],
+    "hr=19*mnth=3": [
+      "hr",
+      "mnth"
+    ],
+    "hr=19*mnth=4": [
+      "hr",
+      "mnth"
+    ],
+    "hr=19*mnth=5": [
+      "hr",
+      "mnth"
+    ],
+    "hr=19*mnth=7": [
+      "hr",
+      "mnth"
+    ],
+    "hr=19*mnth=8": [
+      "hr",
+      "mnth"
+    ],
+    "hr=19*mnth=10": [
+      "hr",
+      "mnth"
+    ],
+    "hr=19*mnth=11": [
+      "hr",
+      "mnth"
+    ],
+    "hr=20*mnth=2": [
+      "hr",
+      "mnth"
+    ],
+    "hr=20*mnth=3": [
+      "hr",
+      "mnth"
+    ],
+    "hr=20*mnth=4": [
+      "hr",
+      "mnth"
+    ],
+    "hr=20*mnth=5": [
+      "hr",
+      "mnth"
+    ],
+    "hr=20*mnth=7": [
+      "hr",
+      "mnth"
+    ],
+    "hr=20*mnth=8": [
+      "hr",
+      "mnth"
+    ],
+    "hr=20*mnth=10": [
+      "hr",
+      "mnth"
+    ],
+    "hr=20*mnth=11": [
+      "hr",
+      "mnth"
+    ],
+    "hr=21*mnth=2": [
+      "hr",
+      "mnth"
+    ],
+    "hr=21*mnth=3": [
+      "hr",
+      "mnth"
+    ],
+    "hr=21*mnth=4": [
+      "hr",
+      "mnth"
+    ],
+    "hr=21*mnth=5": [
+      "hr",
+      "mnth"
+    ],
+    "hr=21*mnth=7": [
+      "hr",
+      "mnth"
+    ],
+    "hr=21*mnth=8": [
+      "hr",
+      "mnth"
+    ],
+    "hr=21*mnth=10": [
+      "hr",
+      "mnth"
+    ],
+    "hr=21*mnth=11": [
+      "hr",
+      "mnth"
+    ],
+    "hr=22*mnth=2": [
+      "hr",
+      "mnth"
+    ],
+    "hr=22*mnth=3": [
+      "hr",
+      "mnth"
+    ],
+    "hr=22*mnth=4": [
+      "hr",
+      "mnth"
+    ],
+    "hr=22*mnth=5": [
+      "hr",
+      "mnth"
+    ],
+    "hr=22*mnth=7": [
+      "hr",
+      "mnth"
+    ],
+    "hr=22*mnth=8": [
+      "hr",
+      "mnth"
+    ],
+    "hr=22*mnth=10": [
+      "hr",
+      "mnth"
+    ],
+    "hr=22*mnth=11": [
+      "hr",
+      "mnth"
+    ],
+    "hr=23*mnth=2": [
+      "hr",
+      "mnth"
+    ],
+    "hr=23*mnth=3": [
+      "hr",
+      "mnth"
+    ],
+    "hr=23*mnth=4": [
+      "hr",
+      "mnth"
+    ],
+    "hr=23*mnth=5": [
+      "hr",
+      "mnth"
+    ],
+    "hr=23*mnth=7": [
+      "hr",
+      "mnth"
+    ],
+    "hr=23*mnth=8": [
+      "hr",
+      "mnth"
+    ],
+    "hr=23*mnth=10": [
+      "hr",
+      "mnth"
+    ],
+    "hr=23*mnth=11": [
+      "hr",
+      "mnth"
+    ]
+  },
+  "weights": [
+    190.96635277905372,
+    10.153707798039795,
+    5.359636962806991,
+    8.947707030850555,
+    -11.905690532705151,
+    -5.380274018861104,
+    -4.30341928724285,
+    -6.3071329848967,
+    -8.094781692767247,
+    -8.919378444803405,
+    -6.810643166881987,
+    6.6328245412689615,
+    33.504082853747484,
+    63.46826314342402,
+    32.740882112385506,
+    23.395997963977813,
+    29.07070204934533,
+    38.1849410807783,
+    36.22208291419181,
+    32.56522492455474,
+    36.38426300950023,
+    46.370816905259694,
+    75.79647272910022,
+    69.6253346183483,
+    48.89605143999745,
+    33.25333074745529,
+    22.40918471279206,
+    15.648570385759955,
+    7.362618559926862,
+    -24.01786952885863,
+    -24.894337576466295,
+    -21.790018181294197,
+    -20.789771376081514,
+    -17.02905400078166,
+    0.3282413767209888,
+    0.5333237224109162,
+    0.7692704478452752,
+    0.6500566241582262,
+    1.6936106211264608,
+    1.0773508900031994,
+    10.743897716085039,
+    9.219373903625051,
+    12.209288168660933,
+    9.281869807772678,
+    11.346948417756744,
+    11.674992801189845,
+    8.878306643869479,
+    6.9000081398225515,
+    -1.0381044938870312,
+    -0.37112718434072106,
+    2.066870928914786,
+    4.171424793865367,
+    6.115259428443677,
+    13.143538452888215,
+    27.551915161699824,
+    42.57349757717146,
+    13.209159396738077,
+    -5.322345742130142,
+    -7.51925822993958,
+    -7.222844929349068,
+    -8.317328848723983,
+    -8.403201256516574,
+    -5.353171060197262,
+    1.629101575319482,
+    20.8789179517094,
+    18.594214921055226,
+    12.76750725505733,
+    8.871421144527668,
+    7.490482897064646,
+    9.119065418215195,
+    9.564747149369524,
+    -0.8239969587227693,
+    -1.296582991665587,
+    -1.8399808910905893,
+    -1.8952774558698124,
+    -1.183827881882285,
+    1.8627173371749,
+    9.167083681756507,
+    16.821143306530796,
+    9.06661891088599,
+    6.027160532339782,
+    8.180102164298246,
+    10.485132275530274,
+    10.191172931687529,
+    8.876632966992492,
+    11.224024918539476,
+    12.138515849000397,
+    19.548346263359512,
+    18.473485675391498,
+    12.235872122804043,
+    7.939864148414299,
+    4.935776857390962,
+    3.314981150244569,
+    1.7935171499674514,
+    -1.2457484463569408,
+    -1.9188362742985137,
+    -0.5492725056342956,
+    -2.238951096985608,
+    -1.9823212288818628,
+    -1.3547177944845366,
+    -3.0333572339014587,
+    -2.760820144295855,
+    -2.1776804053749124,
+    -3.0365735636044127,
+    -3.0409208747678065,
+    -2.1224428016521926,
+    -1.496940941739384,
+    -1.4849156200687743,
+    -1.2015963084773897,
+    -1.7359000170761265,
+    -1.939117343743649,
+    -0.09275127983327297,
+    7.652904897006276,
+    7.363425290191637,
+    7.229103930799938,
+    10.061596030836219,
+    10.603684404245332,
+    12.075273231324468,
+    3.941667494691794,
+    3.625388608608258,
+    5.76972767749506,
+    6.287115624574468,
+    7.942683878176849,
+    5.18939799360306,
+    6.538257174649449,
+    8.614040270809625,
+    6.632991652575367,
+    8.57596382654159,
+    11.706322316019241,
+    9.702697421637872,
+    6.438082581714331,
+    8.340331901514796,
+    7.787375814514481,
+    5.804374297430941,
+    8.167352699949626,
+    6.750533167788253,
+    6.181073691900078,
+    9.532558517670202,
+    8.096620678176267,
+    8.331779358004692,
+    10.242218312813115,
+    9.91123513891205,
+    15.894354533659234,
+    15.955994676919204,
+    11.70429478094474,
+    10.34158691427795,
+    13.99854663268733,
+    10.06222896054971,
+    9.836366019602764,
+    10.614267406813724,
+    6.247575481458205,
+    8.032647323564493,
+    5.854961860359014,
+    4.315510621388991,
+    3.884133556982156,
+    1.9213941848286842,
+    3.2773077061267717,
+    2.450990811247783,
+    1.1415594206670967,
+    1.5339097201410483,
+    0.7096123468863011,
+    0.34854717526222123,
+    0.42332318052743956,
+    -1.500981066322439,
+    -12.345612090407961,
+    -4.26144602658575,
+    -11.075372847368902,
+    -4.3800353806663,
+    -15.430139500365293,
+    -3.2337025355884403,
+    -7.264374408181774,
+    -7.334155546163669,
+    -4.745768964086558,
+    -0.025151269382228413,
+    0.21213697022649664,
+    0.6091598738951688,
+    0.7913166580002603,
+    1.5127145314657549,
+    2.679828114304101,
+    7.315585132048395,
+    10.029033480143395,
+    2.9100698293367024,
+    -1.3173115764937688,
+    -2.368651090385619,
+    -1.7772832979620958,
+    -3.363212069121274,
+    -2.610056898777741,
+    -2.2298881069243053,
+    1.4515602426151955,
+    5.882862409686607,
+    6.647339581814057,
+    5.085416231677815,
+    3.5826825272810163,
+    2.298768269265961,
+    1.642320749349716,
+    1.0746255137794387,
+    -0.5385262975616157,
+    -0.7269788385711493,
+    -0.5028658169046405,
+    -0.5869125619862701,
+    -0.8328133150649375,
+    3.988979035539398,
+    4.222765316793897,
+    5.266465956334596,
+    3.1536321186333027,
+    0.31108240079795396,
+    2.6247836127370325,
+    2.360417138581948,
+    3.4017477593739724,
+    2.7521302886068213,
+    3.791524588067191,
+    6.23035377184107,
+    11.239323931466997,
+    12.802091253042898,
+    7.747574732926534,
+    6.447312600787807,
+    5.86206077893533,
+    4.7318155619693085,
+    2.222922902330101,
+    -9.980634105227468,
+    0.3914751707808939,
+    0.6593670317158657,
+    1.3109879249196992,
+    1.887907288297478,
+    2.198998257984098,
+    3.8429721191413684,
+    7.351630907497873,
+    4.870348702799862,
+    -0.8125891992681054,
+    -2.5210035958769086,
+    -2.7428003676479373,
+    -2.426683079447228,
+    -1.6029435423999514,
+    -1.287848531497231,
+    -1.5808712012619592,
+    1.1143170712886072,
+    4.2465795869101255,
+    4.30426681434387,
+    1.9720300520720646,
+    2.352865499998529,
+    1.41339529213248,
+    1.4623517371789765,
+    1.5675339700965198,
+    -0.347285168329732,
+    -0.11275871553601409,
+    -0.11064477512990062,
+    0.4685171196069728,
+    0.6491316360565543,
+    1.349116869694222,
+    1.4703986780083618,
+    7.2245854636638205,
+    2.4840265517177826,
+    0.5750986877194649,
+    -0.019002375837496765,
+    0.16486156135611332,
+    -0.7137311697746505,
+    -1.1656900560522143,
+    -0.3285856784152168,
+    0.2525409102483354,
+    0.724265888348537,
+    0.4559529474441857,
+    1.8949654651182686,
+    1.8395024852043385,
+    2.6589001595663757,
+    3.663079396914551,
+    2.8190263602819314,
+    0.9550616118650602,
+    0.918308286366954,
+    0.45921409891825776,
+    0.2330757448290105,
+    -0.7523816425065433,
+    1.1213600002021524,
+    1.3317214746391988,
+    0.738768698872012,
+    0.48904052567925554,
+    -0.9015792989657738,
+    1.2878527228224232,
+    1.4572293090864108,
+    0.8986229401940531,
+    0.622295597159751,
+    -0.7452612795196405,
+    1.5302793171124132,
+    1.5005767633745635,
+    0.9520931590748859,
+    0.7039348949455937,
+    -0.23078273128885668,
+    1.4782430708463563,
+    1.7139405206524798,
+    1.2237471838218135,
+    1.016650469163528,
+    -0.1483488467414188,
+    1.3148310027374412,
+    2.601440240213078,
+    2.1052413041853915,
+    1.6538098019019933,
+    -0.14019443888733907,
+    2.990695185296714,
+    4.138984203207847,
+    4.434739249360874,
+    3.980907062777398,
+    0.20356270418069472,
+    0.14464339646238872,
+    0.3893418358610977,
+    2.0222544875459385,
+    2.342134011537736,
+    2.923395382649783,
+    -0.33838300498341345,
+    0.6994952204343377,
+    0.1393721152500367,
+    -0.06673887370078863,
+    2.8091861281627843,
+    -0.5228727312395083,
+    0.6629526540675318,
+    -0.07835812449903594,
+    -0.819170498418461,
+    1.0060803592023022,
+    -1.2323082951548014,
+    -0.7156132110558159,
+    -1.1052452069769494,
+    -1.2913586164833928,
+    1.4551335801982372,
+    -1.5186102014252292,
+    -1.7274039937560468,
+    -1.837442695676671,
+    -2.380616728955361,
+    1.4638978370156714,
+    -2.503158719461505,
+    -2.1318566199179028,
+    -3.4500744334587297,
+    -2.780457088763158,
+    0.6579759532449864,
+    -1.785664960332706,
+    -2.1307259512556076,
+    -2.7697809434310448,
+    -2.982104601641346,
+    2.2923534918810824,
+    -2.5226017985758142,
+    -2.92243462102579,
+    -3.3728481109823796,
+    -3.8981172253385403,
+    2.9670255706455313,
+    -0.9174729915148103,
+    -1.7828030937524766,
+    -3.608143997868249,
+    -2.7257103445623994,
+    0.8182842123289273,
+    4.551416073006877,
+    3.9606894165095157,
+    1.3320020400329937,
+    2.772758992435403,
+    2.3431115505132327,
+    6.859304726996581,
+    7.308291364594294,
+    6.533975393834978,
+    5.455661961386169,
+    1.9920930017743481,
+    5.408415375650576,
+    4.8391734727904625,
+    4.635956226685961,
+    4.127500883623482,
+    2.8655696604424072,
+    3.5117156075104363,
+    4.259062147764716,
+    4.246693945826617,
+    4.648534189105416,
+    1.2824679962767542,
+    2.057577902001475,
+    3.1529370272478956,
+    3.406320611519387,
+    3.1083545915471187,
+    2.2305852718532373,
+    -1.153151729436381,
+    0.6582828179217037,
+    0.6000880822932815,
+    0.7791219965155544,
+    3.0555662667443695,
+    -2.2539559731098415,
+    -1.1026123458987513,
+    -1.573201235705562,
+    -0.8676626629448734,
+    3.9027171552636144,
+    -0.20436751351475646,
+    -0.0917305802789236,
+    0.552270297745687,
+    -0.03934945840184652,
+    -0.11569350466160308,
+    0.5625815252868926,
+    -0.8189979689296458,
+    -0.466495079176243,
+    -0.2504515717609108,
+    -0.2518810510658028,
+    1.248418747679441,
+    0.15814080581729764,
+    -0.4102821072882772,
+    0.05461527018381986,
+    -0.7894111095548597,
+    -0.4326437999536893,
+    -0.6168439212138992,
+    -0.43969745149371936,
+    1.2022362830148348,
+    -0.056926441181757784,
+    -0.8350218001506302,
+    0.006442753712411905,
+    -0.7968005363449683,
+    -0.4083967069643649,
+    -0.2992756738380399,
+    -0.3476406037997497,
+    1.5643944981144673,
+    -0.06121575928392935,
+    -0.5299897686262378,
+    0.19663418934430704,
+    -0.6234100744941617,
+    -0.3182131133650748,
+    -0.17771056839352992,
+    -0.12826627903404553,
+    0.9734513136184195,
+    -0.4564699550559292,
+    -0.8868518579431167,
+    0.07833517359289775,
+    -0.6160559935112857,
+    -0.3101093387800255,
+    -0.02804793963986853,
+    -0.5277716508385801,
+    0.7714541981119727,
+    0.37427615898767524,
+    -1.6514367125867209,
+    -0.7830407539278745,
+    -0.6529181939823933,
+    -0.46677355649666724,
+    1.1397832350776171,
+    2.120136864886395,
+    -1.9247902132167696,
+    -1.3359304747823408,
+    -2.4817421574515492,
+    -1.628830505560238,
+    -0.10414902320372281,
+    0.4660198146145785,
+    2.464513397831472,
+    3.315532764140763,
+    -0.197829421017904,
+    -1.7904390433959565,
+    -3.9518141840202343,
+    -3.008866826721948,
+    -0.38219652829828044,
+    -0.013753689956322568,
+    1.774015690730493,
+    2.5081812495248696,
+    1.7592000476219716,
+    0.022313750732926876,
+    -2.3016755612623037,
+    -0.7268188518893431,
+    0.6953390152056854,
+    0.3656447144770183,
+    0.7179623594386979,
+    2.2764854725979804,
+    0.5131820151040558,
+    -0.11488953093361211,
+    -2.372456608722238,
+    -0.7256065734595266,
+    2.25896541869124,
+    0.9940007449607241,
+    1.0089187658769971,
+    2.423436991672342,
+    0.9902892883796351,
+    0.5422472292582856,
+    -3.7736410576826858,
+    -2.2586873496991977,
+    0.960156252915362,
+    -0.15093417283515476,
+    0.6259764032344018,
+    3.3237399614150602,
+    0.06151543804826708,
+    1.0387730127517636,
+    -4.825305992523203,
+    -2.5374653599986314,
+    0.6575489318822921,
+    -0.3136556474382851,
+    1.0351805361617639,
+    2.8155197141363755,
+    1.1568360933840525,
+    2.283976169104704,
+    -4.5190085006674545,
+    -2.3827954144429904,
+    0.4997472801411786,
+    0.45060908565603064,
+    -0.0050360008836416205,
+    2.9335847679322855,
+    1.2260387857600388,
+    0.6641321350980505,
+    -4.394755360436836,
+    -2.9119975085663192,
+    1.8510869885815107,
+    0.4949932836460294,
+    0.9042957936145939,
+    2.3254359859473115,
+    2.058091074678387,
+    1.5324837102600872,
+    -4.9383554500806826,
+    -3.4011996790262486,
+    1.9521673136798319,
+    0.3619569492941489,
+    0.5117377174155661,
+    2.6910610652181317,
+    0.11576465879185123,
+    0.7205157534808471,
+    -5.294116240665525,
+    -2.564624579701602,
+    3.0785870531144117,
+    -0.13014454351468757,
+    1.650872997987303,
+    4.223525208903306,
+    -0.5955856719541237,
+    0.4960015873092137,
+    -6.113054029780824,
+    -1.3497633043835064,
+    7.568059563168382,
+    2.2806908092238567,
+    0.6368749669057729,
+    4.387731273999596,
+    0.43829137386720357,
+    2.331955490172254,
+    -4.60672828252396,
+    -0.8765661048079809,
+    3.694047577977437,
+    0.2519965767101451,
+    -0.14683363632538735,
+    1.103044609586838,
+    -1.304823776790651,
+    0.29264579535034374,
+    -1.8419204842246872,
+    -0.03342504428121132,
+    1.713900694132449,
+    -0.5172342091505517,
+    0.529784298731007,
+    1.034857085380884,
+    -2.5113188297279327,
+    -1.888264054084759,
+    0.6645691397267491,
+    1.2511064022458893,
+    0.8743767101658569,
+    -0.3519113942730545,
+    0.4582096593522616,
+    0.6717947789882392,
+    -0.9200336325306785,
+    -1.1512349148929195,
+    1.8099820075550594,
+    0.3274345863419441,
+    -0.7097102492196232,
+    -0.6777139123208222,
+    0.1330559931021781,
+    0.009259074394296952,
+    -0.6306857721729137,
+    -0.29603339789814087,
+    0.6208947014999444,
+    -0.05290772266594615,
+    0.058992431421594146,
+    -0.56565235573431,
+    -0.18306393259570283,
+    -0.4849313240882021,
+    -0.034773634837324784,
+    0.0016690641943297201,
+    -0.07695530781709112,
+    0.34760163763971713,
+    -0.08345601246148064,
+    -0.1673219685212581
+  ],
+  "diagnosis": {
+    "seeded_validation_peak": {
+      "step": "hour x workingday x yr x season",
+      "n_features": 818,
+      "val_r2": 0.9274123272240615
+    },
+    "target_train_val_r2_gap": 0.005428720807247656,
+    "largest_train_val_r2_gap": 0.011240977536319807,
+    "largest_status": "converged",
+    "learning_curve_final_gap_rmse": {
+      "Phase 2's chosen design": -0.5947321849952871,
+      "largest extended design": 4.802281302172915
+    },
+    "target_val_r2": {
+      "seeded": 0.926228418773087,
+      "chronological": 0.9224011211311807
+    },
+    "r2_tolerance": 0.002,
+    "shortfall_tolerance": 1.0
+  },
+  "noise_candidates": [
+    "temp x hum"
+  ],
+  "tables": {
+    "seeded_sweep": [
+      {
+        "added group": "(Phase 1)",
+        "degree": 1,
+        "part": "Phase 2",
+        "n_features": 47,
+        "rank_ok": true,
+        "condition_number": 55.82578421532118,
+        "learning_rate": 0.9550686527135399,
+        "status": "converged",
+        "iterations": 0,
+        "final_max_abs_gradient": 9.951920595714394e-05,
+        "gap_to_exact_bikes": 0.007414812677097871,
+        "exact_val_r2": 0.6823313066678378,
+        "dropped_columns": 0,
+        "train_r2": 0.6970320341373377,
+        "val_r2": 0.6823315710394642,
+        "train_val_r2_gap": 0.01470046309787354,
+        "train_rmse": 99.33775459115533,
+        "val_rmse": 103.55819149895348,
+        "top_decile_shortfall": 176.64171524654665,
+        "top_predicted_decile_shortfall": 134.8578620907724,
+        "top_predicted_decile_mean_error": -95.91741814040437,
+        "negative_predictions": 213
+      },
+      {
+        "added group": "hour x workingday",
+        "degree": 2,
+        "part": "Phase 2",
+        "n_features": 70,
+        "rank_ok": true,
+        "condition_number": 191.1843854062156,
+        "learning_rate": 0.9488821954036941,
+        "status": "converged",
+        "iterations": 757,
+        "final_max_abs_gradient": 9.98679546506032e-05,
+        "gap_to_exact_bikes": 0.019002307982539435,
+        "exact_val_r2": 0.8309807764840207,
+        "dropped_columns": 0,
+        "train_r2": 0.8316394316721272,
+        "val_r2": 0.8309804387615874,
+        "train_val_r2_gap": 0.0006589929105397241,
+        "train_rmse": 74.0518947324145,
+        "val_rmse": 75.53807529808978,
+        "top_decile_shortfall": 110.74175545830717,
+        "top_predicted_decile_shortfall": 87.98709673236921,
+        "top_predicted_decile_mean_error": -65.80160987591816,
+        "negative_predictions": 223
+      },
+      {
+        "added group": "hour x yr",
+        "degree": 2,
+        "part": "Phase 2",
+        "n_features": 93,
+        "rank_ok": true,
+        "condition_number": 199.25261916130466,
+        "learning_rate": 0.9104785089608376,
+        "status": "converged",
+        "iterations": 789,
+        "final_max_abs_gradient": 9.972619393546925e-05,
+        "gap_to_exact_bikes": 0.019035619540893833,
+        "exact_val_r2": 0.8674762156469246,
+        "dropped_columns": 0,
+        "train_r2": 0.8640754524677715,
+        "val_r2": 0.8674758281652445,
+        "train_val_r2_gap": -0.0034003756974729793,
+        "train_rmse": 66.53726288860992,
+        "val_rmse": 66.88750236424933,
+        "top_decile_shortfall": 91.7900718365037,
+        "top_predicted_decile_shortfall": 77.393323157781,
+        "top_predicted_decile_mean_error": -55.28301869892391,
+        "negative_predictions": 186
+      },
+      {
+        "added group": "hour x season",
+        "degree": 2,
+        "part": "Phase 2",
+        "n_features": 162,
+        "rank_ok": true,
+        "condition_number": 467.89289269663004,
+        "learning_rate": 0.65446809498311,
+        "status": "converged",
+        "iterations": 1748,
+        "final_max_abs_gradient": 9.985669974083671e-05,
+        "gap_to_exact_bikes": 0.04157736848654281,
+        "exact_val_r2": 0.8936802528577533,
+        "dropped_columns": 0,
+        "train_r2": 0.8932742977359508,
+        "val_r2": 0.8936800424130621,
+        "train_val_r2_gap": -0.00040574467711129714,
+        "train_rmse": 58.9590523022606,
+        "val_rmse": 59.91075976944144,
+        "top_decile_shortfall": 76.34735292436852,
+        "top_predicted_decile_shortfall": 56.49761411690964,
+        "top_predicted_decile_mean_error": -26.568183728136233,
+        "negative_predictions": 156
+      },
+      {
+        "added group": "hour-block x weathersit",
+        "degree": 2,
+        "part": "Phase 2",
+        "n_features": 170,
+        "rank_ok": true,
+        "condition_number": 471.953860225809,
+        "learning_rate": 0.649884378241864,
+        "status": "converged",
+        "iterations": 1756,
+        "final_max_abs_gradient": 9.960060420181625e-05,
+        "gap_to_exact_bikes": 0.04168129398242115,
+        "exact_val_r2": 0.9003902466648261,
+        "dropped_columns": 0,
+        "train_r2": 0.8979063127108655,
+        "val_r2": 0.9003901357000538,
+        "train_val_r2_gap": -0.0024838229891882557,
+        "train_rmse": 57.66541584717474,
+        "val_rmse": 57.989398510669005,
+        "top_decile_shortfall": 73.67954545235816,
+        "top_predicted_decile_shortfall": 54.132110012319245,
+        "top_predicted_decile_mean_error": -24.726233939623672,
+        "negative_predictions": 164
+      },
+      {
+        "added group": "temp x hum",
+        "degree": 2,
+        "part": "Phase 2",
+        "n_features": 171,
+        "rank_ok": true,
+        "condition_number": 477.78437988981284,
+        "learning_rate": 0.6441736522985988,
+        "status": "converged",
+        "iterations": 1758,
+        "final_max_abs_gradient": 9.994782107427096e-05,
+        "gap_to_exact_bikes": 0.041758784574042807,
+        "exact_val_r2": 0.9008534975882658,
+        "dropped_columns": 0,
+        "train_r2": 0.8992845207407648,
+        "val_r2": 0.9008533656655776,
+        "train_val_r2_gap": -0.0015688449248127956,
+        "train_rmse": 57.27486779287811,
+        "val_rmse": 57.85440319350861,
+        "top_decile_shortfall": 73.55954554953148,
+        "top_predicted_decile_shortfall": 53.76598942015733,
+        "top_predicted_decile_mean_error": -23.839394835538943,
+        "negative_predictions": 164
+      },
+      {
+        "added group": "hour x workingday x yr",
+        "degree": 3,
+        "part": "Phase 2",
+        "n_features": 195,
+        "rank_ok": true,
+        "condition_number": 478.083906405558,
+        "learning_rate": 0.6438113705155667,
+        "status": "converged",
+        "iterations": 1759,
+        "final_max_abs_gradient": 9.970810915152132e-05,
+        "gap_to_exact_bikes": 0.04165978663451142,
+        "exact_val_r2": 0.9104514475618039,
+        "dropped_columns": 0,
+        "train_r2": 0.9078016232140068,
+        "val_r2": 0.9104513565566273,
+        "train_val_r2_gap": -0.0026497333426205305,
+        "train_rmse": 54.79962935472235,
+        "val_rmse": 54.9828104999373,
+        "top_decile_shortfall": 65.91463386108212,
+        "top_predicted_decile_shortfall": 50.41137108913887,
+        "top_predicted_decile_mean_error": -21.289610356451316,
+        "negative_predictions": 152
+      },
+      {
+        "added group": "hour x workingday x temp",
+        "degree": 3,
+        "part": "Phase 2",
+        "n_features": 242,
+        "rank_ok": true,
+        "condition_number": 1712.7477623425227,
+        "learning_rate": 0.5110500437508029,
+        "status": "converged",
+        "iterations": 3884,
+        "final_max_abs_gradient": 9.994584092058241e-05,
+        "gap_to_exact_bikes": 0.05865216120913175,
+        "exact_val_r2": 0.9225193038586018,
+        "dropped_columns": 0,
+        "train_r2": 0.9178137407201455,
+        "val_r2": 0.9225194130214331,
+        "train_val_r2_gap": -0.0047056723012876,
+        "train_rmse": 51.73870931369008,
+        "val_rmse": 51.143904557502836,
+        "top_decile_shortfall": 58.86311188362081,
+        "top_predicted_decile_shortfall": 43.26939023562287,
+        "top_predicted_decile_mean_error": -11.774800507316911,
+        "negative_predictions": 120
+      },
+      {
+        "added group": "hour x holiday",
+        "degree": 2,
+        "part": "extension",
+        "n_features": 265,
+        "rank_ok": true,
+        "condition_number": 1713.4312310124328,
+        "learning_rate": 0.510859544125348,
+        "status": "converged",
+        "iterations": 992,
+        "final_max_abs_gradient": 9.985992552393614e-05,
+        "gap_to_exact_bikes": 0.06718463954486253,
+        "exact_val_r2": 0.9222708682958211,
+        "dropped_columns": 0,
+        "train_r2": 0.9204247812457428,
+        "val_r2": 0.9222707685188942,
+        "train_val_r2_gap": -0.0018459872731514393,
+        "train_rmse": 50.910211836468,
+        "val_rmse": 51.22590228896682,
+        "top_decile_shortfall": 58.349687793310444,
+        "top_predicted_decile_shortfall": 45.680865739270395,
+        "top_predicted_decile_mean_error": -15.658263299249763,
+        "negative_predictions": 121
+      },
+      {
+        "added group": "hour x weekday",
+        "degree": 2,
+        "part": "extension",
+        "n_features": 380,
+        "rank_ok": true,
+        "condition_number": 1726.8539098605645,
+        "learning_rate": 0.5090134897906639,
+        "status": "converged",
+        "iterations": 2412,
+        "final_max_abs_gradient": 9.996883392054699e-05,
+        "gap_to_exact_bikes": 0.08207143630623648,
+        "exact_val_r2": 0.9249286672943868,
+        "dropped_columns": 23,
+        "train_r2": 0.9263775899527741,
+        "val_r2": 0.9249286680144759,
+        "train_val_r2_gap": 0.0014489219382981533,
+        "train_rmse": 48.96897330354996,
+        "val_rmse": 50.34246660711949,
+        "top_decile_shortfall": 55.2841504799554,
+        "top_predicted_decile_shortfall": 43.6965609216189,
+        "top_predicted_decile_mean_error": -14.08977743966015,
+        "negative_predictions": 123
+      },
+      {
+        "added group": "hour x month",
+        "degree": 2,
+        "part": "extension",
+        "n_features": 564,
+        "rank_ok": true,
+        "condition_number": 5062.351582801611,
+        "learning_rate": 0.4237184959297464,
+        "status": "converged",
+        "iterations": 10598,
+        "final_max_abs_gradient": 9.998220415140014e-05,
+        "gap_to_exact_bikes": 0.18746888244420745,
+        "exact_val_r2": 0.9262284297893918,
+        "dropped_columns": 92,
+        "train_r2": 0.9316571395803347,
+        "val_r2": 0.926228418773087,
+        "train_val_r2_gap": 0.005428720807247656,
+        "train_rmse": 47.18050221446109,
+        "val_rmse": 49.904760535923906,
+        "top_decile_shortfall": 53.84406673916467,
+        "top_predicted_decile_shortfall": 41.225396078331634,
+        "top_predicted_decile_mean_error": -12.364767203719671,
+        "negative_predictions": 89
+      },
+      {
+        "added group": "hour x weathersit",
+        "degree": 2,
+        "part": "extension",
+        "n_features": 602,
+        "rank_ok": true,
+        "condition_number": 5198.3956224996755,
+        "learning_rate": 0.421958481134051,
+        "status": "converged",
+        "iterations": 10949,
+        "final_max_abs_gradient": 9.997912126082096e-05,
+        "gap_to_exact_bikes": 0.19439048365097733,
+        "exact_val_r2": 0.9271889596883525,
+        "dropped_columns": 100,
+        "train_r2": 0.9332715668085717,
+        "val_r2": 0.927188864070102,
+        "train_val_r2_gap": 0.00608270273846967,
+        "train_rmse": 46.6199117767356,
+        "val_rmse": 49.57883678253286,
+        "top_decile_shortfall": 53.30491057360797,
+        "top_predicted_decile_shortfall": 40.37695211159002,
+        "top_predicted_decile_mean_error": -11.077963818544216,
+        "negative_predictions": 84
+      },
+      {
+        "added group": "hour x workingday x yr x season",
+        "degree": 4,
+        "part": "extension",
+        "n_features": 818,
+        "rank_ok": true,
+        "condition_number": 5530.027475074607,
+        "learning_rate": 0.4207928920960498,
+        "status": "converged",
+        "iterations": 11761,
+        "final_max_abs_gradient": 9.998405872998811e-05,
+        "gap_to_exact_bikes": 0.20351681058940585,
+        "exact_val_r2": 0.9274125844788587,
+        "dropped_columns": 100,
+        "train_r2": 0.9386533047603813,
+        "val_r2": 0.9274123272240615,
+        "train_val_r2_gap": 0.011240977536319807,
+        "train_rmse": 44.70041648871001,
+        "val_rmse": 49.50269762620203,
+        "top_decile_shortfall": 52.691154271951575,
+        "top_predicted_decile_shortfall": 38.83726506416624,
+        "top_predicted_decile_mean_error": -7.489904696420802,
+        "negative_predictions": 64
+      }
+    ],
+    "chronological_sweep": [
+      {
+        "added group": "(Phase 1)",
+        "degree": 1,
+        "part": "Phase 2",
+        "n_features": 47,
+        "rank_ok": true,
+        "condition_number": 53.79877543192014,
+        "learning_rate": 0.945634726281139,
+        "status": "converged",
+        "iterations": 0,
+        "final_max_abs_gradient": 9.65973894485956e-05,
+        "gap_to_exact_bikes": 0.005592001304847827,
+        "exact_val_r2": 0.6376239578748248,
+        "dropped_columns": 0,
+        "train_r2": 0.69462257096054,
+        "val_r2": 0.6376232012948035,
+        "train_val_r2_gap": 0.05699936966573649,
+        "train_rmse": 91.984506027773,
+        "val_rmse": 130.95557609085844,
+        "top_decile_shortfall": 197.3495212289784,
+        "top_predicted_decile_shortfall": 168.29356883213208,
+        "top_predicted_decile_mean_error": -128.73949549208567,
+        "negative_predictions": 2
+      },
+      {
+        "added group": "hour x workingday",
+        "degree": 2,
+        "part": "Phase 2",
+        "n_features": 70,
+        "rank_ok": true,
+        "condition_number": 191.5597346667299,
+        "learning_rate": 0.9451052886781036,
+        "status": "converged",
+        "iterations": 758,
+        "final_max_abs_gradient": 9.954687360080674e-05,
+        "gap_to_exact_bikes": 0.018736828600992794,
+        "exact_val_r2": 0.7985652346811406,
+        "dropped_columns": 0,
+        "train_r2": 0.8271015627084948,
+        "val_r2": 0.7985650861767046,
+        "train_val_r2_gap": 0.028536476531790145,
+        "train_rmse": 69.21364916362006,
+        "val_rmse": 97.63626937911722,
+        "top_decile_shortfall": 143.46535219659845,
+        "top_predicted_decile_shortfall": 157.42087357369297,
+        "top_predicted_decile_mean_error": -150.4491837963416,
+        "negative_predictions": 5
+      },
+      {
+        "added group": "hour x yr",
+        "degree": 2,
+        "part": "Phase 2",
+        "n_features": 93,
+        "rank_ok": true,
+        "condition_number": 230.515244398505,
+        "learning_rate": 0.7854072269049971,
+        "status": "converged",
+        "iterations": 912,
+        "final_max_abs_gradient": 9.950303093053253e-05,
+        "gap_to_exact_bikes": 0.018825268299053732,
+        "exact_val_r2": 0.861300129776438,
+        "dropped_columns": 0,
+        "train_r2": 0.8535381467936478,
+        "val_r2": 0.86129995356208,
+        "train_val_r2_gap": -0.007761806768432189,
+        "train_rmse": 63.70279324708882,
+        "val_rmse": 81.01810980321633,
+        "top_decile_shortfall": 109.32446797764715,
+        "top_predicted_decile_shortfall": 102.21842928810055,
+        "top_predicted_decile_mean_error": -84.97808763685451,
+        "negative_predictions": 22
+      },
+      {
+        "added group": "hour x season",
+        "degree": 2,
+        "part": "Phase 2",
+        "n_features": 162,
+        "rank_ok": true,
+        "condition_number": 444.1143954419248,
+        "learning_rate": 0.6250599857473493,
+        "status": "converged",
+        "iterations": 1717,
+        "final_max_abs_gradient": 9.996874868619576e-05,
+        "gap_to_exact_bikes": 0.030142303881227406,
+        "exact_val_r2": 0.8808241469284379,
+        "dropped_columns": 0,
+        "train_r2": 0.8891871603363563,
+        "val_r2": 0.8808246122944008,
+        "train_val_r2_gap": 0.008362548041955464,
+        "train_rmse": 55.41039617461568,
+        "val_rmse": 75.09950770844578,
+        "top_decile_shortfall": 87.85118044390877,
+        "top_predicted_decile_shortfall": 76.6140390768753,
+        "top_predicted_decile_mean_error": -50.119546272189396,
+        "negative_predictions": 128
+      },
+      {
+        "added group": "hour-block x weathersit",
+        "degree": 2,
+        "part": "Phase 2",
+        "n_features": 170,
+        "rank_ok": true,
+        "condition_number": 448.23582642726916,
+        "learning_rate": 0.6208890752627907,
+        "status": "converged",
+        "iterations": 1719,
+        "final_max_abs_gradient": 9.965589718472482e-05,
+        "gap_to_exact_bikes": 0.030302465071031293,
+        "exact_val_r2": 0.8852319655346784,
+        "dropped_columns": 0,
+        "train_r2": 0.8948842428194828,
+        "val_r2": 0.8852322340465478,
+        "train_val_r2_gap": 0.009652008772934928,
+        "train_rmse": 53.9672296669357,
+        "val_rmse": 73.6976716533576,
+        "top_decile_shortfall": 86.19937270312444,
+        "top_predicted_decile_shortfall": 74.47114526198939,
+        "top_predicted_decile_mean_error": -49.04070206634501,
+        "negative_predictions": 121
+      },
+      {
+        "added group": "temp x hum",
+        "degree": 2,
+        "part": "Phase 2",
+        "n_features": 171,
+        "rank_ok": true,
+        "condition_number": 452.11078191770207,
+        "learning_rate": 0.6192238960554157,
+        "status": "converged",
+        "iterations": 1716,
+        "final_max_abs_gradient": 9.964528781946684e-05,
+        "gap_to_exact_bikes": 0.030271870587398553,
+        "exact_val_r2": 0.8866848453812952,
+        "dropped_columns": 0,
+        "train_r2": 0.8959526208147152,
+        "val_r2": 0.8866850734682982,
+        "train_val_r2_gap": 0.009267547346416993,
+        "train_rmse": 53.69227253211341,
+        "val_rmse": 73.22971841366453,
+        "top_decile_shortfall": 86.31136187641474,
+        "top_predicted_decile_shortfall": 75.49838545220649,
+        "top_predicted_decile_mean_error": -50.552120860750186,
+        "negative_predictions": 102
+      },
+      {
+        "added group": "hour x workingday x yr",
+        "degree": 3,
+        "part": "Phase 2",
+        "n_features": 195,
+        "rank_ok": true,
+        "condition_number": 452.6647415281369,
+        "learning_rate": 0.6191241588467487,
+        "status": "converged",
+        "iterations": 1715,
+        "final_max_abs_gradient": 9.995936686727588e-05,
+        "gap_to_exact_bikes": 0.031196971577770682,
+        "exact_val_r2": 0.9046711662113177,
+        "dropped_columns": 0,
+        "train_r2": 0.9021982283533732,
+        "val_r2": 0.9046714145771484,
+        "train_val_r2_gap": -0.0024731862237752367,
+        "train_rmse": 52.055853824514486,
+        "val_rmse": 67.16691132467196,
+        "top_decile_shortfall": 74.3981107784103,
+        "top_predicted_decile_shortfall": 63.681029726074904,
+        "top_predicted_decile_mean_error": -38.07021948251518,
+        "negative_predictions": 110
+      },
+      {
+        "added group": "hour x workingday x temp",
+        "degree": 3,
+        "part": "Phase 2",
+        "n_features": 242,
+        "rank_ok": true,
+        "condition_number": 1711.8725289934166,
+        "learning_rate": 0.5281898109106635,
+        "status": "converged",
+        "iterations": 1928,
+        "final_max_abs_gradient": 9.999187405512629e-05,
+        "gap_to_exact_bikes": 0.06099471904479259,
+        "exact_val_r2": 0.9093709882395438,
+        "dropped_columns": 0,
+        "train_r2": 0.9153666644340578,
+        "val_r2": 0.9093711773856179,
+        "train_val_r2_gap": 0.005995487048439885,
+        "train_rmse": 48.42470035319689,
+        "val_rmse": 65.49029887310523,
+        "top_decile_shortfall": 74.74833710741328,
+        "top_predicted_decile_shortfall": 66.71846028902105,
+        "top_predicted_decile_mean_error": -47.79048390869966,
+        "negative_predictions": 28
+      },
+      {
+        "added group": "hour x holiday",
+        "degree": 2,
+        "part": "extension",
+        "n_features": 265,
+        "rank_ok": true,
+        "condition_number": 1711.9021391470137,
+        "learning_rate": 0.5281819131724838,
+        "status": "converged",
+        "iterations": 777,
+        "final_max_abs_gradient": 9.984607950386942e-05,
+        "gap_to_exact_bikes": 0.04192529557587932,
+        "exact_val_r2": 0.9114322990437722,
+        "dropped_columns": 0,
+        "train_r2": 0.9176389686798053,
+        "val_r2": 0.9114322523697842,
+        "train_val_r2_gap": 0.006206716310021121,
+        "train_rmse": 47.77020459448872,
+        "val_rmse": 64.74132799227128,
+        "top_decile_shortfall": 73.80096787290842,
+        "top_predicted_decile_shortfall": 65.42847434894301,
+        "top_predicted_decile_mean_error": -46.11050671536328,
+        "negative_predictions": 30
+      },
+      {
+        "added group": "hour x weekday",
+        "degree": 2,
+        "part": "extension",
+        "n_features": 380,
+        "rank_ok": true,
+        "condition_number": 1723.0720025418932,
+        "learning_rate": 0.5265235405476508,
+        "status": "converged",
+        "iterations": 2147,
+        "final_max_abs_gradient": 9.987418356995126e-05,
+        "gap_to_exact_bikes": 0.05905303200032819,
+        "exact_val_r2": 0.9167012153195027,
+        "dropped_columns": 23,
+        "train_r2": 0.9230992479564244,
+        "val_r2": 0.9167010500689526,
+        "train_val_r2_gap": 0.006398197887471757,
+        "train_rmse": 46.15954366410465,
+        "val_rmse": 62.78610857982194,
+        "top_decile_shortfall": 71.86822303365715,
+        "top_predicted_decile_shortfall": 64.9246024943908,
+        "top_predicted_decile_mean_error": -46.66591341881779,
+        "negative_predictions": 26
+      },
+      {
+        "added group": "hour x month",
+        "degree": 2,
+        "part": "extension",
+        "n_features": 564,
+        "rank_ok": true,
+        "condition_number": 4985.139858114659,
+        "learning_rate": 0.4345354972575487,
+        "status": "converged",
+        "iterations": 11149,
+        "final_max_abs_gradient": 9.998671450627526e-05,
+        "gap_to_exact_bikes": 0.13453632422668704,
+        "exact_val_r2": 0.9224007267372205,
+        "dropped_columns": 92,
+        "train_r2": 0.9275073927274429,
+        "val_r2": 0.9224011211311807,
+        "train_val_r2_gap": 0.005106271596262202,
+        "train_rmse": 44.817030049117086,
+        "val_rmse": 60.599846871225196,
+        "top_decile_shortfall": 64.24118105537576,
+        "top_predicted_decile_shortfall": 56.45949833099175,
+        "top_predicted_decile_mean_error": -36.61766669490566,
+        "negative_predictions": 28
+      },
+      {
+        "added group": "hour x weathersit",
+        "degree": 2,
+        "part": "extension",
+        "n_features": 602,
+        "rank_ok": true,
+        "condition_number": 5153.538515221105,
+        "learning_rate": 0.43249809276481466,
+        "status": "converged",
+        "iterations": 11508,
+        "final_max_abs_gradient": 9.9998945663766e-05,
+        "gap_to_exact_bikes": 0.13553412923197072,
+        "exact_val_r2": 0.924277389578509,
+        "dropped_columns": 100,
+        "train_r2": 0.9289178568902694,
+        "val_r2": 0.9242777288618478,
+        "train_val_r2_gap": 0.0046401280284216195,
+        "train_rmse": 44.378893507517155,
+        "val_rmse": 59.862605996395885,
+        "top_decile_shortfall": 63.65869155999887,
+        "top_predicted_decile_shortfall": 56.707888084654705,
+        "top_predicted_decile_mean_error": -37.453181567529676,
+        "negative_predictions": 29
+      },
+      {
+        "added group": "hour x workingday x yr x season",
+        "degree": 4,
+        "part": "extension",
+        "n_features": 770,
+        "rank_ok": true,
+        "condition_number": 5672.853235480837,
+        "learning_rate": 0.4292381649048073,
+        "status": "converged",
+        "iterations": 12478,
+        "final_max_abs_gradient": 9.999351211682212e-05,
+        "gap_to_exact_bikes": 0.19024610710273748,
+        "exact_val_r2": 0.9077885512166599,
+        "dropped_columns": 148,
+        "train_r2": 0.9361430762626397,
+        "val_r2": 0.9077884235325249,
+        "train_val_r2_gap": 0.028354652730114838,
+        "train_rmse": 42.06299667178212,
+        "val_rmse": 66.05968931533901,
+        "top_decile_shortfall": 74.89432966792778,
+        "top_predicted_decile_shortfall": 55.492858733105656,
+        "top_predicted_decile_mean_error": -33.72744770732743,
+        "negative_predictions": 32
+      }
+    ],
+    "contributions": [
+      {
+        "added group": "(Phase 1)",
+        "part": "Phase 2",
+        "n_features": 47,
+        "seeded_val_r2_change": NaN,
+        "seeded_top_decile_shortfall_change": NaN,
+        "seeded_converged": true,
+        "chrono_val_r2_change": NaN,
+        "chrono_top_decile_shortfall_change": NaN,
+        "chrono_converged": true
+      },
+      {
+        "added group": "hour x workingday",
+        "part": "Phase 2",
+        "n_features": 70,
+        "seeded_val_r2_change": 0.14864886772212327,
+        "seeded_top_decile_shortfall_change": -65.89995978823949,
+        "seeded_converged": true,
+        "chrono_val_r2_change": 0.1609418848819011,
+        "chrono_top_decile_shortfall_change": -53.88416903237996,
+        "chrono_converged": true
+      },
+      {
+        "added group": "hour x yr",
+        "part": "Phase 2",
+        "n_features": 93,
+        "seeded_val_r2_change": 0.03649538940365704,
+        "seeded_top_decile_shortfall_change": -18.95168362180347,
+        "seeded_converged": true,
+        "chrono_val_r2_change": 0.06273486738537537,
+        "chrono_top_decile_shortfall_change": -34.1408842189513,
+        "chrono_converged": true
+      },
+      {
+        "added group": "hour x season",
+        "part": "Phase 2",
+        "n_features": 162,
+        "seeded_val_r2_change": 0.026204214247817603,
+        "seeded_top_decile_shortfall_change": -15.442718912135177,
+        "seeded_converged": true,
+        "chrono_val_r2_change": 0.019524658732320788,
+        "chrono_top_decile_shortfall_change": -21.47328753373837,
+        "chrono_converged": true
+      },
+      {
+        "added group": "hour-block x weathersit",
+        "part": "Phase 2",
+        "n_features": 170,
+        "seeded_val_r2_change": 0.006710093286991681,
+        "seeded_top_decile_shortfall_change": -2.6678074720103666,
+        "seeded_converged": true,
+        "chrono_val_r2_change": 0.0044076217521470396,
+        "chrono_top_decile_shortfall_change": -1.651807740784335,
+        "chrono_converged": true
+      },
+      {
+        "added group": "temp x hum",
+        "part": "Phase 2",
+        "n_features": 171,
+        "seeded_val_r2_change": 0.000463229965523837,
+        "seeded_top_decile_shortfall_change": -0.11999990282667738,
+        "seeded_converged": true,
+        "chrono_val_r2_change": 0.0014528394217503404,
+        "chrono_top_decile_shortfall_change": 0.11198917329029712,
+        "chrono_converged": true
+      },
+      {
+        "added group": "hour x workingday x yr",
+        "part": "Phase 2",
+        "n_features": 195,
+        "seeded_val_r2_change": 0.009597990891049735,
+        "seeded_top_decile_shortfall_change": -7.644911688449355,
+        "seeded_converged": true,
+        "chrono_val_r2_change": 0.017986341108850223,
+        "chrono_top_decile_shortfall_change": -11.913251098004437,
+        "chrono_converged": true
+      },
+      {
+        "added group": "hour x workingday x temp",
+        "part": "Phase 2",
+        "n_features": 242,
+        "seeded_val_r2_change": 0.012068056464805799,
+        "seeded_top_decile_shortfall_change": -7.051521977461313,
+        "seeded_converged": true,
+        "chrono_val_r2_change": 0.00469976280846951,
+        "chrono_top_decile_shortfall_change": 0.3502263290029788,
+        "chrono_converged": true
+      },
+      {
+        "added group": "hour x holiday",
+        "part": "extension",
+        "n_features": 265,
+        "seeded_val_r2_change": -0.00024864450253891945,
+        "seeded_top_decile_shortfall_change": -0.513424090310366,
+        "seeded_converged": true,
+        "chrono_val_r2_change": 0.0020610749841663,
+        "chrono_top_decile_shortfall_change": -0.9473692345048619,
+        "chrono_converged": true
+      },
+      {
+        "added group": "hour x weekday",
+        "part": "extension",
+        "n_features": 380,
+        "seeded_val_r2_change": 0.002657899495581706,
+        "seeded_top_decile_shortfall_change": -3.065537313355044,
+        "seeded_converged": true,
+        "chrono_val_r2_change": 0.005268797699168437,
+        "chrono_top_decile_shortfall_change": -1.9327448392512707,
+        "chrono_converged": true
+      },
+      {
+        "added group": "hour x month",
+        "part": "extension",
+        "n_features": 564,
+        "seeded_val_r2_change": 0.0012997507586111068,
+        "seeded_top_decile_shortfall_change": -1.4400837407907332,
+        "seeded_converged": true,
+        "chrono_val_r2_change": 0.005700071062228029,
+        "chrono_top_decile_shortfall_change": -7.627041978281383,
+        "chrono_converged": true
+      },
+      {
+        "added group": "hour x weathersit",
+        "part": "extension",
+        "n_features": 602,
+        "seeded_val_r2_change": 0.0009604452970150001,
+        "seeded_top_decile_shortfall_change": -0.5391561655566974,
+        "seeded_converged": true,
+        "chrono_val_r2_change": 0.0018766077306671125,
+        "chrono_top_decile_shortfall_change": -0.5824894953768904,
+        "chrono_converged": true
+      },
+      {
+        "added group": "hour x workingday x yr x season",
+        "part": "extension",
+        "n_features": 818,
+        "seeded_val_r2_change": 0.00022346315395949112,
+        "seeded_top_decile_shortfall_change": -0.6137563016563945,
+        "seeded_converged": true,
+        "chrono_val_r2_change": -0.016489305329322912,
+        "chrono_top_decile_shortfall_change": 11.235638107928906,
+        "chrono_converged": true
+      }
+    ]
+  },
+  "settings": {
+    "seed": 36954,
+    "first_chronological_validation_day": "2012-08-05",
+    "step_multiplier": 1.9,
+    "max_iter": 50000,
+    "tol": 0.0001
+  },
+  "features": {
+    "phase1": {
+      "seasonal": "mnth",
+      "use_trend": false,
+      "levels": {
+        "hr": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23
+        ],
+        "weekday": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ],
+        "weathersit": [
+          2,
+          3
+        ],
+        "mnth": [
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ]
+      },
+      "mean": [
+        0.5026412494258153,
+        0.028938906752411574,
+        0.4933509416628388,
+        0.6190112540192927,
+        0.19030961185117135,
+        0.04352319706017455,
+        0.0409967845659164,
+        0.03915939366100138,
+        0.03904455672944419,
+        0.043293523197060174,
+        0.04122645842903078,
+        0.04053743683968764,
+        0.04191548001837391,
+        0.04019292604501608,
+        0.042489664676159854,
+        0.04271933853927423,
+        0.04340836012861737,
+        0.04260450160771704,
+        0.03938906752411576,
+        0.04283417547083142,
+        0.04076711070280202,
+        0.04076711070280202,
+        0.0409967845659164,
+        0.04088194763435921,
+        0.04294901240238861,
+        0.04076711070280202,
+        0.04363803399173174,
+        0.043867707854846116,
+        0.14101975195222782,
+        0.14182361047312816,
+        0.1414790996784566,
+        0.14308681672025725,
+        0.1423977951309141,
+        0.14526871841984382,
+        0.2632062471290767,
+        0.07877813504823152,
+        0.0830271015158475,
+        0.0830271015158475,
+        0.08233807992650437,
+        0.08222324299494717,
+        0.08360128617363344,
+        0.08555351401010565,
+        0.08383096003674782,
+        0.08118971061093247,
+        0.08337161231051907,
+        0.0860128617363344,
+        0.0850941662838769
+      ],
+      "std": [
+        0.49999302375280263,
+        0.16763486042105563,
+        0.1905520530576075,
+        0.19291879228156433,
+        0.12127337164966559,
+        0.20403168473998287,
+        0.19828274816829689,
+        0.19397405895919204,
+        0.19370100495156292,
+        0.20351706082352358,
+        0.19881357487463017,
+        0.1972160060800238,
+        0.20039603926525895,
+        0.1964114424898813,
+        0.20170347808569722,
+        0.20222363030576102,
+        0.2037745675975332,
+        0.20196375429882235,
+        0.19451881370113383,
+        0.20248310764744165,
+        0.19775022980453777,
+        0.19775022980453777,
+        0.19828274816829689,
+        0.19801670129557436,
+        0.20274218785454612,
+        0.19775022980453777,
+        0.204288413722042,
+        0.20480071304174696,
+        0.3480419249337068,
+        0.34886913590269714,
+        0.3485150843688547,
+        0.35016136223335775,
+        0.34945766992980465,
+        0.35237156223012656,
+        0.4403733854370676,
+        0.26939216856945586,
+        0.2759231812112289,
+        0.2759231812112289,
+        0.2748791016438335,
+        0.2747045345572967,
+        0.27678892883160566,
+        0.27970361143651384,
+        0.27713413751478727,
+        0.27312623730034713,
+        0.27644309825217844,
+        0.28038304041482365,
+        0.279021771817772
+      ],
+      "feature_names": [
+        "intercept",
+        "yr",
+        "holiday",
+        "temp",
+        "hum",
+        "windspeed",
+        "hr=1",
+        "hr=2",
+        "hr=3",
+        "hr=4",
+        "hr=5",
+        "hr=6",
+        "hr=7",
+        "hr=8",
+        "hr=9",
+        "hr=10",
+        "hr=11",
+        "hr=12",
+        "hr=13",
+        "hr=14",
+        "hr=15",
+        "hr=16",
+        "hr=17",
+        "hr=18",
+        "hr=19",
+        "hr=20",
+        "hr=21",
+        "hr=22",
+        "hr=23",
+        "weekday=1",
+        "weekday=2",
+        "weekday=3",
+        "weekday=4",
+        "weekday=5",
+        "weekday=6",
+        "weathersit=2",
+        "weathersit=3",
+        "mnth=2",
+        "mnth=3",
+        "mnth=4",
+        "mnth=5",
+        "mnth=6",
+        "mnth=7",
+        "mnth=8",
+        "mnth=9",
+        "mnth=10",
+        "mnth=11",
+        "mnth=12"
+      ]
+    },
+    "groups": [
+      "hour x workingday",
+      "hour x yr",
+      "hour x season",
+      "hour-block x weathersit",
+      "temp x hum",
+      "hour x workingday x yr",
+      "hour x workingday x temp",
+      "hour x holiday",
+      "hour x weekday",
+      "hour x month"
+    ],
+    "center_factors": true,
+    "dropped": [
+      "hr=1*weekday=5",
+      "hr=2*weekday=5",
+      "hr=3*weekday=5",
+      "hr=4*weekday=5",
+      "hr=5*weekday=5",
+      "hr=6*weekday=5",
+      "hr=7*weekday=5",
+      "hr=8*weekday=5",
+      "hr=9*weekday=5",
+      "hr=10*weekday=5",
+      "hr=11*weekday=5",
+      "hr=12*weekday=5",
+      "hr=13*weekday=5",
+      "hr=14*weekday=5",
+      "hr=15*weekday=5",
+      "hr=16*weekday=5",
+      "hr=17*weekday=5",
+      "hr=18*weekday=5",
+      "hr=19*weekday=5",
+      "hr=20*weekday=5",
+      "hr=21*weekday=5",
+      "hr=22*weekday=5",
+      "hr=23*weekday=5",
+      "hr=1*mnth=6",
+      "hr=1*mnth=9",
+      "hr=1*mnth=12",
+      "hr=2*mnth=6",
+      "hr=2*mnth=9",
+      "hr=2*mnth=12",
+      "hr=3*mnth=6",
+      "hr=3*mnth=9",
+      "hr=3*mnth=12",
+      "hr=4*mnth=6",
+      "hr=4*mnth=9",
+      "hr=4*mnth=12",
+      "hr=5*mnth=6",
+      "hr=5*mnth=9",
+      "hr=5*mnth=12",
+      "hr=6*mnth=6",
+      "hr=6*mnth=9",
+      "hr=6*mnth=12",
+      "hr=7*mnth=6",
+      "hr=7*mnth=9",
+      "hr=7*mnth=12",
+      "hr=8*mnth=6",
+      "hr=8*mnth=9",
+      "hr=8*mnth=12",
+      "hr=9*mnth=6",
+      "hr=9*mnth=9",
+      "hr=9*mnth=12",
+      "hr=10*mnth=6",
+      "hr=10*mnth=9",
+      "hr=10*mnth=12",
+      "hr=11*mnth=6",
+      "hr=11*mnth=9",
+      "hr=11*mnth=12",
+      "hr=12*mnth=6",
+      "hr=12*mnth=9",
+      "hr=12*mnth=12",
+      "hr=13*mnth=6",
+      "hr=13*mnth=9",
+      "hr=13*mnth=12",
+      "hr=14*mnth=6",
+      "hr=14*mnth=9",
+      "hr=14*mnth=12",
+      "hr=15*mnth=6",
+      "hr=15*mnth=9",
+      "hr=15*mnth=12",
+      "hr=16*mnth=6",
+      "hr=16*mnth=9",
+      "hr=16*mnth=12",
+      "hr=17*mnth=6",
+      "hr=17*mnth=9",
+      "hr=17*mnth=12",
+      "hr=18*mnth=6",
+      "hr=18*mnth=9",
+      "hr=18*mnth=12",
+      "hr=19*mnth=6",
+      "hr=19*mnth=9",
+      "hr=19*mnth=12",
+      "hr=20*mnth=6",
+      "hr=20*mnth=9",
+      "hr=20*mnth=12",
+      "hr=21*mnth=6",
+      "hr=21*mnth=9",
+      "hr=21*mnth=12",
+      "hr=22*mnth=6",
+      "hr=22*mnth=9",
+      "hr=22*mnth=12",
+      "hr=23*mnth=6",
+      "hr=23*mnth=9",
+      "hr=23*mnth=12"
+    ],
+    "levels": {
+      "hr": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23
+      ],
+      "weathersit": [
+        2,
+        3
+      ],
+      "season": [
+        2,
+        3,
+        4
+      ],
+      "hour_block": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "weekday": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "mnth": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ]
+    },
+    "centers": {
+      "workingday": 0.6808681672025724,
+      "yr": 0.5026412494258153,
+      "season=2": 0.24816260909508497,
+      "season=3": 0.25057418465778597,
+      "season=4": 0.25447864033073037,
+      "weathersit=2": 0.2632062471290767,
+      "weathersit=3": 0.07877813504823152,
+      "temp": 0.4933509416628388,
+      "hum": 0.6190112540192927,
+      "holiday": 0.028938906752411574,
+      "weekday=1": 0.14101975195222782,
+      "weekday=2": 0.14182361047312816,
+      "weekday=3": 0.1414790996784566,
+      "weekday=4": 0.14308681672025725,
+      "weekday=5": 0.1423977951309141,
+      "weekday=6": 0.14526871841984382,
+      "mnth=2": 0.0830271015158475,
+      "mnth=3": 0.0830271015158475,
+      "mnth=4": 0.08233807992650437,
+      "mnth=5": 0.08222324299494717,
+      "mnth=6": 0.08360128617363344,
+      "mnth=7": 0.08555351401010565,
+      "mnth=8": 0.08383096003674782,
+      "mnth=9": 0.08118971061093247,
+      "mnth=10": 0.08337161231051907,
+      "mnth=11": 0.0860128617363344,
+      "mnth=12": 0.0850941662838769
+    },
+    "mean": [
+      -5.631071402718279e-06,
+      0.000451316526031427,
+      -2.0216469462239158e-05,
+      -0.00017170152146010325,
+      0.0007249312086162424,
+      -0.00027924575398753936,
+      -0.0007288083397459759,
+      0.0008593384211140534,
+      0.0006541274091754358,
+      -0.0005651380184832058,
+      -0.00014733098293027985,
+      -0.00038678998651497123,
+      4.569475974341345e-05,
+      -0.0004062679548096387,
+      0.00034866486373914753,
+      0.00026318335359288,
+      -0.0007703490304218155,
+      0.00010680573135985993,
+      -0.0003891901153095711,
+      -0.00041854553672049063,
+      0.0004928572167072627,
+      -0.00019865681407642356,
+      0.00033398715303369184,
+      -0.00040204794813780573,
+      0.0008678311845410953,
+      0.0007578472606565162,
+      0.0005858951763002732,
+      5.790640405002632e-05,
+      -0.00039598168854705065,
+      -0.00016448794755544443,
+      -0.00016812770330990753,
+      0.00035318818339051924,
+      0.00011744806068538372,
+      -0.00045734322305963817,
+      -0.001033347758722812,
+      -0.00016994758118712638,
+      0.00041272984002587695,
+      -5.5717275589014115e-05,
+      0.0002942531527142329,
+      6.457928959985817e-05,
+      0.0005233203898695352,
+      0.0005810421686276647,
+      -0.0013766453014762317,
+      -0.00016509457351452145,
+      -0.00034493279533874934,
+      0.000113808304930931,
+      0.00010867835932048548,
+      -0.0003407919137920177,
+      -0.0003958893759011057,
+      0.00016145481776006618,
+      0.0002922618370659623,
+      -0.0007865037434624203,
+      0.00015807881242260052,
+      0.0006378276334054806,
+      2.5583790447971013e-05,
+      0.0006459247712070598,
+      9.241814611308712e-05,
+      -0.0004045403895783572,
+      -6.399903868248187e-05,
+      0.0006354538796525815,
+      -0.0003374422834962521,
+      0.00010445835264865143,
+      -0.00102849475105021,
+      0.0008776031374905583,
+      0.00016061081642570053,
+      6.285172436857428e-05,
+      -0.0006696095586527144,
+      -0.00018136797424276352,
+      -5.277645843958199e-05,
+      -0.0001015966606243175,
+      0.0007054532403215655,
+      -0.00019533355882235775,
+      -0.000352265056931057,
+      -0.000438696068578486,
+      0.00014785848376425902,
+      0.0004413071977066781,
+      7.849212409604646e-05,
+      0.00043481893744873296,
+      -0.0003061614840413068,
+      0.0002520135234333846,
+      0.00014733098293027766,
+      -0.0005963396928130565,
+      0.0005663380828805048,
+      -0.0002254274814008486,
+      -0.0005066118009532597,
+      -1.3754584245990384e-05,
+      0.0008099511555327736,
+      -3.2863301956882465e-05,
+      -0.00017967997157402834,
+      0.0004060437669551939,
+      0.00023879962754220894,
+      -0.0010447549642575915,
+      0.0002349752464958554,
+      0.00042031266451432133,
+      0.0003332882144286657,
+      -0.0009133940690760277,
+      0.0004203126645143219,
+      -0.0007572406346974481,
+      0.0002922618370659587,
+      0.0003618655721094671,
+      -0.000499068539027364,
+      0.0005507108706738833,
+      0.0002762521867547053,
+      -0.00032301513568693257,
+      -8.207912976710761e-05,
+      9.473914978259383e-05,
+      -1.1222580242900538e-05,
+      -0.00033920941129008357,
+      0.000649986527628698,
+      0.000424690921436345,
+      -0.0007140778789571318,
+      0.0004935825303539783,
+      -0.0003213271330181977,
+      3.2230300956100307e-05,
+      0.0003202985063919366,
+      0.005099297811989859,
+      0.0008708775018572835,
+      0.0075911590016224115,
+      -0.0027403932075617562,
+      -0.008904741578396417,
+      0.002629618032426054,
+      -0.006481455497181121,
+      -0.00016745513974660147,
+      -0.0025602260441298726,
+      0.00021130364657122455,
+      -0.00014902389381618144,
+      -0.00026386767355542003,
+      0.00010265890270766343,
+      0.00022034222918903898,
+      -0.0005211272012634402,
+      -0.00014830120919291046,
+      0.0002706932332815154,
+      0.00015166161000409477,
+      -0.00031448295810993697,
+      0.00036188124024115313,
+      0.0001201186396664117,
+      -0.00017732642313844583,
+      -0.0001332816830354636,
+      -6.2658003503622396e-06,
+      0.00024707701246356307,
+      0.00041466561755378436,
+      -0.00017266699851908196,
+      -8.58097670458694e-05,
+      -6.617565808030731e-05,
+      0.0002295792818756155,
+      3.779264671761765e-05,
+      -1.535307290664956e-05,
+      0.00012983256328377027,
+      -0.0017570058440762415,
+      -0.001895531255584918,
+      -0.0014506971873022541,
+      -0.0021473725499960017,
+      -0.0026289969001941026,
+      -0.0029918452063572736,
+      -0.0025118146999290433,
+      -0.0019146869208700255,
+      -0.0007111655468527318,
+      -5.280758098878777e-05,
+      0.0011522105766449198,
+      0.0020088819535423654,
+      0.0025042260729314218,
+      0.00331656258723545,
+      0.003277457367910096,
+      0.0029352797094272178,
+      0.0023817656993215695,
+      0.0018205918496057127,
+      0.001142290395961114,
+      0.0004922769657898808,
+      6.89498977597861e-05,
+      -0.000596389277891451,
+      -0.0008727675373454791,
+      0.0027540499404029592,
+      3.8211380399129795e-05,
+      2.4026439643758348e-06,
+      0.00011297257208732947,
+      0.00019075048994871138,
+      6.385220072625379e-05,
+      0.00010424004893032636,
+      0.00021226791533934453,
+      0.0001601214616618781,
+      -3.4580757744927186e-05,
+      1.5550477372684044e-05,
+      6.24834855347829e-05,
+      0.0002294671239189537,
+      0.00013030034139772546,
+      0.000186654092538826,
+      0.0002637532450977791,
+      9.635930604884557e-05,
+      9.658243890161868e-05,
+      0.00014102907188275843,
+      0.00017414850538907673,
+      3.7919558160226684e-05,
+      0.0002212751960408679,
+      5.3376208230228875e-05,
+      0.00016115538259011655,
+      0.00023336636895222586,
+      -0.00038254360480143994,
+      -0.00021453458917918412,
+      1.84625291892597e-05,
+      -0.00010449791521120292,
+      0.00018499454247637237,
+      -2.473978911360581e-05,
+      -0.0001794557837195985,
+      -0.0002444438864657824,
+      0.00014843873468163977,
+      2.695529261631807e-05,
+      7.015761091919091e-06,
+      -0.00031423224680117976,
+      8.492763427060337e-06,
+      -9.120489419493701e-05,
+      8.345063193545067e-05,
+      0.00019828756349263694,
+      0.0001916410529845065,
+      8.012737668138315e-05,
+      2.0308782108184527e-05,
+      0.0001982875634926392,
+      0.00023004311369816385,
+      -0.0001211141914815357,
+      0.0004080746451660172,
+      -0.0002010965054335846,
+      -7.126536267053772e-05,
+      -2.6401416740638163e-05,
+      0.00022314604029388514,
+      -0.0007285314018081477,
+      4.2371504489348576e-05,
+      -5.834159223805988e-05,
+      0.00044993183634223476,
+      -9.886684380847895e-05,
+      -0.00012491219748617907,
+      -0.00027122774131106014,
+      -0.000487410770596432,
+      0.00036832745732571424,
+      0.0005125593728563544,
+      0.00023579287278853393,
+      -0.00014010422150477334,
+      0.00033269477599044185,
+      -7.458861792460093e-05,
+      -0.0007339646603981387,
+      -0.0001337214614136259,
+      -0.00016852332893539085,
+      0.0001909025518169284,
+      0.0006954834745593778,
+      -0.0007770219159716572,
+      0.00015777549944306557,
+      0.0008136568488914771,
+      2.4001287946035037e-05,
+      -0.0005016269180721508,
+      0.00021227952311391742,
+      -0.00020440657316678944,
+      0.0001075178574857326,
+      -0.00010819042104905644,
+      -0.0006327108753158919,
+      0.0006568836010329627,
+      -0.00016906401729020436,
+      -0.00031759506461779657,
+      0.0006155407231698763,
+      0.0002036416969575294,
+      -0.00023232455480512017,
+      -0.0009596822672576652,
+      4.1540690675833e-05,
+      0.0005147353137965292,
+      0.0006797903247485076,
+      -0.0006711129360295579,
+      -0.00025003539530596354,
+      0.00028999358347985243,
+      -3.9879063048801764e-05,
+      -0.00033786428416343237,
+      2.8775170493545566e-05,
+      0.0005214345743880682,
+      2.774654386728705e-05,
+      -0.0006465577722078431,
+      8.86201401084441e-05,
+      0.0002250846058587622,
+      -3.507880545958697e-05,
+      -6.997298562728979e-05,
+      5.981859457319589e-05,
+      -0.00023964362887657223,
+      0.00035466518572565967,
+      -0.00038106660246629186,
+      4.403313211638106e-05,
+      5.87108428218435e-05,
+      -9.785140470303377e-06,
+      0.00012692988817614707,
+      0.0003020469775362796,
+      -0.0004186378493664405,
+      -6.05570957407676e-05,
+      0.0002206272238116412,
+      -9.498971267873959e-05,
+      0.00039040336722773216,
+      0.00012629688717537732,
+      -0.0004331309347800088,
+      0.0003018623522443822,
+      -2.127147113019725e-05,
+      -0.00023679512437308774,
+      -3.989225056964751e-05,
+      0.0005483371169209746,
+      -0.00020622645104401545,
+      -0.0005248501422880752,
+      0.00010771567029848009,
+      0.00030461854410192003,
+      -0.0008297060617652919,
+      2.3447412070361754e-05,
+      0.0003938453101694364,
+      -3.9509812465007094e-05,
+      -0.0004169762217394055,
+      5.6495339319126433e-05,
+      0.00044993183634223894,
+      1.5970087748709813e-05,
+      0.00032119525780970683,
+      5.865809273843909e-05,
+      -0.0007311161558946459,
+      -0.00045233196513683416,
+      0.0001474892331804753,
+      -8.513863460417768e-05,
+      0.00022484723048347226,
+      -0.00010486716579498994,
+      -5.908009340562359e-05,
+      0.00019172017810958946,
+      0.00022255260185566754,
+      0.000649129338773477,
+      0.0006631740484781707,
+      -0.0005507372457155815,
+      -0.0004100132107308865,
+      0.0005067173011200594,
+      -0.00010254616212548296,
+      -0.00020234931991427348,
+      -0.00015766999927626643,
+      0.00043613768953368066,
+      -9.985590787218484e-05,
+      -2.0282407066486177e-05,
+      0.00010966742338419902,
+      0.00015397749343842347,
+      -0.00017141139600141574,
+      0.00017601384077788247,
+      0.0004056877038922602,
+      -0.00013850853148198827,
+      9.616340203434225e-05,
+      -4.8780639622190184e-05,
+      2.6190416407049573e-05,
+      4.618269801484123e-05,
+      -0.00018360985278717873,
+      0.00027093761585236765,
+      -0.0001884101103763863,
+      0.00018434835395474236,
+      7.421936734082483e-05,
+      0.00039703669021500817,
+      -0.00010652879342201997,
+      -0.0006618816714349235,
+      3.369411577039466e-05,
+      7.898006236747827e-05,
+      -0.00015069380074690265,
+      -0.000583059859317641,
+      0.0005698064008639264,
+      -0.000134789650602437,
+      0.0006216861078857383,
+      6.548922853846834e-05,
+      0.00030657029718764037,
+      -0.00025599615472992606,
+      8.851463994164449e-05,
+      0.00045992797714612845,
+      0.0001199009395633844,
+      -0.00023980187912676915,
+      5.712834031990819e-05,
+      -0.00026944742599638045,
+      0.0005461216134182696,
+      -0.0004939385934169216,
+      0.000424756859040589,
+      -4.760695026661879e-06,
+      0.00011504793189077957,
+      0.0004302164926722765,
+      0.00016028112840446698,
+      -0.0002791798163832921,
+      -4.901801499748308e-05,
+      -9.264233396753466e-05,
+      0.0001370315291468468,
+      5.060051749941275e-05,
+      -0.00028917595718718923,
+      -0.00019679737363664676,
+      -0.0003554564369766241,
+      0.00035250243230634505,
+      0.00024361307265226658,
+      7.94020630346622e-05,
+      7.940206303466098e-05,
+      0.00022217016375102765,
+      -0.00034735929917505083,
+      -0.00013784915543951285,
+      -6.802123254156656e-05,
+      -0.00016423738465930478,
+      -0.00038614379799334223,
+      -3.501286785534534e-05,
+      -3.5012867855345174e-05,
+      0.00022354166591936764,
+      -0.0001161556836421369,
+      8.876520283778617e-05,
+      -6.870698362573927e-05,
+      6.538372837167472e-05,
+      -0.00016016244071681237,
+      0.00022284272731435214,
+      -6.8311358000251086e-06,
+      2.0862657983861503e-05,
+      0.0008293368111815082,
+      -0.00033804890945532455,
+      0.0004202071643475288,
+      -0.0002503518958063482,
+      0.00033251015069854755,
+      -8.268575572618241e-05,
+      -0.00019752268728336954,
+      -0.0003979202541119246,
+      -4.853007672604777e-05,
+      -0.00019003217544086932,
+      -0.00023167836628349507,
+      -0.000212160835426281,
+      2.0124156816293162e-05,
+      0.00012791895223986357,
+      -0.00010175491087451794,
+      0.0003870273618902571,
+      -0.0001822515381396831,
+      0.0002496661447221766,
+      -2.1258283609343142e-05,
+      -0.00011647218414252286,
+      -0.00022930461253059422,
+      -4.4125444762329574e-05,
+      -0.00015896237631951793,
+      -1.4216147475731458e-05,
+      -9.231264594625061e-06,
+      -0.000153792868146523,
+      0.0002654911697415413,
+      -0.0001739170249628177,
+      -0.00028856933122811446,
+      -0.00020705726485753715,
+      2.2616598256836176e-05,
+      0.0001668089512249488,
+      0.0002865384530172946,
+      -8.501994691653473e-05,
+      -0.0003561421880607968,
+      -0.00033657190712018124,
+      -0.00010459022785715036,
+      -5.492602433804578e-05,
+      -0.0003994368190096166,
+      0.00020188775668453796,
+      -0.00025293664989284423,
+      0.0005345825326749854,
+      2.824766965956717e-05,
+      0.0002760148113794124,
+      -0.000746716993059566,
+      -0.00022612642000587033,
+      -0.00022612642000587326,
+      3.306111476962097e-05,
+      3.798006004647838e-05,
+      0.00012500451013213175,
+      0.00019878868928491935,
+      -0.0002408832558364335,
+      0.00022016566058190816,
+      0.00029000677100070023,
+      0.00040484370255788833,
+      -0.0006005992620474349,
+      -0.00036624382903148965,
+      0.00030184916472353205,
+      2.756191857539598e-05,
+      0.0001611251297388238,
+      0.000283122885117281,
+      0.00029000677100070007,
+      -5.4504023670864475e-05,
+      -2.6414604261491604e-05,
+      9.310389719726023e-05,
+      0.00018701223316634278,
+      -0.00043178580765335935,
+      0.0001611251297388283,
+      5.3449022002904e-05,
+      -0.0003032470419335802,
+      0.00015610068429517995,
+      -4.5325509159630416e-05,
+      -0.0004999652904451205,
+      -0.0005216587622425005,
+      0.000352818932806736,
+      0.00025681378102258303,
+      0.00014853104732758508,
+      -6.403860124502887e-05,
+      -0.00040854939591660215,
+      -0.0004952177829393168,
+      -0.00014601223084533273,
+      -5.2486332980891434e-05,
+      0.00047728275458403766,
+      3.671405804492362e-05,
+      4.357156888664926e-05,
+      -0.00035049792913723136,
+      -5.9871344656587034e-06,
+      -9.123126923663764e-05,
+      0.00025821165823263197,
+      0.0002300167386564659,
+      -0.0001553489956067608,
+      0.00032372726181279865,
+      0.00021028820746565426,
+      0.00017516983944350944,
+      -5.450402367086074e-05,
+      8.842232729569988e-05,
+      9.310389719726983e-05,
+      -4.266162994803549e-05,
+      -0.00031694887609617163,
+      0.00016112512973883022,
+      5.344902200290838e-05,
+      -6.319459991066566e-05,
+      -6.319459991066264e-05,
+      0.0003113837422976933,
+      -0.00014295272600826022,
+      -0.0002882792057694219,
+      -0.0002131103369274416,
+      0.0001514454894353155,
+      0.00015102348876813338,
+      0.0006067578342841349,
+      -0.0001971006866161903,
+      -0.00016687488882919936,
+      -0.00016183725586470265,
+      0.0001514191143936206,
+      0.00011214667730389967,
+      0.00036197107227625946,
+      -9.84052805787502e-05
+    ],
+    "std": [
+      0.09725764267784447,
+      0.09351253929999633,
+      0.09228287102187922,
+      0.09244427683835488,
+      0.09562608204502991,
+      0.09517823655211126,
+      0.09524364241274319,
+      0.09378744156069745,
+      0.0921755877369727,
+      0.09714191090733072,
+      0.09662099989625277,
+      0.09783570909769403,
+      0.0961293934036985,
+      0.09330336309848763,
+      0.09581779886495555,
+      0.09361025026378646,
+      0.09558358121759307,
+      0.09417754168327074,
+      0.09499334964555149,
+      0.09738314732396695,
+      0.09316449930279322,
+      0.09774347338634234,
+      0.09701001447131227,
+      0.10431901942527323,
+      0.10121053646517593,
+      0.09891914663901849,
+      0.0987796969828724,
+      0.10403254073311353,
+      0.10152961131913535,
+      0.1006723311730966,
+      0.10236912357424266,
+      0.10022953985405492,
+      0.1030605915925827,
+      0.10335251989408205,
+      0.10419298468502194,
+      0.10320705911027543,
+      0.09922016682231785,
+      0.1034820577202988,
+      0.10094479827799087,
+      0.10095121577146558,
+      0.10122189405549713,
+      0.10107816155539072,
+      0.10364521433571869,
+      0.10095711035841264,
+      0.10445528803658664,
+      0.10471870314943842,
+      0.0904167832260817,
+      0.08945926187188546,
+      0.08979216836504049,
+      0.08792263527470727,
+      0.0885684104483277,
+      0.08597124045233534,
+      0.0859411070133752,
+      0.0875864732336523,
+      0.08626617728360467,
+      0.08723400320299728,
+      0.08589613093003834,
+      0.08490402946749902,
+      0.08969602599713604,
+      0.09190508129016092,
+      0.08970954700695107,
+      0.0880031212017624,
+      0.08501564019856774,
+      0.09083844841077861,
+      0.08743146353598766,
+      0.08742850659103076,
+      0.08579905199287689,
+      0.08791541427124289,
+      0.08857111204834595,
+      0.08889474287501656,
+      0.08862242507486924,
+      0.0863146502252829,
+      0.08632653695453439,
+      0.08778656513878899,
+      0.08973702780255423,
+      0.0909813923672465,
+      0.08949868175463127,
+      0.09076809656999224,
+      0.08918659807372674,
+      0.09069680953497698,
+      0.09069173068570689,
+      0.08911912342732514,
+      0.09074133086991486,
+      0.08881472708167996,
+      0.08850915155335148,
+      0.08568665356665169,
+      0.08831837242405147,
+      0.08635233902023942,
+      0.08888970229892332,
+      0.09080793944250491,
+      0.09079466916961922,
+      0.08413640606762815,
+      0.08816283974907486,
+      0.0891096008589017,
+      0.08817029463049623,
+      0.08484716454638203,
+      0.0891096008589015,
+      0.08524739712368151,
+      0.08856841044832899,
+      0.08919327451037538,
+      0.0858839437699557,
+      0.08917123039477191,
+      0.08883506200735204,
+      0.08860326658880184,
+      0.08957847929583071,
+      0.0905249519664426,
+      0.0871813650442414,
+      0.0865227918534225,
+      0.08973881447727637,
+      0.09140907904931012,
+      0.08853200726149411,
+      0.09230981576139435,
+      0.08957007556495566,
+      0.09085071239090402,
+      0.0920854321591372,
+      0.18484725127852217,
+      0.11236311911591487,
+      0.22953809570995568,
+      0.12679478360495652,
+      0.16551131659098187,
+      0.11860699034573483,
+      0.17347418038076143,
+      0.11083698689475098,
+      0.03542081404279631,
+      0.23306762926872432,
+      0.04862973152550049,
+      0.04673937005516394,
+      0.04613337753007524,
+      0.04621832782263483,
+      0.04779979738372049,
+      0.047590226015600784,
+      0.047629194255349554,
+      0.04689993689034285,
+      0.04607631938141579,
+      0.048575482161343504,
+      0.04831754084825308,
+      0.04892589212737348,
+      0.04806322653989009,
+      0.046646266427012986,
+      0.04791350567022176,
+      0.04680767671502887,
+      0.04778813644821541,
+      0.04707994589739231,
+      0.04748801187309653,
+      0.04871152951224008,
+      0.04658504528394917,
+      0.04887490368614822,
+      0.048505654992027115,
+      0.03778626905555536,
+      0.036842266327441725,
+      0.03474661790130844,
+      0.034871225237128024,
+      0.0380886784253102,
+      0.038478955878205316,
+      0.03942248621572292,
+      0.03997159484456385,
+      0.03844856703652869,
+      0.04032581890748835,
+      0.040264141683187676,
+      0.042104130675223575,
+      0.041765386783825804,
+      0.04225324149600281,
+      0.04283303984490404,
+      0.04108147550479578,
+      0.040403220188450426,
+      0.038814214256249084,
+      0.037542773094402605,
+      0.03858064124629671,
+      0.035390479545598576,
+      0.036920753798349144,
+      0.037039954440102475,
+      0.08881647170744615,
+      0.01753589556203502,
+      0.016935365141882125,
+      0.016490839001662337,
+      0.01664484828512542,
+      0.017702213362790504,
+      0.01814749741959149,
+      0.018552319540804916,
+      0.018386126200257334,
+      0.01771736892358364,
+      0.01901291082137311,
+      0.01874247087113879,
+      0.019923377791862824,
+      0.019499722180291026,
+      0.0197723830472113,
+      0.019585116359948793,
+      0.019081518998691368,
+      0.019094147446387683,
+      0.018199678594577398,
+      0.01768350311136821,
+      0.018163352209142093,
+      0.016278266435220956,
+      0.01728175466531721,
+      0.017357948136135826,
+      0.0379851282015525,
+      0.028133961473999027,
+      0.02997118252265282,
+      0.033385657650490216,
+      0.033438748461046615,
+      0.03650720960087385,
+      0.03340437236986438,
+      0.031761362321868845,
+      0.02998538971645864,
+      0.03652186231393824,
+      0.03501242145363929,
+      0.03502067049126204,
+      0.03001839779550111,
+      0.03338998232427555,
+      0.03343303478039245,
+      0.03498897691088463,
+      0.03650187080643855,
+      0.036504540906330596,
+      0.03499035896151759,
+      0.03501517261040026,
+      0.03650187080643772,
+      0.03798641435947676,
+      0.033445881759603086,
+      0.07459837986996873,
+      0.07178507954074548,
+      0.07235566661804552,
+      0.07292230213656414,
+      0.0745811837829004,
+      0.06665195737220604,
+      0.0708523565848069,
+      0.07026909708922012,
+      0.07312802936610362,
+      0.07085367377104738,
+      0.06821879736471263,
+      0.0676144121117452,
+      0.0663828044454802,
+      0.07116344652699136,
+      0.07228854123954206,
+      0.06999161197593316,
+      0.06820349399278489,
+      0.07057552802645904,
+      0.06880494569593647,
+      0.06577793141936507,
+      0.07175135953763871,
+      0.07175297930306763,
+      0.07345338425112903,
+      0.07618607891869375,
+      0.06945285929049325,
+      0.07146428306998492,
+      0.07483222649637837,
+      0.0708850403310194,
+      0.06853154570359979,
+      0.07259112974734745,
+      0.06901906307674556,
+      0.07078705657028106,
+      0.06961465625756344,
+      0.06721882093614621,
+      0.07415499155801285,
+      0.07039847712018761,
+      0.06981338291619488,
+      0.07437848880500006,
+      0.07269597814970255,
+      0.0709900423823596,
+      0.06464334505069387,
+      0.07015428703253021,
+      0.07246216720332226,
+      0.07357285208497932,
+      0.06718633506358321,
+      0.07047928922335125,
+      0.07334205375256031,
+      0.07164018124536885,
+      0.07048754359152418,
+      0.07277481566249355,
+      0.07449044852211599,
+      0.07224425451500872,
+      0.06873704932909422,
+      0.07280931893636905,
+      0.07391830473514316,
+      0.07233952128323004,
+      0.07234007962788168,
+      0.07290670927868356,
+      0.07177260622988262,
+      0.07510876168064161,
+      0.06990767374008838,
+      0.07222825844941207,
+      0.07222849304116429,
+      0.07222797172512299,
+      0.07334885424573366,
+      0.07062640888102731,
+      0.06703702650396312,
+      0.06885404402076142,
+      0.07061906106715858,
+      0.06945049443472097,
+      0.07395121184017123,
+      0.0728271289232396,
+      0.06994281063805566,
+      0.07394195066712657,
+      0.07282475116150637,
+      0.06905203982190064,
+      0.07023655200120583,
+      0.07310653806376463,
+      0.06965145013145041,
+      0.06847802984128183,
+      0.0708207159938631,
+      0.07197133666348961,
+      0.0660004818687384,
+      0.07081887985687357,
+      0.07308310991571071,
+      0.07026879037404078,
+      0.06848962943072827,
+      0.07085258709416288,
+      0.07312802936610412,
+      0.07142636145199353,
+      0.07199071275925276,
+      0.07083604284151776,
+      0.06663977028000263,
+      0.06848040832228013,
+      0.07197744585784938,
+      0.07170367556936445,
+      0.07340524286204266,
+      0.07170425803502142,
+      0.07227675949233188,
+      0.0739511763870575,
+      0.07140016993844774,
+      0.07366366804514167,
+      0.07366661157966417,
+      0.06786120271884119,
+      0.0690711258891146,
+      0.07516355589511334,
+      0.07237196381587083,
+      0.07180015570754784,
+      0.07237413563652725,
+      0.07568078332031791,
+      0.07240257212089249,
+      0.07296982014134344,
+      0.07353174244921429,
+      0.07408535519222711,
+      0.07297414670150813,
+      0.05882459333935805,
+      0.060429584912671454,
+      0.056327876892054436,
+      0.05800614810479041,
+      0.058004847110937,
+      0.05800452628111648,
+      0.05800480037565875,
+      0.0571795673993064,
+      0.05785418528792614,
+      0.054443305910976646,
+      0.05702291625770647,
+      0.05617590171309068,
+      0.0594667154604602,
+      0.055317359494242956,
+      0.050804045595318134,
+      0.057016178134411004,
+      0.055201490396564225,
+      0.05343830572176095,
+      0.04971360065399755,
+      0.05857344098875195,
+      0.054330985254207376,
+      0.05936866487111508,
+      0.05520105723428328,
+      0.05772556050986347,
+      0.05252666264149997,
+      0.05519430511085687,
+      0.0577418930342028,
+      0.05519576353231299,
+      0.05343957857844011,
+      0.05519328592785049,
+      0.052528318470657885,
+      0.05934096843959706,
+      0.053702233398112476,
+      0.06041635242350842,
+      0.05715958201539651,
+      0.057992727837550995,
+      0.06118372829365421,
+      0.058808750651690264,
+      0.05546006384092873,
+      0.057990663792460755,
+      0.05533038502823776,
+      0.05703487411358773,
+      0.05618963839870274,
+      0.0535663080792728,
+      0.05533672022139826,
+      0.05357558232240648,
+      0.05868695905212813,
+      0.058674096360201655,
+      0.056146876953712774,
+      0.05614687695371282,
+      0.05699546848714812,
+      0.05261845381549533,
+      0.05529131129270484,
+      0.055288234346136805,
+      0.05441529124625918,
+      0.05354409532320163,
+      0.0562314539250329,
+      0.0562314539250318,
+      0.05791158233917956,
+      0.05537131511079663,
+      0.057903275023897284,
+      0.05623216421107643,
+      0.057076186909693176,
+      0.056236418192209654,
+      0.05697211009651416,
+      0.05526604190865342,
+      0.0552661258610009,
+      0.06103547687161773,
+      0.05351763415176908,
+      0.05862191075068533,
+      0.053506120523542124,
+      0.05860846420042756,
+      0.056266588142442876,
+      0.05540874467540975,
+      0.05364611435209665,
+      0.056265690647072174,
+      0.05627245030994879,
+      0.05541172568847273,
+      0.055409964175162724,
+      0.05793938184697731,
+      0.05795721028798327,
+      0.05628062438124994,
+      0.05958987673791446,
+      0.05542018972472216,
+      0.05957343049239584,
+      0.057125239009206824,
+      0.05628126376180851,
+      0.05628903017956812,
+      0.05716672663534213,
+      0.056322673372361964,
+      0.05716639030532306,
+      0.05716636777680606,
+      0.057170910018180664,
+      0.059622265474056975,
+      0.05632364723863719,
+      0.05633401951713555,
+      0.05541585294250573,
+      0.057118251648343665,
+      0.057952090363294365,
+      0.058773988920452123,
+      0.057119572924545635,
+      0.054549152713077594,
+      0.05454636029727191,
+      0.057120302847240456,
+      0.054341726539145985,
+      0.05162909432794689,
+      0.056078343095457395,
+      0.05254516749455003,
+      0.059366611636035925,
+      0.05521523677010443,
+      0.056921512190136817,
+      0.049776879003751044,
+      0.05543006182189109,
+      0.05543006182188987,
+      0.05713232509363148,
+      0.057132393432330016,
+      0.058776639407734546,
+      0.05878118066620871,
+      0.05543145092696227,
+      0.05957882774568653,
+      0.05784040803723152,
+      0.05866174889846083,
+      0.05077644108406082,
+      0.05263307850734544,
+      0.05864714973161483,
+      0.05616039474895069,
+      0.05700602872396001,
+      0.058644952215945886,
+      0.05784040803723151,
+      0.05530181376705863,
+      0.05530133022090232,
+      0.05616205147758339,
+      0.05783041401799385,
+      0.05264476853939341,
+      0.05700602872395984,
+      0.05700126026265794,
+      0.0535560390778463,
+      0.05702094368465279,
+      0.055315394377422784,
+      0.05172741505234911,
+      0.05267518916901905,
+      0.05867051843190155,
+      0.05785267835761594,
+      0.05784380406059231,
+      0.055308960431489425,
+      0.05264612961195482,
+      0.05172105005163017,
+      0.054433766590020756,
+      0.056168091396625194,
+      0.05947186339024109,
+      0.056167797575461725,
+      0.05700872054218446,
+      0.05456595907587593,
+      0.057139041224448045,
+      0.05629340865179109,
+      0.05879393102673024,
+      0.059587617185573746,
+      0.05629653774651066,
+      0.05959731911076463,
+      0.05958599294589725,
+      0.05700700347289279,
+      0.05530181376705517,
+      0.056161873455957675,
+      0.0561620514775867,
+      0.056160616877589706,
+      0.0535456887907547,
+      0.057006028723956784,
+      0.05700126026265854,
+      0.05718055477500592,
+      0.05718055477500547,
+      0.059642556873254836,
+      0.05633447967377627,
+      0.056346668489799315,
+      0.05633933854985366,
+      0.058830459173019684,
+      0.05962893170634407,
+      0.06201162470053648,
+      0.056350656336248764,
+      0.05634852867599293,
+      0.05634820841505764,
+      0.059644265480881836,
+      0.05884315953126855,
+      0.06044740329206904,
+      0.058027215565659464
+    ],
+    "feature_names": [
+      "intercept",
+      "yr",
+      "holiday",
+      "temp",
+      "hum",
+      "windspeed",
+      "hr=1",
+      "hr=2",
+      "hr=3",
+      "hr=4",
+      "hr=5",
+      "hr=6",
+      "hr=7",
+      "hr=8",
+      "hr=9",
+      "hr=10",
+      "hr=11",
+      "hr=12",
+      "hr=13",
+      "hr=14",
+      "hr=15",
+      "hr=16",
+      "hr=17",
+      "hr=18",
+      "hr=19",
+      "hr=20",
+      "hr=21",
+      "hr=22",
+      "hr=23",
+      "weekday=1",
+      "weekday=2",
+      "weekday=3",
+      "weekday=4",
+      "weekday=5",
+      "weekday=6",
+      "weathersit=2",
+      "weathersit=3",
+      "mnth=2",
+      "mnth=3",
+      "mnth=4",
+      "mnth=5",
+      "mnth=6",
+      "mnth=7",
+      "mnth=8",
+      "mnth=9",
+      "mnth=10",
+      "mnth=11",
+      "mnth=12",
+      "hr=1*workingday",
+      "hr=2*workingday",
+      "hr=3*workingday",
+      "hr=4*workingday",
+      "hr=5*workingday",
+      "hr=6*workingday",
+      "hr=7*workingday",
+      "hr=8*workingday",
+      "hr=9*workingday",
+      "hr=10*workingday",
+      "hr=11*workingday",
+      "hr=12*workingday",
+      "hr=13*workingday",
+      "hr=14*workingday",
+      "hr=15*workingday",
+      "hr=16*workingday",
+      "hr=17*workingday",
+      "hr=18*workingday",
+      "hr=19*workingday",
+      "hr=20*workingday",
+      "hr=21*workingday",
+      "hr=22*workingday",
+      "hr=23*workingday",
+      "hr=1*yr",
+      "hr=2*yr",
+      "hr=3*yr",
+      "hr=4*yr",
+      "hr=5*yr",
+      "hr=6*yr",
+      "hr=7*yr",
+      "hr=8*yr",
+      "hr=9*yr",
+      "hr=10*yr",
+      "hr=11*yr",
+      "hr=12*yr",
+      "hr=13*yr",
+      "hr=14*yr",
+      "hr=15*yr",
+      "hr=16*yr",
+      "hr=17*yr",
+      "hr=18*yr",
+      "hr=19*yr",
+      "hr=20*yr",
+      "hr=21*yr",
+      "hr=22*yr",
+      "hr=23*yr",
+      "hr=1*season=2",
+      "hr=1*season=3",
+      "hr=1*season=4",
+      "hr=2*season=2",
+      "hr=2*season=3",
+      "hr=2*season=4",
+      "hr=3*season=2",
+      "hr=3*season=3",
+      "hr=3*season=4",
+      "hr=4*season=2",
+      "hr=4*season=3",
+      "hr=4*season=4",
+      "hr=5*season=2",
+      "hr=5*season=3",
+      "hr=5*season=4",
+      "hr=6*season=2",
+      "hr=6*season=3",
+      "hr=6*season=4",
+      "hr=7*season=2",
+      "hr=7*season=3",
+      "hr=7*season=4",
+      "hr=8*season=2",
+      "hr=8*season=3",
+      "hr=8*season=4",
+      "hr=9*season=2",
+      "hr=9*season=3",
+      "hr=9*season=4",
+      "hr=10*season=2",
+      "hr=10*season=3",
+      "hr=10*season=4",
+      "hr=11*season=2",
+      "hr=11*season=3",
+      "hr=11*season=4",
+      "hr=12*season=2",
+      "hr=12*season=3",
+      "hr=12*season=4",
+      "hr=13*season=2",
+      "hr=13*season=3",
+      "hr=13*season=4",
+      "hr=14*season=2",
+      "hr=14*season=3",
+      "hr=14*season=4",
+      "hr=15*season=2",
+      "hr=15*season=3",
+      "hr=15*season=4",
+      "hr=16*season=2",
+      "hr=16*season=3",
+      "hr=16*season=4",
+      "hr=17*season=2",
+      "hr=17*season=3",
+      "hr=17*season=4",
+      "hr=18*season=2",
+      "hr=18*season=3",
+      "hr=18*season=4",
+      "hr=19*season=2",
+      "hr=19*season=3",
+      "hr=19*season=4",
+      "hr=20*season=2",
+      "hr=20*season=3",
+      "hr=20*season=4",
+      "hr=21*season=2",
+      "hr=21*season=3",
+      "hr=21*season=4",
+      "hr=22*season=2",
+      "hr=22*season=3",
+      "hr=22*season=4",
+      "hr=23*season=2",
+      "hr=23*season=3",
+      "hr=23*season=4",
+      "hour_block=1*weathersit=2",
+      "hour_block=1*weathersit=3",
+      "hour_block=2*weathersit=2",
+      "hour_block=2*weathersit=3",
+      "hour_block=3*weathersit=2",
+      "hour_block=3*weathersit=3",
+      "hour_block=4*weathersit=2",
+      "hour_block=4*weathersit=3",
+      "temp*hum",
+      "workingday*yr",
+      "hr=1*workingday*yr",
+      "hr=2*workingday*yr",
+      "hr=3*workingday*yr",
+      "hr=4*workingday*yr",
+      "hr=5*workingday*yr",
+      "hr=6*workingday*yr",
+      "hr=7*workingday*yr",
+      "hr=8*workingday*yr",
+      "hr=9*workingday*yr",
+      "hr=10*workingday*yr",
+      "hr=11*workingday*yr",
+      "hr=12*workingday*yr",
+      "hr=13*workingday*yr",
+      "hr=14*workingday*yr",
+      "hr=15*workingday*yr",
+      "hr=16*workingday*yr",
+      "hr=17*workingday*yr",
+      "hr=18*workingday*yr",
+      "hr=19*workingday*yr",
+      "hr=20*workingday*yr",
+      "hr=21*workingday*yr",
+      "hr=22*workingday*yr",
+      "hr=23*workingday*yr",
+      "hr=1*temp",
+      "hr=2*temp",
+      "hr=3*temp",
+      "hr=4*temp",
+      "hr=5*temp",
+      "hr=6*temp",
+      "hr=7*temp",
+      "hr=8*temp",
+      "hr=9*temp",
+      "hr=10*temp",
+      "hr=11*temp",
+      "hr=12*temp",
+      "hr=13*temp",
+      "hr=14*temp",
+      "hr=15*temp",
+      "hr=16*temp",
+      "hr=17*temp",
+      "hr=18*temp",
+      "hr=19*temp",
+      "hr=20*temp",
+      "hr=21*temp",
+      "hr=22*temp",
+      "hr=23*temp",
+      "workingday*temp",
+      "hr=1*workingday*temp",
+      "hr=2*workingday*temp",
+      "hr=3*workingday*temp",
+      "hr=4*workingday*temp",
+      "hr=5*workingday*temp",
+      "hr=6*workingday*temp",
+      "hr=7*workingday*temp",
+      "hr=8*workingday*temp",
+      "hr=9*workingday*temp",
+      "hr=10*workingday*temp",
+      "hr=11*workingday*temp",
+      "hr=12*workingday*temp",
+      "hr=13*workingday*temp",
+      "hr=14*workingday*temp",
+      "hr=15*workingday*temp",
+      "hr=16*workingday*temp",
+      "hr=17*workingday*temp",
+      "hr=18*workingday*temp",
+      "hr=19*workingday*temp",
+      "hr=20*workingday*temp",
+      "hr=21*workingday*temp",
+      "hr=22*workingday*temp",
+      "hr=23*workingday*temp",
+      "hr=1*holiday",
+      "hr=2*holiday",
+      "hr=3*holiday",
+      "hr=4*holiday",
+      "hr=5*holiday",
+      "hr=6*holiday",
+      "hr=7*holiday",
+      "hr=8*holiday",
+      "hr=9*holiday",
+      "hr=10*holiday",
+      "hr=11*holiday",
+      "hr=12*holiday",
+      "hr=13*holiday",
+      "hr=14*holiday",
+      "hr=15*holiday",
+      "hr=16*holiday",
+      "hr=17*holiday",
+      "hr=18*holiday",
+      "hr=19*holiday",
+      "hr=20*holiday",
+      "hr=21*holiday",
+      "hr=22*holiday",
+      "hr=23*holiday",
+      "hr=1*weekday=1",
+      "hr=1*weekday=2",
+      "hr=1*weekday=3",
+      "hr=1*weekday=4",
+      "hr=1*weekday=6",
+      "hr=2*weekday=1",
+      "hr=2*weekday=2",
+      "hr=2*weekday=3",
+      "hr=2*weekday=4",
+      "hr=2*weekday=6",
+      "hr=3*weekday=1",
+      "hr=3*weekday=2",
+      "hr=3*weekday=3",
+      "hr=3*weekday=4",
+      "hr=3*weekday=6",
+      "hr=4*weekday=1",
+      "hr=4*weekday=2",
+      "hr=4*weekday=3",
+      "hr=4*weekday=4",
+      "hr=4*weekday=6",
+      "hr=5*weekday=1",
+      "hr=5*weekday=2",
+      "hr=5*weekday=3",
+      "hr=5*weekday=4",
+      "hr=5*weekday=6",
+      "hr=6*weekday=1",
+      "hr=6*weekday=2",
+      "hr=6*weekday=3",
+      "hr=6*weekday=4",
+      "hr=6*weekday=6",
+      "hr=7*weekday=1",
+      "hr=7*weekday=2",
+      "hr=7*weekday=3",
+      "hr=7*weekday=4",
+      "hr=7*weekday=6",
+      "hr=8*weekday=1",
+      "hr=8*weekday=2",
+      "hr=8*weekday=3",
+      "hr=8*weekday=4",
+      "hr=8*weekday=6",
+      "hr=9*weekday=1",
+      "hr=9*weekday=2",
+      "hr=9*weekday=3",
+      "hr=9*weekday=4",
+      "hr=9*weekday=6",
+      "hr=10*weekday=1",
+      "hr=10*weekday=2",
+      "hr=10*weekday=3",
+      "hr=10*weekday=4",
+      "hr=10*weekday=6",
+      "hr=11*weekday=1",
+      "hr=11*weekday=2",
+      "hr=11*weekday=3",
+      "hr=11*weekday=4",
+      "hr=11*weekday=6",
+      "hr=12*weekday=1",
+      "hr=12*weekday=2",
+      "hr=12*weekday=3",
+      "hr=12*weekday=4",
+      "hr=12*weekday=6",
+      "hr=13*weekday=1",
+      "hr=13*weekday=2",
+      "hr=13*weekday=3",
+      "hr=13*weekday=4",
+      "hr=13*weekday=6",
+      "hr=14*weekday=1",
+      "hr=14*weekday=2",
+      "hr=14*weekday=3",
+      "hr=14*weekday=4",
+      "hr=14*weekday=6",
+      "hr=15*weekday=1",
+      "hr=15*weekday=2",
+      "hr=15*weekday=3",
+      "hr=15*weekday=4",
+      "hr=15*weekday=6",
+      "hr=16*weekday=1",
+      "hr=16*weekday=2",
+      "hr=16*weekday=3",
+      "hr=16*weekday=4",
+      "hr=16*weekday=6",
+      "hr=17*weekday=1",
+      "hr=17*weekday=2",
+      "hr=17*weekday=3",
+      "hr=17*weekday=4",
+      "hr=17*weekday=6",
+      "hr=18*weekday=1",
+      "hr=18*weekday=2",
+      "hr=18*weekday=3",
+      "hr=18*weekday=4",
+      "hr=18*weekday=6",
+      "hr=19*weekday=1",
+      "hr=19*weekday=2",
+      "hr=19*weekday=3",
+      "hr=19*weekday=4",
+      "hr=19*weekday=6",
+      "hr=20*weekday=1",
+      "hr=20*weekday=2",
+      "hr=20*weekday=3",
+      "hr=20*weekday=4",
+      "hr=20*weekday=6",
+      "hr=21*weekday=1",
+      "hr=21*weekday=2",
+      "hr=21*weekday=3",
+      "hr=21*weekday=4",
+      "hr=21*weekday=6",
+      "hr=22*weekday=1",
+      "hr=22*weekday=2",
+      "hr=22*weekday=3",
+      "hr=22*weekday=4",
+      "hr=22*weekday=6",
+      "hr=23*weekday=1",
+      "hr=23*weekday=2",
+      "hr=23*weekday=3",
+      "hr=23*weekday=4",
+      "hr=23*weekday=6",
+      "hr=1*mnth=2",
+      "hr=1*mnth=3",
+      "hr=1*mnth=4",
+      "hr=1*mnth=5",
+      "hr=1*mnth=7",
+      "hr=1*mnth=8",
+      "hr=1*mnth=10",
+      "hr=1*mnth=11",
+      "hr=2*mnth=2",
+      "hr=2*mnth=3",
+      "hr=2*mnth=4",
+      "hr=2*mnth=5",
+      "hr=2*mnth=7",
+      "hr=2*mnth=8",
+      "hr=2*mnth=10",
+      "hr=2*mnth=11",
+      "hr=3*mnth=2",
+      "hr=3*mnth=3",
+      "hr=3*mnth=4",
+      "hr=3*mnth=5",
+      "hr=3*mnth=7",
+      "hr=3*mnth=8",
+      "hr=3*mnth=10",
+      "hr=3*mnth=11",
+      "hr=4*mnth=2",
+      "hr=4*mnth=3",
+      "hr=4*mnth=4",
+      "hr=4*mnth=5",
+      "hr=4*mnth=7",
+      "hr=4*mnth=8",
+      "hr=4*mnth=10",
+      "hr=4*mnth=11",
+      "hr=5*mnth=2",
+      "hr=5*mnth=3",
+      "hr=5*mnth=4",
+      "hr=5*mnth=5",
+      "hr=5*mnth=7",
+      "hr=5*mnth=8",
+      "hr=5*mnth=10",
+      "hr=5*mnth=11",
+      "hr=6*mnth=2",
+      "hr=6*mnth=3",
+      "hr=6*mnth=4",
+      "hr=6*mnth=5",
+      "hr=6*mnth=7",
+      "hr=6*mnth=8",
+      "hr=6*mnth=10",
+      "hr=6*mnth=11",
+      "hr=7*mnth=2",
+      "hr=7*mnth=3",
+      "hr=7*mnth=4",
+      "hr=7*mnth=5",
+      "hr=7*mnth=7",
+      "hr=7*mnth=8",
+      "hr=7*mnth=10",
+      "hr=7*mnth=11",
+      "hr=8*mnth=2",
+      "hr=8*mnth=3",
+      "hr=8*mnth=4",
+      "hr=8*mnth=5",
+      "hr=8*mnth=7",
+      "hr=8*mnth=8",
+      "hr=8*mnth=10",
+      "hr=8*mnth=11",
+      "hr=9*mnth=2",
+      "hr=9*mnth=3",
+      "hr=9*mnth=4",
+      "hr=9*mnth=5",
+      "hr=9*mnth=7",
+      "hr=9*mnth=8",
+      "hr=9*mnth=10",
+      "hr=9*mnth=11",
+      "hr=10*mnth=2",
+      "hr=10*mnth=3",
+      "hr=10*mnth=4",
+      "hr=10*mnth=5",
+      "hr=10*mnth=7",
+      "hr=10*mnth=8",
+      "hr=10*mnth=10",
+      "hr=10*mnth=11",
+      "hr=11*mnth=2",
+      "hr=11*mnth=3",
+      "hr=11*mnth=4",
+      "hr=11*mnth=5",
+      "hr=11*mnth=7",
+      "hr=11*mnth=8",
+      "hr=11*mnth=10",
+      "hr=11*mnth=11",
+      "hr=12*mnth=2",
+      "hr=12*mnth=3",
+      "hr=12*mnth=4",
+      "hr=12*mnth=5",
+      "hr=12*mnth=7",
+      "hr=12*mnth=8",
+      "hr=12*mnth=10",
+      "hr=12*mnth=11",
+      "hr=13*mnth=2",
+      "hr=13*mnth=3",
+      "hr=13*mnth=4",
+      "hr=13*mnth=5",
+      "hr=13*mnth=7",
+      "hr=13*mnth=8",
+      "hr=13*mnth=10",
+      "hr=13*mnth=11",
+      "hr=14*mnth=2",
+      "hr=14*mnth=3",
+      "hr=14*mnth=4",
+      "hr=14*mnth=5",
+      "hr=14*mnth=7",
+      "hr=14*mnth=8",
+      "hr=14*mnth=10",
+      "hr=14*mnth=11",
+      "hr=15*mnth=2",
+      "hr=15*mnth=3",
+      "hr=15*mnth=4",
+      "hr=15*mnth=5",
+      "hr=15*mnth=7",
+      "hr=15*mnth=8",
+      "hr=15*mnth=10",
+      "hr=15*mnth=11",
+      "hr=16*mnth=2",
+      "hr=16*mnth=3",
+      "hr=16*mnth=4",
+      "hr=16*mnth=5",
+      "hr=16*mnth=7",
+      "hr=16*mnth=8",
+      "hr=16*mnth=10",
+      "hr=16*mnth=11",
+      "hr=17*mnth=2",
+      "hr=17*mnth=3",
+      "hr=17*mnth=4",
+      "hr=17*mnth=5",
+      "hr=17*mnth=7",
+      "hr=17*mnth=8",
+      "hr=17*mnth=10",
+      "hr=17*mnth=11",
+      "hr=18*mnth=2",
+      "hr=18*mnth=3",
+      "hr=18*mnth=4",
+      "hr=18*mnth=5",
+      "hr=18*mnth=7",
+      "hr=18*mnth=8",
+      "hr=18*mnth=10",
+      "hr=18*mnth=11",
+      "hr=19*mnth=2",
+      "hr=19*mnth=3",
+      "hr=19*mnth=4",
+      "hr=19*mnth=5",
+      "hr=19*mnth=7",
+      "hr=19*mnth=8",
+      "hr=19*mnth=10",
+      "hr=19*mnth=11",
+      "hr=20*mnth=2",
+      "hr=20*mnth=3",
+      "hr=20*mnth=4",
+      "hr=20*mnth=5",
+      "hr=20*mnth=7",
+      "hr=20*mnth=8",
+      "hr=20*mnth=10",
+      "hr=20*mnth=11",
+      "hr=21*mnth=2",
+      "hr=21*mnth=3",
+      "hr=21*mnth=4",
+      "hr=21*mnth=5",
+      "hr=21*mnth=7",
+      "hr=21*mnth=8",
+      "hr=21*mnth=10",
+      "hr=21*mnth=11",
+      "hr=22*mnth=2",
+      "hr=22*mnth=3",
+      "hr=22*mnth=4",
+      "hr=22*mnth=5",
+      "hr=22*mnth=7",
+      "hr=22*mnth=8",
+      "hr=22*mnth=10",
+      "hr=22*mnth=11",
+      "hr=23*mnth=2",
+      "hr=23*mnth=3",
+      "hr=23*mnth=4",
+      "hr=23*mnth=5",
+      "hr=23*mnth=7",
+      "hr=23*mnth=8",
+      "hr=23*mnth=10",
+      "hr=23*mnth=11"
+    ],
+    "lineage": {
+      "intercept": [],
+      "yr": [
+        "yr"
+      ],
+      "holiday": [
+        "holiday"
+      ],
+      "temp": [
+        "temp"
+      ],
+      "hum": [
+        "hum"
+      ],
+      "windspeed": [
+        "windspeed"
+      ],
+      "hr=1": [
+        "hr"
+      ],
+      "hr=2": [
+        "hr"
+      ],
+      "hr=3": [
+        "hr"
+      ],
+      "hr=4": [
+        "hr"
+      ],
+      "hr=5": [
+        "hr"
+      ],
+      "hr=6": [
+        "hr"
+      ],
+      "hr=7": [
+        "hr"
+      ],
+      "hr=8": [
+        "hr"
+      ],
+      "hr=9": [
+        "hr"
+      ],
+      "hr=10": [
+        "hr"
+      ],
+      "hr=11": [
+        "hr"
+      ],
+      "hr=12": [
+        "hr"
+      ],
+      "hr=13": [
+        "hr"
+      ],
+      "hr=14": [
+        "hr"
+      ],
+      "hr=15": [
+        "hr"
+      ],
+      "hr=16": [
+        "hr"
+      ],
+      "hr=17": [
+        "hr"
+      ],
+      "hr=18": [
+        "hr"
+      ],
+      "hr=19": [
+        "hr"
+      ],
+      "hr=20": [
+        "hr"
+      ],
+      "hr=21": [
+        "hr"
+      ],
+      "hr=22": [
+        "hr"
+      ],
+      "hr=23": [
+        "hr"
+      ],
+      "weekday=1": [
+        "weekday"
+      ],
+      "weekday=2": [
+        "weekday"
+      ],
+      "weekday=3": [
+        "weekday"
+      ],
+      "weekday=4": [
+        "weekday"
+      ],
+      "weekday=5": [
+        "weekday"
+      ],
+      "weekday=6": [
+        "weekday"
+      ],
+      "weathersit=2": [
+        "weathersit"
+      ],
+      "weathersit=3": [
+        "weathersit"
+      ],
+      "mnth=2": [
+        "mnth"
+      ],
+      "mnth=3": [
+        "mnth"
+      ],
+      "mnth=4": [
+        "mnth"
+      ],
+      "mnth=5": [
+        "mnth"
+      ],
+      "mnth=6": [
+        "mnth"
+      ],
+      "mnth=7": [
+        "mnth"
+      ],
+      "mnth=8": [
+        "mnth"
+      ],
+      "mnth=9": [
+        "mnth"
+      ],
+      "mnth=10": [
+        "mnth"
+      ],
+      "mnth=11": [
+        "mnth"
+      ],
+      "mnth=12": [
+        "mnth"
+      ],
+      "hr=1*workingday": [
+        "hr",
+        "workingday"
+      ],
+      "hr=2*workingday": [
+        "hr",
+        "workingday"
+      ],
+      "hr=3*workingday": [
+        "hr",
+        "workingday"
+      ],
+      "hr=4*workingday": [
+        "hr",
+        "workingday"
+      ],
+      "hr=5*workingday": [
+        "hr",
+        "workingday"
+      ],
+      "hr=6*workingday": [
+        "hr",
+        "workingday"
+      ],
+      "hr=7*workingday": [
+        "hr",
+        "workingday"
+      ],
+      "hr=8*workingday": [
+        "hr",
+        "workingday"
+      ],
+      "hr=9*workingday": [
+        "hr",
+        "workingday"
+      ],
+      "hr=10*workingday": [
+        "hr",
+        "workingday"
+      ],
+      "hr=11*workingday": [
+        "hr",
+        "workingday"
+      ],
+      "hr=12*workingday": [
+        "hr",
+        "workingday"
+      ],
+      "hr=13*workingday": [
+        "hr",
+        "workingday"
+      ],
+      "hr=14*workingday": [
+        "hr",
+        "workingday"
+      ],
+      "hr=15*workingday": [
+        "hr",
+        "workingday"
+      ],
+      "hr=16*workingday": [
+        "hr",
+        "workingday"
+      ],
+      "hr=17*workingday": [
+        "hr",
+        "workingday"
+      ],
+      "hr=18*workingday": [
+        "hr",
+        "workingday"
+      ],
+      "hr=19*workingday": [
+        "hr",
+        "workingday"
+      ],
+      "hr=20*workingday": [
+        "hr",
+        "workingday"
+      ],
+      "hr=21*workingday": [
+        "hr",
+        "workingday"
+      ],
+      "hr=22*workingday": [
+        "hr",
+        "workingday"
+      ],
+      "hr=23*workingday": [
+        "hr",
+        "workingday"
+      ],
+      "hr=1*yr": [
+        "hr",
+        "yr"
+      ],
+      "hr=2*yr": [
+        "hr",
+        "yr"
+      ],
+      "hr=3*yr": [
+        "hr",
+        "yr"
+      ],
+      "hr=4*yr": [
+        "hr",
+        "yr"
+      ],
+      "hr=5*yr": [
+        "hr",
+        "yr"
+      ],
+      "hr=6*yr": [
+        "hr",
+        "yr"
+      ],
+      "hr=7*yr": [
+        "hr",
+        "yr"
+      ],
+      "hr=8*yr": [
+        "hr",
+        "yr"
+      ],
+      "hr=9*yr": [
+        "hr",
+        "yr"
+      ],
+      "hr=10*yr": [
+        "hr",
+        "yr"
+      ],
+      "hr=11*yr": [
+        "hr",
+        "yr"
+      ],
+      "hr=12*yr": [
+        "hr",
+        "yr"
+      ],
+      "hr=13*yr": [
+        "hr",
+        "yr"
+      ],
+      "hr=14*yr": [
+        "hr",
+        "yr"
+      ],
+      "hr=15*yr": [
+        "hr",
+        "yr"
+      ],
+      "hr=16*yr": [
+        "hr",
+        "yr"
+      ],
+      "hr=17*yr": [
+        "hr",
+        "yr"
+      ],
+      "hr=18*yr": [
+        "hr",
+        "yr"
+      ],
+      "hr=19*yr": [
+        "hr",
+        "yr"
+      ],
+      "hr=20*yr": [
+        "hr",
+        "yr"
+      ],
+      "hr=21*yr": [
+        "hr",
+        "yr"
+      ],
+      "hr=22*yr": [
+        "hr",
+        "yr"
+      ],
+      "hr=23*yr": [
+        "hr",
+        "yr"
+      ],
+      "hr=1*season=2": [
+        "hr",
+        "season"
+      ],
+      "hr=1*season=3": [
+        "hr",
+        "season"
+      ],
+      "hr=1*season=4": [
+        "hr",
+        "season"
+      ],
+      "hr=2*season=2": [
+        "hr",
+        "season"
+      ],
+      "hr=2*season=3": [
+        "hr",
+        "season"
+      ],
+      "hr=2*season=4": [
+        "hr",
+        "season"
+      ],
+      "hr=3*season=2": [
+        "hr",
+        "season"
+      ],
+      "hr=3*season=3": [
+        "hr",
+        "season"
+      ],
+      "hr=3*season=4": [
+        "hr",
+        "season"
+      ],
+      "hr=4*season=2": [
+        "hr",
+        "season"
+      ],
+      "hr=4*season=3": [
+        "hr",
+        "season"
+      ],
+      "hr=4*season=4": [
+        "hr",
+        "season"
+      ],
+      "hr=5*season=2": [
+        "hr",
+        "season"
+      ],
+      "hr=5*season=3": [
+        "hr",
+        "season"
+      ],
+      "hr=5*season=4": [
+        "hr",
+        "season"
+      ],
+      "hr=6*season=2": [
+        "hr",
+        "season"
+      ],
+      "hr=6*season=3": [
+        "hr",
+        "season"
+      ],
+      "hr=6*season=4": [
+        "hr",
+        "season"
+      ],
+      "hr=7*season=2": [
+        "hr",
+        "season"
+      ],
+      "hr=7*season=3": [
+        "hr",
+        "season"
+      ],
+      "hr=7*season=4": [
+        "hr",
+        "season"
+      ],
+      "hr=8*season=2": [
+        "hr",
+        "season"
+      ],
+      "hr=8*season=3": [
+        "hr",
+        "season"
+      ],
+      "hr=8*season=4": [
+        "hr",
+        "season"
+      ],
+      "hr=9*season=2": [
+        "hr",
+        "season"
+      ],
+      "hr=9*season=3": [
+        "hr",
+        "season"
+      ],
+      "hr=9*season=4": [
+        "hr",
+        "season"
+      ],
+      "hr=10*season=2": [
+        "hr",
+        "season"
+      ],
+      "hr=10*season=3": [
+        "hr",
+        "season"
+      ],
+      "hr=10*season=4": [
+        "hr",
+        "season"
+      ],
+      "hr=11*season=2": [
+        "hr",
+        "season"
+      ],
+      "hr=11*season=3": [
+        "hr",
+        "season"
+      ],
+      "hr=11*season=4": [
+        "hr",
+        "season"
+      ],
+      "hr=12*season=2": [
+        "hr",
+        "season"
+      ],
+      "hr=12*season=3": [
+        "hr",
+        "season"
+      ],
+      "hr=12*season=4": [
+        "hr",
+        "season"
+      ],
+      "hr=13*season=2": [
+        "hr",
+        "season"
+      ],
+      "hr=13*season=3": [
+        "hr",
+        "season"
+      ],
+      "hr=13*season=4": [
+        "hr",
+        "season"
+      ],
+      "hr=14*season=2": [
+        "hr",
+        "season"
+      ],
+      "hr=14*season=3": [
+        "hr",
+        "season"
+      ],
+      "hr=14*season=4": [
+        "hr",
+        "season"
+      ],
+      "hr=15*season=2": [
+        "hr",
+        "season"
+      ],
+      "hr=15*season=3": [
+        "hr",
+        "season"
+      ],
+      "hr=15*season=4": [
+        "hr",
+        "season"
+      ],
+      "hr=16*season=2": [
+        "hr",
+        "season"
+      ],
+      "hr=16*season=3": [
+        "hr",
+        "season"
+      ],
+      "hr=16*season=4": [
+        "hr",
+        "season"
+      ],
+      "hr=17*season=2": [
+        "hr",
+        "season"
+      ],
+      "hr=17*season=3": [
+        "hr",
+        "season"
+      ],
+      "hr=17*season=4": [
+        "hr",
+        "season"
+      ],
+      "hr=18*season=2": [
+        "hr",
+        "season"
+      ],
+      "hr=18*season=3": [
+        "hr",
+        "season"
+      ],
+      "hr=18*season=4": [
+        "hr",
+        "season"
+      ],
+      "hr=19*season=2": [
+        "hr",
+        "season"
+      ],
+      "hr=19*season=3": [
+        "hr",
+        "season"
+      ],
+      "hr=19*season=4": [
+        "hr",
+        "season"
+      ],
+      "hr=20*season=2": [
+        "hr",
+        "season"
+      ],
+      "hr=20*season=3": [
+        "hr",
+        "season"
+      ],
+      "hr=20*season=4": [
+        "hr",
+        "season"
+      ],
+      "hr=21*season=2": [
+        "hr",
+        "season"
+      ],
+      "hr=21*season=3": [
+        "hr",
+        "season"
+      ],
+      "hr=21*season=4": [
+        "hr",
+        "season"
+      ],
+      "hr=22*season=2": [
+        "hr",
+        "season"
+      ],
+      "hr=22*season=3": [
+        "hr",
+        "season"
+      ],
+      "hr=22*season=4": [
+        "hr",
+        "season"
+      ],
+      "hr=23*season=2": [
+        "hr",
+        "season"
+      ],
+      "hr=23*season=3": [
+        "hr",
+        "season"
+      ],
+      "hr=23*season=4": [
+        "hr",
+        "season"
+      ],
+      "hour_block=1*weathersit=2": [
+        "hr",
+        "weathersit"
+      ],
+      "hour_block=1*weathersit=3": [
+        "hr",
+        "weathersit"
+      ],
+      "hour_block=2*weathersit=2": [
+        "hr",
+        "weathersit"
+      ],
+      "hour_block=2*weathersit=3": [
+        "hr",
+        "weathersit"
+      ],
+      "hour_block=3*weathersit=2": [
+        "hr",
+        "weathersit"
+      ],
+      "hour_block=3*weathersit=3": [
+        "hr",
+        "weathersit"
+      ],
+      "hour_block=4*weathersit=2": [
+        "hr",
+        "weathersit"
+      ],
+      "hour_block=4*weathersit=3": [
+        "hr",
+        "weathersit"
+      ],
+      "temp*hum": [
+        "hum",
+        "temp"
+      ],
+      "workingday*yr": [
+        "workingday",
+        "yr"
+      ],
+      "hr=1*workingday*yr": [
+        "hr",
+        "workingday",
+        "yr"
+      ],
+      "hr=2*workingday*yr": [
+        "hr",
+        "workingday",
+        "yr"
+      ],
+      "hr=3*workingday*yr": [
+        "hr",
+        "workingday",
+        "yr"
+      ],
+      "hr=4*workingday*yr": [
+        "hr",
+        "workingday",
+        "yr"
+      ],
+      "hr=5*workingday*yr": [
+        "hr",
+        "workingday",
+        "yr"
+      ],
+      "hr=6*workingday*yr": [
+        "hr",
+        "workingday",
+        "yr"
+      ],
+      "hr=7*workingday*yr": [
+        "hr",
+        "workingday",
+        "yr"
+      ],
+      "hr=8*workingday*yr": [
+        "hr",
+        "workingday",
+        "yr"
+      ],
+      "hr=9*workingday*yr": [
+        "hr",
+        "workingday",
+        "yr"
+      ],
+      "hr=10*workingday*yr": [
+        "hr",
+        "workingday",
+        "yr"
+      ],
+      "hr=11*workingday*yr": [
+        "hr",
+        "workingday",
+        "yr"
+      ],
+      "hr=12*workingday*yr": [
+        "hr",
+        "workingday",
+        "yr"
+      ],
+      "hr=13*workingday*yr": [
+        "hr",
+        "workingday",
+        "yr"
+      ],
+      "hr=14*workingday*yr": [
+        "hr",
+        "workingday",
+        "yr"
+      ],
+      "hr=15*workingday*yr": [
+        "hr",
+        "workingday",
+        "yr"
+      ],
+      "hr=16*workingday*yr": [
+        "hr",
+        "workingday",
+        "yr"
+      ],
+      "hr=17*workingday*yr": [
+        "hr",
+        "workingday",
+        "yr"
+      ],
+      "hr=18*workingday*yr": [
+        "hr",
+        "workingday",
+        "yr"
+      ],
+      "hr=19*workingday*yr": [
+        "hr",
+        "workingday",
+        "yr"
+      ],
+      "hr=20*workingday*yr": [
+        "hr",
+        "workingday",
+        "yr"
+      ],
+      "hr=21*workingday*yr": [
+        "hr",
+        "workingday",
+        "yr"
+      ],
+      "hr=22*workingday*yr": [
+        "hr",
+        "workingday",
+        "yr"
+      ],
+      "hr=23*workingday*yr": [
+        "hr",
+        "workingday",
+        "yr"
+      ],
+      "hr=1*temp": [
+        "hr",
+        "temp"
+      ],
+      "hr=2*temp": [
+        "hr",
+        "temp"
+      ],
+      "hr=3*temp": [
+        "hr",
+        "temp"
+      ],
+      "hr=4*temp": [
+        "hr",
+        "temp"
+      ],
+      "hr=5*temp": [
+        "hr",
+        "temp"
+      ],
+      "hr=6*temp": [
+        "hr",
+        "temp"
+      ],
+      "hr=7*temp": [
+        "hr",
+        "temp"
+      ],
+      "hr=8*temp": [
+        "hr",
+        "temp"
+      ],
+      "hr=9*temp": [
+        "hr",
+        "temp"
+      ],
+      "hr=10*temp": [
+        "hr",
+        "temp"
+      ],
+      "hr=11*temp": [
+        "hr",
+        "temp"
+      ],
+      "hr=12*temp": [
+        "hr",
+        "temp"
+      ],
+      "hr=13*temp": [
+        "hr",
+        "temp"
+      ],
+      "hr=14*temp": [
+        "hr",
+        "temp"
+      ],
+      "hr=15*temp": [
+        "hr",
+        "temp"
+      ],
+      "hr=16*temp": [
+        "hr",
+        "temp"
+      ],
+      "hr=17*temp": [
+        "hr",
+        "temp"
+      ],
+      "hr=18*temp": [
+        "hr",
+        "temp"
+      ],
+      "hr=19*temp": [
+        "hr",
+        "temp"
+      ],
+      "hr=20*temp": [
+        "hr",
+        "temp"
+      ],
+      "hr=21*temp": [
+        "hr",
+        "temp"
+      ],
+      "hr=22*temp": [
+        "hr",
+        "temp"
+      ],
+      "hr=23*temp": [
+        "hr",
+        "temp"
+      ],
+      "workingday*temp": [
+        "temp",
+        "workingday"
+      ],
+      "hr=1*workingday*temp": [
+        "hr",
+        "temp",
+        "workingday"
+      ],
+      "hr=2*workingday*temp": [
+        "hr",
+        "temp",
+        "workingday"
+      ],
+      "hr=3*workingday*temp": [
+        "hr",
+        "temp",
+        "workingday"
+      ],
+      "hr=4*workingday*temp": [
+        "hr",
+        "temp",
+        "workingday"
+      ],
+      "hr=5*workingday*temp": [
+        "hr",
+        "temp",
+        "workingday"
+      ],
+      "hr=6*workingday*temp": [
+        "hr",
+        "temp",
+        "workingday"
+      ],
+      "hr=7*workingday*temp": [
+        "hr",
+        "temp",
+        "workingday"
+      ],
+      "hr=8*workingday*temp": [
+        "hr",
+        "temp",
+        "workingday"
+      ],
+      "hr=9*workingday*temp": [
+        "hr",
+        "temp",
+        "workingday"
+      ],
+      "hr=10*workingday*temp": [
+        "hr",
+        "temp",
+        "workingday"
+      ],
+      "hr=11*workingday*temp": [
+        "hr",
+        "temp",
+        "workingday"
+      ],
+      "hr=12*workingday*temp": [
+        "hr",
+        "temp",
+        "workingday"
+      ],
+      "hr=13*workingday*temp": [
+        "hr",
+        "temp",
+        "workingday"
+      ],
+      "hr=14*workingday*temp": [
+        "hr",
+        "temp",
+        "workingday"
+      ],
+      "hr=15*workingday*temp": [
+        "hr",
+        "temp",
+        "workingday"
+      ],
+      "hr=16*workingday*temp": [
+        "hr",
+        "temp",
+        "workingday"
+      ],
+      "hr=17*workingday*temp": [
+        "hr",
+        "temp",
+        "workingday"
+      ],
+      "hr=18*workingday*temp": [
+        "hr",
+        "temp",
+        "workingday"
+      ],
+      "hr=19*workingday*temp": [
+        "hr",
+        "temp",
+        "workingday"
+      ],
+      "hr=20*workingday*temp": [
+        "hr",
+        "temp",
+        "workingday"
+      ],
+      "hr=21*workingday*temp": [
+        "hr",
+        "temp",
+        "workingday"
+      ],
+      "hr=22*workingday*temp": [
+        "hr",
+        "temp",
+        "workingday"
+      ],
+      "hr=23*workingday*temp": [
+        "hr",
+        "temp",
+        "workingday"
+      ],
+      "hr=1*holiday": [
+        "holiday",
+        "hr"
+      ],
+      "hr=2*holiday": [
+        "holiday",
+        "hr"
+      ],
+      "hr=3*holiday": [
+        "holiday",
+        "hr"
+      ],
+      "hr=4*holiday": [
+        "holiday",
+        "hr"
+      ],
+      "hr=5*holiday": [
+        "holiday",
+        "hr"
+      ],
+      "hr=6*holiday": [
+        "holiday",
+        "hr"
+      ],
+      "hr=7*holiday": [
+        "holiday",
+        "hr"
+      ],
+      "hr=8*holiday": [
+        "holiday",
+        "hr"
+      ],
+      "hr=9*holiday": [
+        "holiday",
+        "hr"
+      ],
+      "hr=10*holiday": [
+        "holiday",
+        "hr"
+      ],
+      "hr=11*holiday": [
+        "holiday",
+        "hr"
+      ],
+      "hr=12*holiday": [
+        "holiday",
+        "hr"
+      ],
+      "hr=13*holiday": [
+        "holiday",
+        "hr"
+      ],
+      "hr=14*holiday": [
+        "holiday",
+        "hr"
+      ],
+      "hr=15*holiday": [
+        "holiday",
+        "hr"
+      ],
+      "hr=16*holiday": [
+        "holiday",
+        "hr"
+      ],
+      "hr=17*holiday": [
+        "holiday",
+        "hr"
+      ],
+      "hr=18*holiday": [
+        "holiday",
+        "hr"
+      ],
+      "hr=19*holiday": [
+        "holiday",
+        "hr"
+      ],
+      "hr=20*holiday": [
+        "holiday",
+        "hr"
+      ],
+      "hr=21*holiday": [
+        "holiday",
+        "hr"
+      ],
+      "hr=22*holiday": [
+        "holiday",
+        "hr"
+      ],
+      "hr=23*holiday": [
+        "holiday",
+        "hr"
+      ],
+      "hr=1*weekday=1": [
+        "hr",
+        "weekday"
+      ],
+      "hr=1*weekday=2": [
+        "hr",
+        "weekday"
+      ],
+      "hr=1*weekday=3": [
+        "hr",
+        "weekday"
+      ],
+      "hr=1*weekday=4": [
+        "hr",
+        "weekday"
+      ],
+      "hr=1*weekday=6": [
+        "hr",
+        "weekday"
+      ],
+      "hr=2*weekday=1": [
+        "hr",
+        "weekday"
+      ],
+      "hr=2*weekday=2": [
+        "hr",
+        "weekday"
+      ],
+      "hr=2*weekday=3": [
+        "hr",
+        "weekday"
+      ],
+      "hr=2*weekday=4": [
+        "hr",
+        "weekday"
+      ],
+      "hr=2*weekday=6": [
+        "hr",
+        "weekday"
+      ],
+      "hr=3*weekday=1": [
+        "hr",
+        "weekday"
+      ],
+      "hr=3*weekday=2": [
+        "hr",
+        "weekday"
+      ],
+      "hr=3*weekday=3": [
+        "hr",
+        "weekday"
+      ],
+      "hr=3*weekday=4": [
+        "hr",
+        "weekday"
+      ],
+      "hr=3*weekday=6": [
+        "hr",
+        "weekday"
+      ],
+      "hr=4*weekday=1": [
+        "hr",
+        "weekday"
+      ],
+      "hr=4*weekday=2": [
+        "hr",
+        "weekday"
+      ],
+      "hr=4*weekday=3": [
+        "hr",
+        "weekday"
+      ],
+      "hr=4*weekday=4": [
+        "hr",
+        "weekday"
+      ],
+      "hr=4*weekday=6": [
+        "hr",
+        "weekday"
+      ],
+      "hr=5*weekday=1": [
+        "hr",
+        "weekday"
+      ],
+      "hr=5*weekday=2": [
+        "hr",
+        "weekday"
+      ],
+      "hr=5*weekday=3": [
+        "hr",
+        "weekday"
+      ],
+      "hr=5*weekday=4": [
+        "hr",
+        "weekday"
+      ],
+      "hr=5*weekday=6": [
+        "hr",
+        "weekday"
+      ],
+      "hr=6*weekday=1": [
+        "hr",
+        "weekday"
+      ],
+      "hr=6*weekday=2": [
+        "hr",
+        "weekday"
+      ],
+      "hr=6*weekday=3": [
+        "hr",
+        "weekday"
+      ],
+      "hr=6*weekday=4": [
+        "hr",
+        "weekday"
+      ],
+      "hr=6*weekday=6": [
+        "hr",
+        "weekday"
+      ],
+      "hr=7*weekday=1": [
+        "hr",
+        "weekday"
+      ],
+      "hr=7*weekday=2": [
+        "hr",
+        "weekday"
+      ],
+      "hr=7*weekday=3": [
+        "hr",
+        "weekday"
+      ],
+      "hr=7*weekday=4": [
+        "hr",
+        "weekday"
+      ],
+      "hr=7*weekday=6": [
+        "hr",
+        "weekday"
+      ],
+      "hr=8*weekday=1": [
+        "hr",
+        "weekday"
+      ],
+      "hr=8*weekday=2": [
+        "hr",
+        "weekday"
+      ],
+      "hr=8*weekday=3": [
+        "hr",
+        "weekday"
+      ],
+      "hr=8*weekday=4": [
+        "hr",
+        "weekday"
+      ],
+      "hr=8*weekday=6": [
+        "hr",
+        "weekday"
+      ],
+      "hr=9*weekday=1": [
+        "hr",
+        "weekday"
+      ],
+      "hr=9*weekday=2": [
+        "hr",
+        "weekday"
+      ],
+      "hr=9*weekday=3": [
+        "hr",
+        "weekday"
+      ],
+      "hr=9*weekday=4": [
+        "hr",
+        "weekday"
+      ],
+      "hr=9*weekday=6": [
+        "hr",
+        "weekday"
+      ],
+      "hr=10*weekday=1": [
+        "hr",
+        "weekday"
+      ],
+      "hr=10*weekday=2": [
+        "hr",
+        "weekday"
+      ],
+      "hr=10*weekday=3": [
+        "hr",
+        "weekday"
+      ],
+      "hr=10*weekday=4": [
+        "hr",
+        "weekday"
+      ],
+      "hr=10*weekday=6": [
+        "hr",
+        "weekday"
+      ],
+      "hr=11*weekday=1": [
+        "hr",
+        "weekday"
+      ],
+      "hr=11*weekday=2": [
+        "hr",
+        "weekday"
+      ],
+      "hr=11*weekday=3": [
+        "hr",
+        "weekday"
+      ],
+      "hr=11*weekday=4": [
+        "hr",
+        "weekday"
+      ],
+      "hr=11*weekday=6": [
+        "hr",
+        "weekday"
+      ],
+      "hr=12*weekday=1": [
+        "hr",
+        "weekday"
+      ],
+      "hr=12*weekday=2": [
+        "hr",
+        "weekday"
+      ],
+      "hr=12*weekday=3": [
+        "hr",
+        "weekday"
+      ],
+      "hr=12*weekday=4": [
+        "hr",
+        "weekday"
+      ],
+      "hr=12*weekday=6": [
+        "hr",
+        "weekday"
+      ],
+      "hr=13*weekday=1": [
+        "hr",
+        "weekday"
+      ],
+      "hr=13*weekday=2": [
+        "hr",
+        "weekday"
+      ],
+      "hr=13*weekday=3": [
+        "hr",
+        "weekday"
+      ],
+      "hr=13*weekday=4": [
+        "hr",
+        "weekday"
+      ],
+      "hr=13*weekday=6": [
+        "hr",
+        "weekday"
+      ],
+      "hr=14*weekday=1": [
+        "hr",
+        "weekday"
+      ],
+      "hr=14*weekday=2": [
+        "hr",
+        "weekday"
+      ],
+      "hr=14*weekday=3": [
+        "hr",
+        "weekday"
+      ],
+      "hr=14*weekday=4": [
+        "hr",
+        "weekday"
+      ],
+      "hr=14*weekday=6": [
+        "hr",
+        "weekday"
+      ],
+      "hr=15*weekday=1": [
+        "hr",
+        "weekday"
+      ],
+      "hr=15*weekday=2": [
+        "hr",
+        "weekday"
+      ],
+      "hr=15*weekday=3": [
+        "hr",
+        "weekday"
+      ],
+      "hr=15*weekday=4": [
+        "hr",
+        "weekday"
+      ],
+      "hr=15*weekday=6": [
+        "hr",
+        "weekday"
+      ],
+      "hr=16*weekday=1": [
+        "hr",
+        "weekday"
+      ],
+      "hr=16*weekday=2": [
+        "hr",
+        "weekday"
+      ],
+      "hr=16*weekday=3": [
+        "hr",
+        "weekday"
+      ],
+      "hr=16*weekday=4": [
+        "hr",
+        "weekday"
+      ],
+      "hr=16*weekday=6": [
+        "hr",
+        "weekday"
+      ],
+      "hr=17*weekday=1": [
+        "hr",
+        "weekday"
+      ],
+      "hr=17*weekday=2": [
+        "hr",
+        "weekday"
+      ],
+      "hr=17*weekday=3": [
+        "hr",
+        "weekday"
+      ],
+      "hr=17*weekday=4": [
+        "hr",
+        "weekday"
+      ],
+      "hr=17*weekday=6": [
+        "hr",
+        "weekday"
+      ],
+      "hr=18*weekday=1": [
+        "hr",
+        "weekday"
+      ],
+      "hr=18*weekday=2": [
+        "hr",
+        "weekday"
+      ],
+      "hr=18*weekday=3": [
+        "hr",
+        "weekday"
+      ],
+      "hr=18*weekday=4": [
+        "hr",
+        "weekday"
+      ],
+      "hr=18*weekday=6": [
+        "hr",
+        "weekday"
+      ],
+      "hr=19*weekday=1": [
+        "hr",
+        "weekday"
+      ],
+      "hr=19*weekday=2": [
+        "hr",
+        "weekday"
+      ],
+      "hr=19*weekday=3": [
+        "hr",
+        "weekday"
+      ],
+      "hr=19*weekday=4": [
+        "hr",
+        "weekday"
+      ],
+      "hr=19*weekday=6": [
+        "hr",
+        "weekday"
+      ],
+      "hr=20*weekday=1": [
+        "hr",
+        "weekday"
+      ],
+      "hr=20*weekday=2": [
+        "hr",
+        "weekday"
+      ],
+      "hr=20*weekday=3": [
+        "hr",
+        "weekday"
+      ],
+      "hr=20*weekday=4": [
+        "hr",
+        "weekday"
+      ],
+      "hr=20*weekday=6": [
+        "hr",
+        "weekday"
+      ],
+      "hr=21*weekday=1": [
+        "hr",
+        "weekday"
+      ],
+      "hr=21*weekday=2": [
+        "hr",
+        "weekday"
+      ],
+      "hr=21*weekday=3": [
+        "hr",
+        "weekday"
+      ],
+      "hr=21*weekday=4": [
+        "hr",
+        "weekday"
+      ],
+      "hr=21*weekday=6": [
+        "hr",
+        "weekday"
+      ],
+      "hr=22*weekday=1": [
+        "hr",
+        "weekday"
+      ],
+      "hr=22*weekday=2": [
+        "hr",
+        "weekday"
+      ],
+      "hr=22*weekday=3": [
+        "hr",
+        "weekday"
+      ],
+      "hr=22*weekday=4": [
+        "hr",
+        "weekday"
+      ],
+      "hr=22*weekday=6": [
+        "hr",
+        "weekday"
+      ],
+      "hr=23*weekday=1": [
+        "hr",
+        "weekday"
+      ],
+      "hr=23*weekday=2": [
+        "hr",
+        "weekday"
+      ],
+      "hr=23*weekday=3": [
+        "hr",
+        "weekday"
+      ],
+      "hr=23*weekday=4": [
+        "hr",
+        "weekday"
+      ],
+      "hr=23*weekday=6": [
+        "hr",
+        "weekday"
+      ],
+      "hr=1*mnth=2": [
+        "hr",
+        "mnth"
+      ],
+      "hr=1*mnth=3": [
+        "hr",
+        "mnth"
+      ],
+      "hr=1*mnth=4": [
+        "hr",
+        "mnth"
+      ],
+      "hr=1*mnth=5": [
+        "hr",
+        "mnth"
+      ],
+      "hr=1*mnth=7": [
+        "hr",
+        "mnth"
+      ],
+      "hr=1*mnth=8": [
+        "hr",
+        "mnth"
+      ],
+      "hr=1*mnth=10": [
+        "hr",
+        "mnth"
+      ],
+      "hr=1*mnth=11": [
+        "hr",
+        "mnth"
+      ],
+      "hr=2*mnth=2": [
+        "hr",
+        "mnth"
+      ],
+      "hr=2*mnth=3": [
+        "hr",
+        "mnth"
+      ],
+      "hr=2*mnth=4": [
+        "hr",
+        "mnth"
+      ],
+      "hr=2*mnth=5": [
+        "hr",
+        "mnth"
+      ],
+      "hr=2*mnth=7": [
+        "hr",
+        "mnth"
+      ],
+      "hr=2*mnth=8": [
+        "hr",
+        "mnth"
+      ],
+      "hr=2*mnth=10": [
+        "hr",
+        "mnth"
+      ],
+      "hr=2*mnth=11": [
+        "hr",
+        "mnth"
+      ],
+      "hr=3*mnth=2": [
+        "hr",
+        "mnth"
+      ],
+      "hr=3*mnth=3": [
+        "hr",
+        "mnth"
+      ],
+      "hr=3*mnth=4": [
+        "hr",
+        "mnth"
+      ],
+      "hr=3*mnth=5": [
+        "hr",
+        "mnth"
+      ],
+      "hr=3*mnth=7": [
+        "hr",
+        "mnth"
+      ],
+      "hr=3*mnth=8": [
+        "hr",
+        "mnth"
+      ],
+      "hr=3*mnth=10": [
+        "hr",
+        "mnth"
+      ],
+      "hr=3*mnth=11": [
+        "hr",
+        "mnth"
+      ],
+      "hr=4*mnth=2": [
+        "hr",
+        "mnth"
+      ],
+      "hr=4*mnth=3": [
+        "hr",
+        "mnth"
+      ],
+      "hr=4*mnth=4": [
+        "hr",
+        "mnth"
+      ],
+      "hr=4*mnth=5": [
+        "hr",
+        "mnth"
+      ],
+      "hr=4*mnth=7": [
+        "hr",
+        "mnth"
+      ],
+      "hr=4*mnth=8": [
+        "hr",
+        "mnth"
+      ],
+      "hr=4*mnth=10": [
+        "hr",
+        "mnth"
+      ],
+      "hr=4*mnth=11": [
+        "hr",
+        "mnth"
+      ],
+      "hr=5*mnth=2": [
+        "hr",
+        "mnth"
+      ],
+      "hr=5*mnth=3": [
+        "hr",
+        "mnth"
+      ],
+      "hr=5*mnth=4": [
+        "hr",
+        "mnth"
+      ],
+      "hr=5*mnth=5": [
+        "hr",
+        "mnth"
+      ],
+      "hr=5*mnth=7": [
+        "hr",
+        "mnth"
+      ],
+      "hr=5*mnth=8": [
+        "hr",
+        "mnth"
+      ],
+      "hr=5*mnth=10": [
+        "hr",
+        "mnth"
+      ],
+      "hr=5*mnth=11": [
+        "hr",
+        "mnth"
+      ],
+      "hr=6*mnth=2": [
+        "hr",
+        "mnth"
+      ],
+      "hr=6*mnth=3": [
+        "hr",
+        "mnth"
+      ],
+      "hr=6*mnth=4": [
+        "hr",
+        "mnth"
+      ],
+      "hr=6*mnth=5": [
+        "hr",
+        "mnth"
+      ],
+      "hr=6*mnth=7": [
+        "hr",
+        "mnth"
+      ],
+      "hr=6*mnth=8": [
+        "hr",
+        "mnth"
+      ],
+      "hr=6*mnth=10": [
+        "hr",
+        "mnth"
+      ],
+      "hr=6*mnth=11": [
+        "hr",
+        "mnth"
+      ],
+      "hr=7*mnth=2": [
+        "hr",
+        "mnth"
+      ],
+      "hr=7*mnth=3": [
+        "hr",
+        "mnth"
+      ],
+      "hr=7*mnth=4": [
+        "hr",
+        "mnth"
+      ],
+      "hr=7*mnth=5": [
+        "hr",
+        "mnth"
+      ],
+      "hr=7*mnth=7": [
+        "hr",
+        "mnth"
+      ],
+      "hr=7*mnth=8": [
+        "hr",
+        "mnth"
+      ],
+      "hr=7*mnth=10": [
+        "hr",
+        "mnth"
+      ],
+      "hr=7*mnth=11": [
+        "hr",
+        "mnth"
+      ],
+      "hr=8*mnth=2": [
+        "hr",
+        "mnth"
+      ],
+      "hr=8*mnth=3": [
+        "hr",
+        "mnth"
+      ],
+      "hr=8*mnth=4": [
+        "hr",
+        "mnth"
+      ],
+      "hr=8*mnth=5": [
+        "hr",
+        "mnth"
+      ],
+      "hr=8*mnth=7": [
+        "hr",
+        "mnth"
+      ],
+      "hr=8*mnth=8": [
+        "hr",
+        "mnth"
+      ],
+      "hr=8*mnth=10": [
+        "hr",
+        "mnth"
+      ],
+      "hr=8*mnth=11": [
+        "hr",
+        "mnth"
+      ],
+      "hr=9*mnth=2": [
+        "hr",
+        "mnth"
+      ],
+      "hr=9*mnth=3": [
+        "hr",
+        "mnth"
+      ],
+      "hr=9*mnth=4": [
+        "hr",
+        "mnth"
+      ],
+      "hr=9*mnth=5": [
+        "hr",
+        "mnth"
+      ],
+      "hr=9*mnth=7": [
+        "hr",
+        "mnth"
+      ],
+      "hr=9*mnth=8": [
+        "hr",
+        "mnth"
+      ],
+      "hr=9*mnth=10": [
+        "hr",
+        "mnth"
+      ],
+      "hr=9*mnth=11": [
+        "hr",
+        "mnth"
+      ],
+      "hr=10*mnth=2": [
+        "hr",
+        "mnth"
+      ],
+      "hr=10*mnth=3": [
+        "hr",
+        "mnth"
+      ],
+      "hr=10*mnth=4": [
+        "hr",
+        "mnth"
+      ],
+      "hr=10*mnth=5": [
+        "hr",
+        "mnth"
+      ],
+      "hr=10*mnth=7": [
+        "hr",
+        "mnth"
+      ],
+      "hr=10*mnth=8": [
+        "hr",
+        "mnth"
+      ],
+      "hr=10*mnth=10": [
+        "hr",
+        "mnth"
+      ],
+      "hr=10*mnth=11": [
+        "hr",
+        "mnth"
+      ],
+      "hr=11*mnth=2": [
+        "hr",
+        "mnth"
+      ],
+      "hr=11*mnth=3": [
+        "hr",
+        "mnth"
+      ],
+      "hr=11*mnth=4": [
+        "hr",
+        "mnth"
+      ],
+      "hr=11*mnth=5": [
+        "hr",
+        "mnth"
+      ],
+      "hr=11*mnth=7": [
+        "hr",
+        "mnth"
+      ],
+      "hr=11*mnth=8": [
+        "hr",
+        "mnth"
+      ],
+      "hr=11*mnth=10": [
+        "hr",
+        "mnth"
+      ],
+      "hr=11*mnth=11": [
+        "hr",
+        "mnth"
+      ],
+      "hr=12*mnth=2": [
+        "hr",
+        "mnth"
+      ],
+      "hr=12*mnth=3": [
+        "hr",
+        "mnth"
+      ],
+      "hr=12*mnth=4": [
+        "hr",
+        "mnth"
+      ],
+      "hr=12*mnth=5": [
+        "hr",
+        "mnth"
+      ],
+      "hr=12*mnth=7": [
+        "hr",
+        "mnth"
+      ],
+      "hr=12*mnth=8": [
+        "hr",
+        "mnth"
+      ],
+      "hr=12*mnth=10": [
+        "hr",
+        "mnth"
+      ],
+      "hr=12*mnth=11": [
+        "hr",
+        "mnth"
+      ],
+      "hr=13*mnth=2": [
+        "hr",
+        "mnth"
+      ],
+      "hr=13*mnth=3": [
+        "hr",
+        "mnth"
+      ],
+      "hr=13*mnth=4": [
+        "hr",
+        "mnth"
+      ],
+      "hr=13*mnth=5": [
+        "hr",
+        "mnth"
+      ],
+      "hr=13*mnth=7": [
+        "hr",
+        "mnth"
+      ],
+      "hr=13*mnth=8": [
+        "hr",
+        "mnth"
+      ],
+      "hr=13*mnth=10": [
+        "hr",
+        "mnth"
+      ],
+      "hr=13*mnth=11": [
+        "hr",
+        "mnth"
+      ],
+      "hr=14*mnth=2": [
+        "hr",
+        "mnth"
+      ],
+      "hr=14*mnth=3": [
+        "hr",
+        "mnth"
+      ],
+      "hr=14*mnth=4": [
+        "hr",
+        "mnth"
+      ],
+      "hr=14*mnth=5": [
+        "hr",
+        "mnth"
+      ],
+      "hr=14*mnth=7": [
+        "hr",
+        "mnth"
+      ],
+      "hr=14*mnth=8": [
+        "hr",
+        "mnth"
+      ],
+      "hr=14*mnth=10": [
+        "hr",
+        "mnth"
+      ],
+      "hr=14*mnth=11": [
+        "hr",
+        "mnth"
+      ],
+      "hr=15*mnth=2": [
+        "hr",
+        "mnth"
+      ],
+      "hr=15*mnth=3": [
+        "hr",
+        "mnth"
+      ],
+      "hr=15*mnth=4": [
+        "hr",
+        "mnth"
+      ],
+      "hr=15*mnth=5": [
+        "hr",
+        "mnth"
+      ],
+      "hr=15*mnth=7": [
+        "hr",
+        "mnth"
+      ],
+      "hr=15*mnth=8": [
+        "hr",
+        "mnth"
+      ],
+      "hr=15*mnth=10": [
+        "hr",
+        "mnth"
+      ],
+      "hr=15*mnth=11": [
+        "hr",
+        "mnth"
+      ],
+      "hr=16*mnth=2": [
+        "hr",
+        "mnth"
+      ],
+      "hr=16*mnth=3": [
+        "hr",
+        "mnth"
+      ],
+      "hr=16*mnth=4": [
+        "hr",
+        "mnth"
+      ],
+      "hr=16*mnth=5": [
+        "hr",
+        "mnth"
+      ],
+      "hr=16*mnth=7": [
+        "hr",
+        "mnth"
+      ],
+      "hr=16*mnth=8": [
+        "hr",
+        "mnth"
+      ],
+      "hr=16*mnth=10": [
+        "hr",
+        "mnth"
+      ],
+      "hr=16*mnth=11": [
+        "hr",
+        "mnth"
+      ],
+      "hr=17*mnth=2": [
+        "hr",
+        "mnth"
+      ],
+      "hr=17*mnth=3": [
+        "hr",
+        "mnth"
+      ],
+      "hr=17*mnth=4": [
+        "hr",
+        "mnth"
+      ],
+      "hr=17*mnth=5": [
+        "hr",
+        "mnth"
+      ],
+      "hr=17*mnth=7": [
+        "hr",
+        "mnth"
+      ],
+      "hr=17*mnth=8": [
+        "hr",
+        "mnth"
+      ],
+      "hr=17*mnth=10": [
+        "hr",
+        "mnth"
+      ],
+      "hr=17*mnth=11": [
+        "hr",
+        "mnth"
+      ],
+      "hr=18*mnth=2": [
+        "hr",
+        "mnth"
+      ],
+      "hr=18*mnth=3": [
+        "hr",
+        "mnth"
+      ],
+      "hr=18*mnth=4": [
+        "hr",
+        "mnth"
+      ],
+      "hr=18*mnth=5": [
+        "hr",
+        "mnth"
+      ],
+      "hr=18*mnth=7": [
+        "hr",
+        "mnth"
+      ],
+      "hr=18*mnth=8": [
+        "hr",
+        "mnth"
+      ],
+      "hr=18*mnth=10": [
+        "hr",
+        "mnth"
+      ],
+      "hr=18*mnth=11": [
+        "hr",
+        "mnth"
+      ],
+      "hr=19*mnth=2": [
+        "hr",
+        "mnth"
+      ],
+      "hr=19*mnth=3": [
+        "hr",
+        "mnth"
+      ],
+      "hr=19*mnth=4": [
+        "hr",
+        "mnth"
+      ],
+      "hr=19*mnth=5": [
+        "hr",
+        "mnth"
+      ],
+      "hr=19*mnth=7": [
+        "hr",
+        "mnth"
+      ],
+      "hr=19*mnth=8": [
+        "hr",
+        "mnth"
+      ],
+      "hr=19*mnth=10": [
+        "hr",
+        "mnth"
+      ],
+      "hr=19*mnth=11": [
+        "hr",
+        "mnth"
+      ],
+      "hr=20*mnth=2": [
+        "hr",
+        "mnth"
+      ],
+      "hr=20*mnth=3": [
+        "hr",
+        "mnth"
+      ],
+      "hr=20*mnth=4": [
+        "hr",
+        "mnth"
+      ],
+      "hr=20*mnth=5": [
+        "hr",
+        "mnth"
+      ],
+      "hr=20*mnth=7": [
+        "hr",
+        "mnth"
+      ],
+      "hr=20*mnth=8": [
+        "hr",
+        "mnth"
+      ],
+      "hr=20*mnth=10": [
+        "hr",
+        "mnth"
+      ],
+      "hr=20*mnth=11": [
+        "hr",
+        "mnth"
+      ],
+      "hr=21*mnth=2": [
+        "hr",
+        "mnth"
+      ],
+      "hr=21*mnth=3": [
+        "hr",
+        "mnth"
+      ],
+      "hr=21*mnth=4": [
+        "hr",
+        "mnth"
+      ],
+      "hr=21*mnth=5": [
+        "hr",
+        "mnth"
+      ],
+      "hr=21*mnth=7": [
+        "hr",
+        "mnth"
+      ],
+      "hr=21*mnth=8": [
+        "hr",
+        "mnth"
+      ],
+      "hr=21*mnth=10": [
+        "hr",
+        "mnth"
+      ],
+      "hr=21*mnth=11": [
+        "hr",
+        "mnth"
+      ],
+      "hr=22*mnth=2": [
+        "hr",
+        "mnth"
+      ],
+      "hr=22*mnth=3": [
+        "hr",
+        "mnth"
+      ],
+      "hr=22*mnth=4": [
+        "hr",
+        "mnth"
+      ],
+      "hr=22*mnth=5": [
+        "hr",
+        "mnth"
+      ],
+      "hr=22*mnth=7": [
+        "hr",
+        "mnth"
+      ],
+      "hr=22*mnth=8": [
+        "hr",
+        "mnth"
+      ],
+      "hr=22*mnth=10": [
+        "hr",
+        "mnth"
+      ],
+      "hr=22*mnth=11": [
+        "hr",
+        "mnth"
+      ],
+      "hr=23*mnth=2": [
+        "hr",
+        "mnth"
+      ],
+      "hr=23*mnth=3": [
+        "hr",
+        "mnth"
+      ],
+      "hr=23*mnth=4": [
+        "hr",
+        "mnth"
+      ],
+      "hr=23*mnth=5": [
+        "hr",
+        "mnth"
+      ],
+      "hr=23*mnth=7": [
+        "hr",
+        "mnth"
+      ],
+      "hr=23*mnth=8": [
+        "hr",
+        "mnth"
+      ],
+      "hr=23*mnth=10": [
+        "hr",
+        "mnth"
+      ],
+      "hr=23*mnth=11": [
+        "hr",
+        "mnth"
+      ]
+    }
+  }
+}
