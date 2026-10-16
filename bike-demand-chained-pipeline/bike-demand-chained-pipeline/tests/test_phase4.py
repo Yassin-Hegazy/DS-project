@@ -53,3 +53,15 @@ def test_lambda_max_zeroes_every_penalized_weight(design):
         start[0] = y.mean()
         assert np.count_nonzero(fit(X, y, lam * 1.0001, rho, start).weights[1:]) == 0
         assert np.count_nonzero(fit(X, y, lam * 0.9, rho, start).weights[1:]) > 0
+
+
+def test_alone_uses_full_encoding_and_learning_rates_follow_the_rule():
+    from src.phase4_regularization import alone_design, penalized_learning_rate
+    data = synthetic_hours()
+    train, val = data.iloc[:2400], data.iloc[2400:]
+    assert alone_design(train, val, "hr")[0].shape[1] == 1 + 23   # intercept + hour dummies
+    assert alone_design(train, val, "temp")[0].shape[1] == 1 + 1
+    assert alone_design(train, val, "dteday")[0].shape[1] == 1 + 2
+    assert penalized_learning_rate(4.0, 1.0, 0.0, 1.9) == 1.9 / 5.0  # Ridge: 1.9 / L
+    assert penalized_learning_rate(4.0, 1.0, 0.5, 1.9) == 1.0 / 4.5  # Elastic Net: 1 / L
+    assert penalized_learning_rate(4.0, 1.0, 1.0, 1.9) == 1.0 / 4.0  # Lasso: 1 / L

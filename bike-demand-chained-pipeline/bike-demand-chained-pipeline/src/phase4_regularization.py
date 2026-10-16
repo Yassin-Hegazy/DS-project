@@ -86,6 +86,19 @@ class PenalizedGD(LinearRegressionGD):
                         move_history, status)
 
 
+def penalized_learning_rate(curvature, lam, l1_ratio, ridge_multiplier) -> float:
+    """Step size for one fit. L = curvature + lam * (1 - rho) bounds the
+    curvature of the smooth part (squared error + L2 penalty).
+
+    Ridge (no L1 part) is plain gradient descent on a quadratic: stable for
+    any step below 2/L, so it keeps Phases 1-3's ridge_multiplier / L.
+    With an L1 part the step is 1/L: soft-thresholding steps of size at most
+    1/L are guaranteed never to increase the objective.
+    """
+    smooth_curvature = curvature + lam * (1 - l1_ratio)
+    return (ridge_multiplier if l1_ratio == 0 else 1.0) / smooth_curvature
+
+
 def lambda_max_l1(X, y, l1_ratio) -> float:
     """Smallest lam at which every penalized weight is exactly 0 (rho > 0).
 
@@ -109,8 +122,7 @@ def regularization_path(X_train, y_train, X_val, y_val, lambdas, l1_ratio,
     w[0] = y_train.mean()
     rows, weights = [], []
     for lam in lambdas:
-        # The penalty's L2 part raises the largest curvature by lam * (1 - rho).
-        learning_rate = step_multiplier / (curvature + lam * (1 - l1_ratio))
+        learning_rate = penalized_learning_rate(curvature, lam, l1_ratio, step_multiplier)
         result = PenalizedGD(lam, l1_ratio, learning_rate, max_iter, tol).fit(
             X_train, y_train, init_weights=w)
         w = result.weights
@@ -119,9 +131,15 @@ def regularization_path(X_train, y_train, X_val, y_val, lambdas, l1_ratio,
                      **score_weights(w, X_train, y_train, X_val, y_val, decile_edges),
                      "status": result.status, "iterations": result.iterations,
                      "final_max_move": result.grad_history[-1],
-                     "objective_ever_increased":
-                         bool(np.any(np.diff(result.loss_history) > 0))})
+                     "objective_ever_increased": ever_increased(result.loss_history)})
     return pd.DataFrame(rows), weights
+
+
+def ever_increased(history, relative_tolerance=1e-12) -> bool:
+    """True if the objective rose between two updates by more than floating-point
+    rounding (changes below relative_tolerance of its size are rounding noise)."""
+    history = np.asarray(history)
+    return bool(np.any(np.diff(history) > relative_tolerance * np.max(np.abs(history))))
 
 
 def score_weights(w, X_train, y_train, X_val, y_val, decile_edges) -> dict:
@@ -171,7 +189,10 @@ ADD_BACK_GROUPS = {
     "season": "add season main effect",
 }
 
-# A column on its own: one-hot (reference level dropped) or numeric.
+# A column on its own, in its own full encoding: categorical columns as their
+# level indicators (hr as 23 hour dummies, never as one number 0-23),
+# 0/1 and continuous columns as their values, dteday as elapsed days plus
+# day of month.
 ONE_HOT_ALONE = {"hr", "weekday", "weathersit", "mnth", "season"}
 ALONE_COLUMNS = {"dteday": ["days_since_start", "day"]}
 
@@ -203,7 +224,8 @@ def refit_like(features, train_df, y_train, val_df, y_val, start_names, start_we
     X_tr, X_va = features.transform(train_df), features.transform(val_df)
     lookup = dict(zip(start_names, start_weights))
     init = np.array([lookup.get(name, 0.0) for name in features.feature_names])
-    learning_rate = step_multiplier / (largest_curvature(X_tr) + lam * (1 - l1_ratio))
+    learning_rate = penalized_learning_rate(largest_curvature(X_tr), lam, l1_ratio,
+                                            step_multiplier)
     result = PenalizedGD(lam, l1_ratio, learning_rate, max_iter, tol).fit(
         X_tr, y_train, init_weights=init)
     return result, score_weights(result.weights, X_tr, y_train, X_va, y_val, decile_edges)
