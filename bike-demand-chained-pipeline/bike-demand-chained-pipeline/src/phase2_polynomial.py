@@ -8,7 +8,7 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
-from src.features import Phase1Features, group_rare_weather
+from src.features import Phase1Features, add_calendar_features, group_rare_weather
 from src.metrics import regression_metrics
 from src.operator_checks import errors_by_demand_decile, top_decile_shortfall
 from src.phase1_gradient_descent import LinearRegressionGD
@@ -219,7 +219,7 @@ SELECTORS = ("hr", "hour_block")
 DEPENDENCE_TOL = 1e-8
 
 # Original data column behind each prepared column (for lineage).
-SOURCE_COLUMN = {"hour_block": "hr"}
+SOURCE_COLUMN = {"hour_block": "hr", "day": "dteday", "days_since_start": "dteday"}
 
 
 def group_terms(group: str, levels: dict) -> list[tuple]:
@@ -268,6 +268,18 @@ def group_terms(group: str, levels: dict) -> list[tuple]:
                 + [(("hr", h), wd, ("season", s)) for h in hours for s in seasons]
                 + [(("hr", h), yr, ("season", s)) for h in hours for s in seasons]
                 + [(("hr", h), wd, yr, ("season", s)) for h in hours for s in seasons])
+    # Single columns that are NOT in the Phase 3 target, added back one at a
+    # time for the Phase 4 column verdicts.
+    if group == "add atemp":
+        return [(("atemp", None),)]
+    if group == "add instant":
+        return [(("instant", None),)]
+    if group == "add dteday (elapsed days, day of month)":
+        return [(("days_since_start", None),), (("day", None),)]
+    if group == "add workingday main effect":
+        return [(("workingday", None),)]
+    if group == "add season main effect":
+        return [(("season", s),) for s in seasons]
     raise ValueError(f"unknown group: {group}")
 
 
@@ -294,10 +306,14 @@ class Phase2Features:
     and standard deviation.
     """
 
-    def __init__(self, phase1, groups: list[str], center_factors: bool = True):
+    def __init__(self, phase1, groups: list[str], center_factors: bool = True,
+                 excluded=()):
         self.phase1 = phase1
         self.groups = list(groups)
         self.center_factors = center_factors  # False only to show why we center
+        # Original columns left out entirely, with every column derived from
+        # them (Phase 4 ablations). Empty everywhere else.
+        self.excluded = sorted(excluded)
         self.dropped = []
         self.levels = None
         self.centers = None
@@ -306,15 +322,23 @@ class Phase2Features:
 
     @staticmethod
     def _prepare(df: pd.DataFrame) -> pd.DataFrame:
-        out = group_rare_weather(df)
+        out = add_calendar_features(group_rare_weather(df))
         out["hour_block"] = hour_block(out["hr"])
+        out["day"] = pd.to_datetime(out["dteday"]).dt.day
         return out
+
+    @property
+    def _phase1_keep(self) -> np.ndarray:
+        """Phase 1 columns not derived from an excluded original column."""
+        excluded = set(self.excluded)
+        return np.array([not excluded & set(phase1_lineage(name))
+                         for name in self.phase1.feature_names])
 
     def _group_terms(self) -> list[tuple]:
         """(group, term) for every kept term, in column order."""
-        dropped = set(getattr(self, "dropped", []))
+        dropped, excluded = set(self.dropped), set(self.excluded)
         return [(g, term) for g in self.groups for term in group_terms(g, self.levels)
-                if term_name(term) not in dropped]
+                if term_name(term) not in dropped and not excluded & set(term_lineage(term))]
 
     @property
     def terms(self) -> list[tuple]:
@@ -383,7 +407,7 @@ class Phase2Features:
         constant = [name for name, s in zip(names, std) if s == 0]
         keep = std > 0
         scaled = (raw[:, keep] - raw[:, keep].mean(axis=0)) / std[keep]
-        X = np.hstack([self.phase1.transform(train_df), scaled])
+        X = np.hstack([self.phase1.transform(train_df)[:, self._phase1_keep], scaled])
         diagonal = np.abs(np.diag(np.linalg.qr(X, mode="r")))[-scaled.shape[1]:]
         kept_names = [name for name, k in zip(names, keep) if k]
         dependent = [name for name, d in zip(kept_names, diagonal)
@@ -391,17 +415,20 @@ class Phase2Features:
         return constant + dependent
 
     def transform(self, df: pd.DataFrame) -> np.ndarray:
-        phase1_part = self.phase1.transform(df)
+        phase1_part = self.phase1.transform(df)[:, self._phase1_keep]
         new_part = (self._products(self._prepare(df)) - self.mean) / self.std
         return np.hstack([phase1_part, new_part])
 
     @property
     def feature_names(self) -> list[str]:
-        return self.phase1.feature_names + [term_name(t) for t in self.terms]
+        phase1_names = [name for name, keep in zip(self.phase1.feature_names, self._phase1_keep)
+                        if keep]
+        return phase1_names + [term_name(t) for t in self.terms]
 
     @property
     def lineage(self) -> dict[str, list[str]]:
-        out = {name: phase1_lineage(name) for name in self.phase1.feature_names}
+        out = {name: phase1_lineage(name) for name in self.feature_names
+               if name in self.phase1.feature_names}
         out.update({term_name(t): term_lineage(t) for t in self.terms})
         return out
 
@@ -427,6 +454,7 @@ class Phase2Features:
             "phase1": self.phase1.to_dict(),
             "groups": self.groups,
             "center_factors": self.center_factors,
+            "excluded": self.excluded,
             "dropped": self.dropped,
             "levels": self.levels,
             "centers": self.centers,
@@ -439,7 +467,7 @@ class Phase2Features:
     @classmethod
     def from_dict(cls, state: dict) -> "Phase2Features":
         features = cls(Phase1Features.from_dict(state["phase1"]), state["groups"],
-                       state["center_factors"])
+                       state["center_factors"], state.get("excluded", ()))
         features.levels = {k: list(v) for k, v in state["levels"].items()}
         features.dropped = list(state.get("dropped", []))
         features.centers = dict(state["centers"])

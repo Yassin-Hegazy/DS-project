@@ -1888,6 +1888,7 @@
       "hour x workingday x temp"
     ],
     "center_factors": true,
+    "excluded": [],
     "dropped": [],
     "levels": {
       "hr": [

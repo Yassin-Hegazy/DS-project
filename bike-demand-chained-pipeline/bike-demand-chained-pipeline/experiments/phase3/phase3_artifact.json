@@ -4428,6 +4428,7 @@
       "hour x month"
     ],
     "center_factors": true,
+    "excluded": [],
     "dropped": [
       "hr=1*weekday=5",
       "hr=2*weekday=5",

@@ -209,6 +209,31 @@ def plot_learning_curves(curves: dict, title: str):
     return fig
 
 
+def plot_regularization_paths(paths: dict, chosen: dict, title: str):
+    """Validation R2 and number of nonzero weights against lambda, per method.
+
+    paths maps a method label to its path table; chosen maps the label to the
+    selected lambda (drawn as a ringed point).
+    """
+    fig, axes = plt.subplots(1, 2, figsize=(13, 4.8))
+    for color, (label, table) in zip(SERIES_COLORS, paths.items()):
+        for ax, column in ((axes[0], "val_r2"), (axes[1], "nonzero")):
+            ax.plot(table["lambda"], table[column], color=color, lw=2, marker="o",
+                    ms=3, label=label)
+            pick = table[table["lambda"] == chosen[label]]
+            ax.plot(pick["lambda"], pick[column], ls="none", marker="o", ms=11,
+                    mfc="none", mec=color, mew=2)
+    for ax, ylabel in ((axes[0], "Validation R²"), (axes[1], "Nonzero weights")):
+        ax.set_xscale("log")
+        ax.set_xlabel("λ (log scale)")
+        ax.set_ylabel(ylabel)
+        ax.grid(**GRID)
+    axes[0].legend(fontsize=8, title="ringed = selected", title_fontsize=8)
+    fig.suptitle(title)
+    fig.tight_layout()
+    return fig
+
+
 def plot_complexity_curve(degrees, train_scores, val_scores):
     fig, ax = plt.subplots(figsize=(8, 4.5))
     ax.plot(degrees, train_scores, marker="o", label="Train")
