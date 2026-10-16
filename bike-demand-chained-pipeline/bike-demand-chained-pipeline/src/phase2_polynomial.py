@@ -213,6 +213,11 @@ PHASE2_GROUPS = {
 # less correlated with its hour indicator, so gradient descent converges faster.
 SELECTORS = ("hr", "hour_block")
 
+# A new column whose part not explained by the columns before it is below
+# this fraction of its own size is an exact linear combination of them
+# (e.g. hour x month contains hour x season) and is dropped.
+DEPENDENCE_TOL = 1e-8
+
 # Original data column behind each prepared column (for lineage).
 SOURCE_COLUMN = {"hour_block": "hr"}
 
@@ -244,6 +249,25 @@ def group_terms(group: str, levels: dict) -> list[tuple]:
         return ([(("hr", h), ("temp", None)) for h in hours]
                 + [(("workingday", None), ("temp", None))]
                 + [(("hr", h), ("workingday", None), ("temp", None)) for h in hours])
+    # Groups beyond Phase 2, used by the Phase 3 sweep to probe the
+    # high-variance side. Some overlap with Phase 2 groups exactly; those
+    # columns are found and dropped by Phase2Features.fit (see DEPENDENCE_TOL).
+    if group == "hour x holiday":
+        return [(("hr", h), ("holiday", None)) for h in hours]
+    if group == "hour x weekday":
+        return [(("hr", h), ("weekday", d)) for h in hours for d in levels["weekday"]]
+    if group == "hour x month":
+        return [(("hr", h), ("mnth", m)) for h in hours for m in levels["mnth"]]
+    if group == "hour x weathersit":
+        return [(("hr", h), ("weathersit", w)) for h in hours for w in levels["weathersit"]]
+    if group == "hour x workingday x yr x season":
+        wd, yr = ("workingday", None), ("yr", None)
+        return ([(wd, ("season", s)) for s in seasons]
+                + [(yr, ("season", s)) for s in seasons]
+                + [(wd, yr, ("season", s)) for s in seasons]
+                + [(("hr", h), wd, ("season", s)) for h in hours for s in seasons]
+                + [(("hr", h), yr, ("season", s)) for h in hours for s in seasons]
+                + [(("hr", h), wd, yr, ("season", s)) for h in hours for s in seasons])
     raise ValueError(f"unknown group: {group}")
 
 
@@ -274,6 +298,7 @@ class Phase2Features:
         self.phase1 = phase1
         self.groups = list(groups)
         self.center_factors = center_factors  # False only to show why we center
+        self.dropped = []
         self.levels = None
         self.centers = None
         self.mean = None
@@ -285,9 +310,15 @@ class Phase2Features:
         out["hour_block"] = hour_block(out["hr"])
         return out
 
+    def _group_terms(self) -> list[tuple]:
+        """(group, term) for every kept term, in column order."""
+        dropped = set(getattr(self, "dropped", []))
+        return [(g, term) for g in self.groups for term in group_terms(g, self.levels)
+                if term_name(term) not in dropped]
+
     @property
     def terms(self) -> list[tuple]:
-        return [term for g in self.groups for term in group_terms(g, self.levels)]
+        return [term for _, term in self._group_terms()]
 
     def _factor(self, prepared, factor, centered=True) -> np.ndarray:
         column, level = factor
@@ -316,7 +347,10 @@ class Phase2Features:
             "weathersit": list(self.phase1.levels["weathersit"]),
             "season": sorted(int(v) for v in prepared["season"].unique())[1:],
             "hour_block": sorted(int(v) for v in prepared["hour_block"].unique())[1:],
+            "weekday": list(self.phase1.levels["weekday"]),
+            "mnth": list(self.phase1.levels.get("mnth", [])),
         }
+        self.dropped = []
         for term in self.terms:
             # No product of two levels of one column (always 0) and no square
             # of a 0/1 column (identical to the column).
@@ -329,12 +363,32 @@ class Phase2Features:
                     center = self._factor(prepared, factor, centered=False).mean()
                     self.centers[term_name((factor,))] = (
                         float(center) if self.center_factors else 0.0)
+        self.dropped = self._dependent_terms(train_df, prepared)
         raw = self._products(prepared)
         self.mean = raw.mean(axis=0)
         self.std = raw.std(axis=0)
-        if np.any(self.std == 0):
-            raise ValueError("An interaction column is constant in the training portion.")
         return self
+
+    def _dependent_terms(self, train_df, prepared) -> list[str]:
+        """Names of new columns that add nothing on the training rows: constant
+        columns, and exact linear combinations of the columns before them.
+
+        In a QR factorization of the training matrix (columns in order), the
+        j-th diagonal entry of R is the size of the part of column j that the
+        columns before it cannot express.
+        """
+        raw = self._products(prepared)
+        std = raw.std(axis=0)
+        names = [term_name(t) for t in self.terms]
+        constant = [name for name, s in zip(names, std) if s == 0]
+        keep = std > 0
+        scaled = (raw[:, keep] - raw[:, keep].mean(axis=0)) / std[keep]
+        X = np.hstack([self.phase1.transform(train_df), scaled])
+        diagonal = np.abs(np.diag(np.linalg.qr(X, mode="r")))[-scaled.shape[1]:]
+        kept_names = [name for name, k in zip(names, keep) if k]
+        dependent = [name for name, d in zip(kept_names, diagonal)
+                     if d / np.sqrt(len(X)) < DEPENDENCE_TOL]
+        return constant + dependent
 
     def transform(self, df: pd.DataFrame) -> np.ndarray:
         phase1_part = self.phase1.transform(df)
@@ -355,22 +409,25 @@ class Phase2Features:
         """Training rows where each new term is non-zero before centering
         (e.g. hr=8*workingday: working-day rows at 08:00)."""
         raw = self._products(self._prepare(train_df), centered=False)
-        groups = [g for g in self.groups for _ in group_terms(g, self.levels)]
         return pd.DataFrame({
-            "group": groups,
+            "group": [g for g, _ in self._group_terms()],
             "term": [term_name(t) for t in self.terms],
             "support_rows": np.count_nonzero(raw, axis=0),
         })
 
-    def warm_start(self, phase1_weights) -> np.ndarray:
-        """Phase 1 weights in their own columns, zero for every new column."""
-        return np.concatenate([np.asarray(phase1_weights), np.zeros(len(self.terms))])
+    def warm_start(self, base_weights) -> np.ndarray:
+        """A smaller model's weights in their own (leading) columns, zero for
+        every column added after them. The base is Phase 1 in Phase 2."""
+        base_weights = np.asarray(base_weights)
+        return np.concatenate([base_weights,
+                               np.zeros(len(self.feature_names) - len(base_weights))])
 
     def to_dict(self) -> dict:
         return {
             "phase1": self.phase1.to_dict(),
             "groups": self.groups,
             "center_factors": self.center_factors,
+            "dropped": self.dropped,
             "levels": self.levels,
             "centers": self.centers,
             "mean": self.mean.tolist(),
@@ -384,6 +441,7 @@ class Phase2Features:
         features = cls(Phase1Features.from_dict(state["phase1"]), state["groups"],
                        state["center_factors"])
         features.levels = {k: list(v) for k, v in state["levels"].items()}
+        features.dropped = list(state.get("dropped", []))
         features.centers = dict(state["centers"])
         features.mean = np.asarray(state["mean"])
         features.std = np.asarray(state["std"])
@@ -391,20 +449,26 @@ class Phase2Features:
 
 
 def fit_and_score(features: Phase2Features, train_df, y_train, val_df, y_val,
-                  phase1_weights, step_multiplier, max_iter, tol, decile_edges):
+                  phase1_weights, step_multiplier, max_iter, tol, decile_edges,
+                  base_features=None):
     """Fit one expanded design with the Phase 1 GD and score it.
 
+    The fit starts from a smaller model's weights (phase1_weights, for the
+    model base_features describes; Phase 1 unless given) plus zeros.
     Returns the GD result and one row of numbers: design checks, convergence,
     train/validation scores and the operator checks.
     """
+    base_features = base_features or features.phase1
+    base_names = base_features.feature_names
+    assert features.feature_names[:len(base_names)] == base_names,         "the starting model's columns must lead the expanded design"
     X_tr, X_va = features.transform(train_df), features.transform(val_df)
     eigenvalues = np.linalg.eigvalsh(X_tr.T @ X_tr / len(X_tr))
 
     # Warm start: before any update the expanded model must predict exactly
-    # what Phase 1 predicts.
+    # what the starting model predicts.
     init = features.warm_start(phase1_weights)
-    phase1_pred = features.phase1.transform(train_df) @ np.asarray(phase1_weights)
-    init_gap = float(np.max(np.abs(X_tr @ init - phase1_pred)))
+    base_pred = base_features.transform(train_df) @ np.asarray(phase1_weights)
+    init_gap = float(np.max(np.abs(X_tr @ init - base_pred)))
     assert init_gap < 1e-8, f"warm start changes predictions by {init_gap}"
 
     model = LinearRegressionGD(learning_rate=step_multiplier / eigenvalues[-1],
@@ -429,9 +493,13 @@ def fit_and_score(features: Phase2Features, train_df, y_train, val_df, y_val,
         "iterations": result.iterations,
         "final_max_abs_gradient": result.grad_history[-1],
         "gap_to_exact_bikes": float(np.max(np.abs(pred_va - X_va @ exact))),
+        # Reference only (not our model): what a fully converged fit would score.
+        "exact_val_r2": regression_metrics(y_val, X_va @ exact)["r2"],
+        "dropped_columns": len(features.dropped),
         "train_r2": train_scores["r2"],
         "val_r2": val_scores["r2"],
         "train_val_r2_gap": train_scores["r2"] - val_scores["r2"],
+        "train_rmse": train_scores["rmse"],
         "val_rmse": val_scores["rmse"],
         "top_decile_shortfall": top_decile_shortfall(y_val, pred_va, decile_edges),
         "top_predicted_decile_shortfall": float(top_predicted["mean_shortfall_bikes"]),

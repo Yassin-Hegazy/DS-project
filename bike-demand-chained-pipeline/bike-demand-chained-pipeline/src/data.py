@@ -29,10 +29,13 @@ def seeded_split(train_df: pd.DataFrame, seed: int, test_size: float = 0.20):
 
 
 def chronological_split(df: pd.DataFrame, validation_fraction: float = 0.20):
-    """Chronological split for Phase 3.
+    """The one chronological split (Phase 3): the last 20% of labeled DAYS.
 
-    TODO: choose and justify the exact chronological cut used by the team.
+    The cut falls between whole days, so no day has hours on both sides.
+    Uses dates only, never labels. Returns (earlier, later, first_validation_day).
     """
-    ordered = df.sort_values(["dteday", "hr"]).reset_index(drop=True)
-    cut = int(len(ordered) * (1 - validation_fraction))
-    return ordered.iloc[:cut].copy(), ordered.iloc[cut:].copy()
+    days = sorted(df["dteday"].unique())
+    first_validation_day = days[-round(validation_fraction * len(days))]
+    earlier = df[df["dteday"] < first_validation_day].copy()
+    later = df[df["dteday"] >= first_validation_day].copy()
+    return earlier, later, first_validation_day

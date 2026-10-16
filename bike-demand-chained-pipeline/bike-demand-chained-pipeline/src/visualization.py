@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import matplotlib.pyplot as plt
+import numpy as np
 
 # Fixed categorical order (never cycled), plus ink for observed data.
 SERIES_COLORS = ["#2a78d6", "#eb6834", "#1baf7a", "#eda100", "#e87ba4", "#008300"]
@@ -116,6 +117,93 @@ def plot_shortfall_by_hour(tables: dict, title: str):
         ax.grid(**GRID)
     axes[0].set_ylabel("Mean shortfall (bikes per hour, validation)")
     axes[0].legend()
+    fig.suptitle(title)
+    fig.tight_layout()
+    return fig
+
+
+DEGREE_MARKERS = {1: "o", 2: "s", 3: "^", 4: "D"}
+
+
+def _sweep_panel(ax, table, columns: dict, metric: str):
+    """Lines for each (label -> column) against feature count; marker shape
+    shows the degree; a non-converged fit is drawn as a red-ringed point."""
+    for color, (label, column) in zip(SERIES_COLORS, columns.items()):
+        ax.plot(table["n_features"], table[column], color=color, lw=2, label=label)
+        for degree, marker in DEGREE_MARKERS.items():
+            part = table[table["degree"] == degree]
+            ax.plot(part["n_features"], part[column], ls="none", marker=marker,
+                    ms=7, color=color)
+    flagged = table[table["status"] != "converged"]
+    for column in columns.values():
+        ax.plot(flagged["n_features"], flagged[column], ls="none", marker="o", ms=14,
+                mfc="none", mec="#d03b3b", mew=2)
+    ax.set_xlabel("Number of features")
+    ax.set_ylabel(metric)
+    ax.grid(**GRID)
+
+
+def plot_complexity_sweep(table, title: str, peak_features: int, extension_start: int):
+    """Train vs validation R2 and RMSE against feature count."""
+    fig, axes = plt.subplots(1, 2, figsize=(13, 4.8))
+    panels = ((axes[0], {"train": "train_r2", "validation": "val_r2"}, "R²"),
+              (axes[1], {"train": "train_rmse", "validation": "val_rmse"}, "RMSE (bikes)"))
+    for ax, columns, metric in panels:
+        ax.axvspan(extension_start, table["n_features"].max() + 15, color=INK, alpha=0.06)
+        ax.axvline(peak_features, color=INK, ls=":", lw=1.5)
+        _sweep_panel(ax, table, columns, metric)
+    axes[0].text(peak_features, axes[0].get_ylim()[0], " validation peak",
+                 rotation=90, va="bottom", fontsize=8, color=INK)
+    axes[0].text(extension_start, axes[0].get_ylim()[1], " beyond Phase 2",
+                 va="top", fontsize=8, color=INK)
+    handles = [plt.Line2D([], [], color=c, lw=2, label=l)
+               for c, l in zip(SERIES_COLORS, ("train", "validation"))]
+    handles += [plt.Line2D([], [], color=INK, ls="none", marker=m, label=f"degree {d}")
+                for d, m in DEGREE_MARKERS.items()]
+    handles.append(plt.Line2D([], [], ls="none", marker="o", ms=10, mfc="none",
+                              mec="#d03b3b", mew=2, label="not converged (flagged)"))
+    axes[1].legend(handles=handles, fontsize=8)
+    fig.suptitle(title)
+    fig.tight_layout()
+    return fig
+
+
+def plot_split_comparison(seeded, chronological, title: str):
+    """Validation R2 and RMSE of the same sweep on the seeded and the
+    chronological split (plus chronological training R2 for reference)."""
+    fig, axes = plt.subplots(1, 2, figsize=(13, 4.8))
+    for ax, column, metric in ((axes[0], "val_r2", "Validation R²"),
+                               (axes[1], "val_rmse", "Validation RMSE (bikes)")):
+        for color, (label, table) in zip(SERIES_COLORS, (("seeded random split", seeded),
+                                                         ("chronological split", chronological))):
+            ax.plot(table["n_features"], table[column], color=color, lw=2, marker="o",
+                    ms=5, label=label)
+        ax.set_xlabel("Number of features")
+        ax.set_ylabel(metric)
+        ax.grid(**GRID)
+    axes[0].legend(fontsize=8)
+    fig.suptitle(title)
+    fig.tight_layout()
+    return fig
+
+
+def plot_learning_curves(curves: dict, title: str):
+    """Train and validation RMSE against training-set size, one panel per model."""
+    fig, axes = plt.subplots(1, len(curves), figsize=(6.5 * len(curves), 4.5), sharey=True)
+    axes = np.atleast_1d(axes)
+    for ax, (label, table) in zip(axes, curves.items()):
+        for color, (name, column) in zip(SERIES_COLORS, (("train", "train_rmse"),
+                                                         ("validation", "val_rmse"))):
+            ax.plot(table["n_train"], table[column], color=color, lw=2, marker="o",
+                    ms=6, label=name)
+        flagged = table[table["status"] != "converged"]
+        ax.plot(flagged["n_train"], flagged["val_rmse"], ls="none", marker="o", ms=14,
+                mfc="none", mec="#d03b3b", mew=2, label="not converged (flagged)")
+        ax.set_title(label)
+        ax.set_xlabel("Training rows")
+        ax.grid(**GRID)
+    axes[0].set_ylabel("RMSE (bikes)")
+    axes[0].legend(fontsize=8)
     fig.suptitle(title)
     fig.tight_layout()
     return fig
