@@ -1,9 +1,15 @@
-"""Build report/report.pdf from the executed notebook and the saved artifacts.
+"""Build report/report.pdf (LaTeX) from the executed notebook and the saved artifacts.
 
-Every number is read from the executed notebook's outputs or from an
-artifact the notebook saved. The few values recomputed here (the Phase 1
-sweep and design table, decile tables, the Phase 5 cutoff scan, all used for
-the figures) are asserted to appear in the notebook's own printed output.
+1. Every number is read from the executed notebook's outputs or from an artifact
+   the notebook saved. Values recomputed here (the Phase 1 sweep and design table,
+   a decile table, the Phase 5 cutoff scan and label table) are asserted to appear
+   in the notebook's own printed output, so the report cannot drift from the run.
+2. The numbers are written to report/numbers.tex as al{key} macros and the tables
+   to report/tab_*.tex; report/report.tex contains no hand-typed results.
+3. Figures are drawn in greyscale (line styles and markers, no colour) as PDF.
+4. pdflatex runs twice; the build fails on an undefined al key, any overfull box,
+   or more than 6 pages.
+
 Run after executing notebooks/final_submission.ipynb:  python report/build_report.py
 """
 
@@ -14,7 +20,8 @@ import re
 import sys
 from pathlib import Path
 
-import fitz  # PyMuPDF
+import subprocess
+
 import matplotlib
 
 matplotlib.use("Agg")
@@ -26,7 +33,8 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
 import config  # noqa: E402
-from src.data import compute_team_seed, load_data, seeded_split  # noqa: E402
+from src.data import (  # noqa: E402
+    chronological_split, compute_team_seed, load_data, seeded_split)
 from src.features import Phase1Features  # noqa: E402
 from src.operator_checks import demand_decile_edges, errors_by_demand_decile  # noqa: E402
 from src.phase1_gradient_descent import (  # noqa: E402
@@ -35,7 +43,8 @@ from src.phase2_polynomial import Phase2Features, load_phase2_artifact  # noqa: 
 from src.phase3_bias_variance import load_phase3_artifact  # noqa: E402
 from src.phase4_regularization import load_phase4_artifact  # noqa: E402
 from src.phase5_logistic import (  # noqa: E402
-    high_demand_cutoffs, high_demand_labels, sigmoid, threshold_scan)
+    high_demand_cutoffs, high_demand_labels, label_definition_comparison, sigmoid,
+    threshold_scan)
 
 OUT = ROOT / "report"
 FIGURES = OUT / "figures"
@@ -232,52 +241,254 @@ v["s_dropped"] = grab(SUB, r"\((\d+) exact combinations dropped\)", int)
 submission = pd.read_csv(config.SUBMISSION_PATH)
 assert len(submission) == 574 and np.isfinite(submission["cnt"]).all() and (submission["cnt"] >= 0).all()
 
+
+# Phase 2 Step A and the chronological split (sizes only)
+step_a = pd.read_csv(config.PHASE2_DIR / "residual_diagnosis.csv").set_index("combination")
+_, chrono_val, _first_day = chronological_split(train_all)
+assert _first_day == v["p3_first_day"]
+
+# Phase 5 label evidence (recomputed with the pipeline's function, checked against the notebook)
+label_table = label_definition_comparison(train_df).set_index("definition")
+for value in label_table["positive_rate"]:
+    appears(LABEL, f"{value:.3f}")
+
 # ---------------------------------------------------------------------------
-# Figures (greyscale only)
+# Macros: every number the text uses, formatted once
+# ---------------------------------------------------------------------------
+
+def num(x, d=4):
+    """Fixed decimals with thousands separators; a minus sign typeset as a real minus."""
+    text = f"{x:,.{d}f}"
+    return f"$-${text[1:]}" if text.startswith("-") else text
+
+
+def count(x):
+    return f"{int(x):,}"
+
+
+S, C = seeded, chrono
+deg3, deg4, target = "hour x workingday x temp", "hour x workingday x yr x season", v["p3_target"]
+ridge, lasso, enet = v["p4_sel"]["Ridge"], v["p4_sel"]["Lasso"], v["p4_sel"]["Elastic Net"]
+cmp_ = v["bonus"]
+mse_col, asym_col = cmp_.columns[0], cmp_.columns[1]
+tuned, half = v["p5_tuned"], v["p5_half"]
+lc = curves.set_index(["design", "fraction"])
+big = "largest extended design"
+temp_odds = float(odds.loc[odds["feature"] == "temp", "odds"].iloc[0])
+lasso_path = paths["Lasso"]
+
+M = {
+    # data and seed
+    "seed": str(v["seed"]), "nAll": count(v["n_all"]), "nTest": count(v["n_test"]),
+    "nTrain": count(v["n_train"]), "nVal": count(v["n_val"]), "nDays": count(v["n_days"]),
+    # Phase 1
+    "pOneLam": num(v["p1_lam"]), "pOneLimit": num(v["p1_limit"]), "pOneLr": num(v["p1_lr"], 3),
+    "pOneIter": count(v["p1_iter"]), "pOneTrainR": num(v["p1_train_r2"]), "pOneValR": num(v["p1_val_r2"]),
+    "pOneValRmse": num(v["p1_val_rmse"], 1), "pOneDivIter": count(v["p1_div_iter"]),
+    "pOneSlowGrad": num(v["p1_slow_grad"]), "pOneGapExact": num(v["p1_gap_exact"]),
+    "pOneSeasonR": num(v["p1_season_r2"]), "pOneMonthR": num(v["p1_month_r2"]),
+    "pOneTrendGain": num(v["p1_trend_gain"]), "pOneCond": num(v["p1_cond"], 0),
+    "pOneCondTrend": num(v["p1_cond_trend"], 0), "pOneIterTrend": count(v["p1_iter_trend"]),
+    "pOneIterNoTrend": count(v["p1_iter_notrend"]), "topCut": count(v["top_cut"]),
+    "pOneTopShort": num(v["p1_top_short"], 1), "pOneTopPredErr": num(-v["p1_toppred_err"], 1),
+    "pOneNegative": count(v["p1_negative"]), "residBetween": num(v["resid_between"], 1),
+    # bonus
+    "bDivIter": count(v["b_div_iter"]), "bLr": num(v["b_lr"], 3), "bIter": count(v["b_iter"]),
+    "bShift": num(v["b_shift"], 1),
+    "bRmse": num(cmp_.loc["r2", mse_col], 3), "bRasym": num(cmp_.loc["r2", asym_col], 3),
+    "bRmseMse": num(cmp_.loc["rmse", mse_col], 1), "bRmseAsym": num(cmp_.loc["rmse", asym_col], 1),
+    "bCostMse": num(cmp_.loc["asymmetric_cost", mse_col], 0),
+    "bCostAsym": num(cmp_.loc["asymmetric_cost", asym_col], 0),
+    "bCostDrop": num(100 * (1 - cmp_.loc["asymmetric_cost", asym_col] / cmp_.loc["asymmetric_cost", mse_col]), 1),
+    "bShortMse": num(cmp_.loc["mean_shortfall_bikes", mse_col], 1),
+    "bShortAsym": num(cmp_.loc["mean_shortfall_bikes", asym_col], 1),
+    "bIdleMse": num(cmp_.loc["mean_surplus_bikes", mse_col], 1),
+    "bIdleAsym": num(cmp_.loc["mean_surplus_bikes", asym_col], 1),
+    "bTopMse": num(v["b_top_mse"], 1), "bTopAsym": num(v["b_top_asym"], 1),
+    "fShift": num(v["f_shift"], 1), "fR": num(v["f_r2"], 3), "fRasym": num(v["f_r2_asym"], 3),
+    "fRcost": num(v["f_r2"] - v["f_r2_asym"], 3), "fTop": num(v["f_top"], 1), "fTopAsym": num(v["f_top_asym"], 1),
+    # Phase 2
+    "pTwoCondUnc": count(v["p2_cond_unc"]), "pTwoCond": count(v["p2_cond"]),
+    "pTwoHrWdR": num(seq.loc["hour x workingday", "val_r2"]),
+    "pTwoHrWdGain": num(seq.loc["hour x workingday", "val_r2"] - seq.loc["(Phase 1)", "val_r2"], 3),
+    "pTwoDegTwoR": num(seq.loc["temp x hum", "val_r2"]), "pTwoDegThreeR": num(seq.loc[deg3, "val_r2"]),
+    "pTwoDegThreeRmse": num(seq.loc[deg3, "val_rmse"], 1),
+    "pTwoDegThreeTrainRmse": num(seq.loc[deg3, "train_rmse"], 2),
+    "pTwoDegThreeValRmse": num(seq.loc[deg3, "val_rmse"], 2), "pTwoDegThreeN": count(seq.loc[deg3, "n_features"]),
+    "pTwoDegThreeIter": count(seq.loc[deg3, "iterations"]), "pTwoDegThreeGap": num(seq.loc[deg3, "train_val_r2_gap"]),
+    "pTwoTopPredStart": num(seq.loc["(Phase 1)", "top_predicted_decile_shortfall"], 1),
+    "pTwoTopPredEnd": num(seq.loc[deg3, "top_predicted_decile_shortfall"], 1),
+    "pTwoTempHumGain": num(seq.loc["temp x hum", "val_r2"] - seq.loc["hour-block x weathersit", "val_r2"]),
+    # Phase 3
+    "pThreeTargetN": count(len(p3["feature_names"]) - 1), "pThreeTargetR": num(S.loc[target, "val_r2"]),
+    "pThreeTargetChronoR": num(C.loc[target, "val_r2"]), "pThreeDegFourR": num(S.loc[deg4, "val_r2"]),
+    "pThreeDegFourN": count(S.loc[deg4, "n_features"]), "pThreeDegFourGap": num(S.loc[deg4, "train_val_r2_gap"]),
+    "pThreeDegThreeChronoR": num(C.loc[deg3, "val_r2"]), "pThreeDegThreeChronoRmse": num(C.loc[deg3, "val_rmse"], 1),
+    "pThreeWeatherChronoR": num(C.loc["hour x weathersit", "val_r2"]),
+    "pThreeChronoGain": num(C.loc["hour x weathersit", "val_r2"] - C.loc[deg3, "val_r2"]),
+    "pThreeSeededGain": num(S.loc["hour x weathersit", "val_r2"] - S.loc[deg3, "val_r2"]),
+    "pThreeDegFourChronoR": num(C.loc[deg4, "val_r2"]),
+    "pThreeDegFourChronoDrop": num(C.loc[deg4, "val_r2"] - C.loc["hour x weathersit", "val_r2"]),
+    "pThreeDegFourChronoShort": num(C.loc[deg4, "top_decile_shortfall"]
+                                    - C.loc["hour x weathersit", "top_decile_shortfall"], 1),
+    "pThreeDegFourChronoN": count(C.loc[deg4, "n_features"]),
+    "pThreeMaxIter": count(S["iterations"].max()),
+    "pThreeLcGapSmall": num(lc.loc[(big, 0.25), "val_rmse"] - lc.loc[(big, 0.25), "train_rmse"], 1),
+    "pThreeLcGapFull": num(lc.loc[(big, 1.0), "val_rmse"] - lc.loc[(big, 1.0), "train_rmse"], 1),
+    "pThreeFirstDay": v["p3_first_day"],
+    "pThreeTargetChronoErr": num(C.loc[target, "top_predicted_decile_mean_error"], 1),
+    "pThreeTargetSeededErr": num(S.loc[target, "top_predicted_decile_mean_error"], 1),
+    "pThreeDegThreeChronoShort": num(C.loc[deg3, "top_decile_shortfall"], 1),
+    "pThreeDegThreeSeededShort": num(S.loc[deg3, "top_decile_shortfall"], 1),
+    # Phase 4
+    "ridgeLam": f"{ridge['lambda']:.2g}", "ridgeR": num(ridge["val_r2"], 6),
+    "unpenR": num(S.loc[target, "val_r2"], 6), "lassoLam": num(lasso["lambda"], 3),
+    "lassoN": count(lasso["nonzero"]), "lassoR": num(lasso["val_r2"]),
+    "enetRho": f"{enet['l1_ratio']:g}", "enetLam": num(enet["lambda"], 4), "enetR": num(enet["val_r2"]),
+    "enetN": count(enet["nonzero"]), "unpenShort": num(S.loc[target, "top_decile_shortfall"], 1),
+    "lassoShort": num(lasso["top_decile_shortfall"], 1), "enetShort": num(enet["top_decile_shortfall"], 1),
+    "ridgeShort": num(ridge["top_decile_shortfall"], 1), "lassoLamMax": num(lasso_path["lambda"].iloc[0], 1),
+    "survivors": count(v["p4_survivors"]), "survivorColumns": count(len(v["p4_columns"])),
+    # Phase 5
+    "pFivePos": count(v["p5_pos"]), "pFivePosRate": num(v["p5_pos_rate"], 1),
+    "pFiveValPos": num(v["p5_val_pos"], 1), "pFiveCurv": num(v["p5_curv"]), "pFiveLr": num(v["p5_lr"], 3),
+    "pFiveIter": count(v["p5_iter"]), "pFiveCut": num(v["p5_cut"], 2),
+    "pFiveAuc": num(tuned["roc_auc"], 3), "pFiveAcc": num(tuned["accuracy"], 3),
+    "pFiveBase": num(tuned["always_0_accuracy"], 3), "pFivePrec": num(tuned["precision"], 3),
+    "pFiveRec": num(tuned["recall"], 3), "pFiveFone": num(tuned["f1"], 3),
+    "pFiveHalfAcc": num(half["accuracy"], 3), "pFiveHalfFone": num(half["f1"], 3),
+    "pFiveHalfRec": num(half["recall"], 3), "pFiveMissed": count(tuned["tp"] - half["tp"]),
+    "pFiveSavedAlarms": count(tuned["fp"] - half["fp"]),
+    "pFiveAucCal": num(v["p5_auc_cal"], 3), "pFiveAucMonth": num(v["p5_auc_month"], 3),
+    "pFiveAucSeasonLo": num(v["p5_auc_season_lo"], 3), "pFiveAucSeasonHi": num(v["p5_auc_season_hi"], 3),
+    "pFiveJan": num(v["p5_jan"], 1), "pFiveJun": num(v["p5_jun"], 1), "pFiveTempOdds": num(temp_odds, 2),
+    "labelGlobalNever": count(label_table.loc["global cutoff", "hours_never_positive"]),
+    "labelNoYearOld": num(100 * label_table.loc["hour x working day", "rate_2011"], 1),
+    "labelNoYearNew": num(100 * label_table.loc["hour x working day", "rate_2012"], 1),
+    "labelOld": num(100 * label_table.loc["hour x working day x year (chosen)", "rate_2011"], 1),
+    "labelNew": num(100 * label_table.loc["hour x working day x year (chosen)", "rate_2012"], 1),
+    # submission
+    "sIter": count(v["s_iter"]), "sR": num(v["s_r2"]), "sRmse": num(v["s_rmse"], 2),
+    "sClipped": count(v["s_clipped"]), "sMean": num(v["s_mean"], 1), "sMax": num(v["s_max"], 1),
+    "sDropped": count(v["s_dropped"]),
+    # design constants and rules, read from the artifacts
+    "slowMult": f"{min(sweep):g}", "pOneN": count(len(p1["feature_names"]) - 1), "labelGroups": count(len(p5["label"]["cutoffs"])),
+    "rTol": f"{p3['diagnosis']['r2_tolerance']:g}", "aloneTol": f"{p4['rules']['alone_r2_threshold']:g}",
+    "selTol": f"{p4['rules']['select_r2_tolerance']:g}",
+    "stepAshare": num(step_a.loc["hour x workingday", "between_share"], 3),
+    "pThreeChronoDays": count(chrono_val["dteday"].nunique()), "pThreeChronoRows": count(len(chrono_val)),
+}
+
+
+def write_numbers():
+    lines = ["% Generated by report/build_report.py from the executed notebook and the artifacts.",
+             "% Do not edit: rebuild instead."]
+    for key, value in M.items():
+        assert re.fullmatch(r"[A-Za-z]+", key), key
+        lines.append(rf"\expandafter\def\csname val@{key}\endcsname{{{value}}}")
+    (OUT / "numbers.tex").write_text("\n".join(lines) + "\n", encoding="utf8")
+
+
+def table(name, rows):
+    (OUT / f"tab_{name}.tex").write_text(
+        "% Generated by report/build_report.py. Do not edit.\n" + "\n".join(rows)
+        # \bottomrule lives here: LaTeX cannot place it directly after an \input in a tabular.
+        + "\n\\bottomrule\n", encoding="utf8")
+
+
+def write_tables():
+    pretty = {"(Phase 1)": "Phase 1 (main effects)", "hour x workingday": r"+ hour $\times$ workingday",
+              "hour x yr": r"+ hour $\times$ yr", "hour x season": r"+ hour $\times$ season",
+              "hour-block x weathersit": r"+ hour-block $\times$ weathersit",
+              "temp x hum": r"+ temp $\times$ hum",
+              "hour x workingday x yr": r"+ hour $\times$ workingday $\times$ yr",
+              "hour x workingday x temp": r"+ hour $\times$ workingday $\times$ temp"}
+    table("phase2", [rf"{pretty[g]} & {int(r.degree)} & {count(r.n_features)} & {num(r.train_r2)} & "
+                     rf"{num(r.val_r2)} & {num(r.top_predicted_decile_shortfall, 1)} \\"
+                     for g, r in seq.iterrows()])
+    method_rows = [("Unpenalised (Phase 3)", "0", "--", S.loc[target, "n_features"], S.loc[target, "val_r2"],
+                    S.loc[target, "val_rmse"], S.loc[target, "top_decile_shortfall"])]
+    for label, row in (("Ridge", ridge), ("Lasso", lasso), ("Elastic Net", enet)):
+        method_rows.append((label, f"{row['lambda']:.3g}", f"{row['l1_ratio']:g}", row["nonzero"],
+                            row["val_r2"], row["val_rmse"], row["top_decile_shortfall"]))
+    table("phase4", [rf"{m} & {lam} & {rho} & {count(n)} & {num(r2)} & {num(rmse, 1)} & {num(short, 1)} \\"
+                     for m, lam, rho, n, r2, rmse, short in method_rows])
+    rows = []
+    for column, row in v["p4_verdicts"].iterrows():
+        if row["terms_in_target"] > 0:
+            test, change = "removal", num(row["ablation_val_r2_change"])
+        elif row.get("add_back_columns_kept", 0) == 0:
+            test, change = "add back", "exact copy"
+        else:
+            test, change = "add back", num(row["add_back_val_r2_change"])
+        kept = (f"{int(row['terms_surviving_lasso'])}/{int(row['terms_in_target'])}"
+                if row["terms_in_target"] > 0 else "--")
+        rows.append(rf"\texttt{{{column}}} & {test} & {change} & {num(row['alone_val_r2'], 3)} & {kept} & "
+                    rf"{row['verdict'].split(' (')[0]} \\")
+    table("verdicts", rows)
+    table("phase5", [rf"{num(r['threshold'], 2)} & {count(r['tp'])} & {count(r['fp'])} & {count(r['fn'])} & "
+                     rf"{count(r['tn'])} & {num(r['accuracy'], 3)} & {num(r['precision'], 3)} & "
+                     rf"{num(r['recall'], 3)} & {num(r['f1'], 3)} \\" for r in (tuned, half)])
+
+
+# ---------------------------------------------------------------------------
+# Figures (greyscale only: line styles and markers carry identity)
 # ---------------------------------------------------------------------------
 
 FIGURES.mkdir(parents=True, exist_ok=True)
-plt.rcParams.update({"font.family": "serif", "font.size": 8, "axes.linewidth": 0.6,
-                     "lines.linewidth": 1.2, "savefig.dpi": 200})
-STYLES = [("black", "-"), ("0.45", "--"), ("black", ":"), ("0.6", "-."), ("0.3", (0, (5, 1)))]
+plt.rcParams.update({"font.family": "serif", "font.size": 7.5, "axes.linewidth": 0.6,
+                     "lines.linewidth": 1.1, "pdf.fonttype": 42, "axes.edgecolor": "black",
+                     "text.color": "black", "axes.labelcolor": "black",
+                     "xtick.color": "black", "ytick.color": "black"})
+STYLES = [("black", "-", "o"), ("0.45", "--", "s"), ("black", ":", "^"), ("0.55", "-.", "D"),
+          ("0.25", (0, (5, 1)), "v"), ("0.7", "-", "x")]
+
+
+def save(fig, name):
+    fig.tight_layout(pad=0.3)
+    fig.savefig(FIGURES / f"{name}.pdf")
+    plt.close(fig)
 
 
 def fig_phase1():
-    fig, ax = plt.subplots(figsize=(4.8, 2.3))
-    for (color, ls), m in zip(STYLES + [("0.75", "-")], (0.005, 0.1, 0.5, 1.0, 1.9, 2.1)):
+    fig, ax = plt.subplots(figsize=(3.4, 2.15))
+    for (color, ls, _), m in zip(STYLES, (0.005, 0.1, 0.5, 1.0, 1.9, 2.1)):
         r = sweep[m]
         ax.plot(range(1, len(r.grad_history) + 1), r.grad_history, color=color, ls=ls,
-                label=f"{m:g}/λmax ({r.status}, {r.iterations})")
-    ax.axhline(p1["settings"]["tol"], color="black", lw=0.6)
+                label=rf"{m:g}/$\lambda_{{max}}$ ({r.status.replace('_', ' ')}, {r.iterations:,})")
+    ax.axhline(p1["settings"]["tol"], color="black", lw=0.5)
     ax.set_xscale("log"), ax.set_yscale("log")
+    ax.set_ylim(1e-5, 1e10)  # tolerance line visible; empty band above the curves for the legend
     ax.set_xlabel("update"), ax.set_ylabel("max |gradient|")
-    ax.legend(fontsize=6, frameon=False, loc="center left", bbox_to_anchor=(1.01, 0.5))
-    fig.tight_layout(), fig.savefig(FIGURES / "fig1.png"), plt.close(fig)
+    ax.legend(fontsize=5.6, frameon=False, loc="upper right")
+    save(fig, "fig_phase1")
 
 
 def fig_phase3():
-    fig, ax = plt.subplots(figsize=(3.3, 2.3))
-    s, c = seeded, chrono
-    ax.plot(s["n_features"], s["train_r2"], color="black", ls="-", marker="o", ms=2.5, label="train (seeded)")
-    ax.plot(s["n_features"], s["val_r2"], color="0.45", ls="--", marker="s", ms=2.5, label="validation (seeded)")
-    ax.plot(s["n_features"], c["val_r2"], color="black", ls=":", marker="^", ms=2.5, label="validation (chronological)")
-    ax.axvline(v["p3_target_n"], color="0.6", lw=0.6)
+    fig, ax = plt.subplots(figsize=(3.4, 2.15))
+    ax.plot(S["n_features"], S["train_r2"], color="black", ls="-", marker="o", ms=2.6, label="train (seeded)")
+    ax.plot(S["n_features"], S["val_r2"], color="0.45", ls="--", marker="s", ms=2.6,
+            label="validation (seeded)")
+    ax.plot(S["n_features"], C["val_r2"], color="black", ls=":", marker="^", ms=2.6,
+            label="validation (chronological)")
+    ax.axvline(len(p3["feature_names"]) - 1, color="0.6", lw=0.6)
     ax.set_ylim(0.85, 0.945)
-    ax.set_xlabel("number of features (seeded design)"), ax.set_ylabel("R²")
+    ax.set_xlabel("number of features (seeded design)"), ax.set_ylabel(r"$R^2$")
     ax.legend(fontsize=6, frameon=False, loc="lower right")
-    fig.tight_layout(), fig.savefig(FIGURES / "fig2.png"), plt.close(fig)
+    save(fig, "fig_phase3")
 
 
 def fig_phase4():
-    fig, axes = plt.subplots(1, 2, figsize=(6.8, 2.2))
-    for (color, ls), (label, path) in zip(STYLES, paths.items()):
-        axes[0].plot(path["lambda"], path["val_r2"], color=color, ls=ls, label=label)
-        axes[1].plot(path["lambda"], path["nonzero"], color=color, ls=ls, label=label)
-    for ax, ylabel in zip(axes, ("validation R²", "nonzero weights")):
-        ax.set_xscale("log"), ax.set_xlabel("λ"), ax.set_ylabel(ylabel)
+    fig, axes = plt.subplots(1, 2, figsize=(6.9, 2.0))
+    for (color, ls, marker), (label, path) in zip(STYLES, paths.items()):
+        for ax, column in zip(axes, ("val_r2", "nonzero")):
+            ax.plot(path["lambda"], path[column], color=color, ls=ls, marker=marker, ms=2.2,
+                    markevery=6, label=label)
+    for ax, ylabel in zip(axes, (r"validation $R^2$", "nonzero weights")):
+        ax.set_xscale("log"), ax.set_xlabel(r"$\lambda$"), ax.set_ylabel(ylabel)
     axes[0].set_ylim(0.85, 0.935)
-    axes[1].legend(fontsize=6, frameon=False)
-    fig.tight_layout(), fig.savefig(FIGURES / "fig3.png"), plt.close(fig)
+    axes[1].legend(fontsize=6, frameon=False, loc="lower left")
+    save(fig, "fig_phase4")
 
 
 def fig_phase5():
@@ -287,142 +498,56 @@ def fig_phase5():
     label = high_demand_labels(val_df, high_demand_cutoffs(train_df))
     scan = threshold_scan(label, prob, np.round(np.arange(0.05, 0.951, 0.01), 2))
     best = scan.loc[scan["threshold"] == p5["threshold"]].iloc[0]
-    assert abs(best["f1"] - v["p5_tuned"]["f1"]) < 1e-12
-    fig, ax = plt.subplots(figsize=(3.3, 2.3))
-    for (color, ls), column in zip(STYLES, ("f1", "precision", "recall")):
+    assert abs(best["f1"] - tuned["f1"]) < 1e-12, "cutoff scan does not reproduce the notebook"
+    fig, ax = plt.subplots(figsize=(3.4, 2.15))
+    for (color, ls, _), column in zip(STYLES, ("f1", "precision", "recall")):
         ax.plot(scan["threshold"], scan[column], color=color, ls=ls, label=column)
     ax.axvline(p5["threshold"], color="0.6", lw=0.6)
     ax.set_xlabel("probability cutoff"), ax.set_ylabel("validation score")
-    ax.legend(fontsize=6, frameon=False)
-    fig.tight_layout(), fig.savefig(FIGURES / "fig4.png"), plt.close(fig)
+    ax.legend(fontsize=6, frameon=False, loc="lower left")
+    save(fig, "fig_phase5")
 
-
-for draw in (fig_phase1, fig_phase3, fig_phase4, fig_phase5):
-    draw()
 
 # ---------------------------------------------------------------------------
-# Text
+# Build and checks
 # ---------------------------------------------------------------------------
 
-def f(x, d=4):
-    return f"{x:.{d}f}".replace("-", "−")
+def check_tex_keys():
+    tex = (OUT / "report.tex").read_text(encoding="utf8")
+    used = set(re.findall(r"\\val\{([A-Za-z]+)\}", tex))
+    missing = used - set(M)
+    assert not missing, f"report.tex uses undefined values: {sorted(missing)}"
+    body = re.sub(r"%.*", "", tex)
+    body = re.sub(r"\d*\.?\d+\s*(\\textwidth|\\linewidth|cm|pt)", "", body)  # layout lengths
+    hand_typed = re.findall(r"(?<![\w.])\d+\.\d{3,}", body)
+    assert not hand_typed, f"report.tex contains hand-typed results {hand_typed}; use \\val{{...}}"
+    return used
 
 
-S, C = seeded, chrono
-deg3, target, deg4 = "hour x workingday x temp", v["p3_target"], "hour x workingday x yr x season"
-ridge, lasso, enet = v["p4_sel"]["Ridge"], v["p4_sel"]["Lasso"], v["p4_sel"]["Elastic Net"]
-cmp_ = v["bonus"]
-mse_col, asym_col = cmp_.columns[0], cmp_.columns[1]
-tuned, half = v["p5_tuned"], v["p5_half"]
-verd = v["p4_verdicts"]
-lc = curves.set_index(["design", "fraction"])
-big = "largest extended design"
-odds_top = v["p5_odds"].head(6)
-
-
-def verdict_rows():
-    rows = []
-    for column, row in verd.iterrows():
-        if row["terms_in_target"] > 0:
-            test, change = "ablation", row["ablation_val_r2_change"]
-        elif row.get("add_back_columns_kept", 0) == 0:
-            test, change = "add back", np.nan
-        else:
-            test, change = "add back", row["add_back_val_r2_change"]
-        change_text = "exact combination" if np.isnan(change) else f(change)
-        kept = f"{int(row['terms_surviving_lasso'])}/{int(row['terms_in_target'])}" \
-            if row["terms_in_target"] > 0 else "–"
-        rows.append(f"<tr><td>{column}</td><td>{test}</td><td>{change_text}</td>"
-                    f"<td>{f(row['alone_val_r2'], 3)}</td><td>{kept}</td><td>{row['verdict'].split(' (')[0]}</td></tr>")
-    return "\n".join(rows)
-
-
-HTML = f"""
-<h1>Predicting hourly bike-sharing demand with a chained regression–classification pipeline</h1>
-<p class="sub">Machine Learning, Winter 2026 — Project 1. Team seed {v['seed']}.</p>
-
-<h2>1. Problem and data</h2>
-<p>The task is to predict the number of bikes rented per hour (<i>cnt</i>) and, finally, to classify hours as high demand. The labelled file contains {v['n_all']:,} hours over {v['n_days']} days (days 1–19 of each month, 2011–2012); the hidden test file contains {v['n_test']} hours, all on day 20. The team seed, the SHA-256 of the sorted, underscore-joined student IDs modulo 100,000 (the brief's example reproduces 41,698), splits the labelled rows into {v['n_train']:,} training and {v['n_val']:,} validation hours. Every encoder, scaler and centring mean is fitted on the training portion only. Three properties shape the design: <i>workingday</i> is an exact function of <i>weekday</i> and <i>holiday</i>, <i>season</i> is an exact function of <i>mnth</i> in this file, and the year, month and weekday of <i>dteday</i> coincide exactly with <i>yr</i>, <i>mnth</i> and <i>weekday</i>. Phases are chained through saved artifacts. Phases 2–5 were preceded by written expectations; those of Phase 1 and the bonus were reconstructed afterwards (Section 8). Besides R² and RMSE, every regression model is checked on the hours that matter to the operator: the mean shortfall in the top demand decile (actual demand above {v['top_cut']} bikes), grouped both by actual and by predicted demand.</p>
-
-<h2>2. Phase 1 — Gradient descent</h2>
-<p><b>Method.</b> A linear model with main effects only was fitted by full-batch gradient descent on L(w) = ‖Xw − y‖²/(2n), with gradient Xᵀ(Xw − y)/n. Hour, weekday, weathersit (level 4, absent from the training portion, merged into 3) and month were one-hot encoded with one reference level each; <i>yr</i>, <i>holiday</i>, <i>temp</i>, <i>hum</i> and <i>windspeed</i> enter as numbers, and <i>workingday</i>, <i>season</i>, <i>atemp</i> and <i>instant</i> were excluded as exact or near copies. Month was preferred to season (validation R² {f(v['p1_month_r2'])} vs {f(v['p1_season_r2'])}); the elapsed-day trend from <i>dteday</i> added only {f(v['p1_trend_gain'])} R² while raising the condition number from {v['p1_cond']:.0f} to {v['p1_cond_trend']:,.0f} ({v['p1_iter_trend']:,} instead of {v['p1_iter_notrend']} updates) and was left out. Because the loss is quadratic, gradient descent is stable only for learning rates below 2/λ<sub>max</sub>, where λ<sub>max</sub> = {f(v['p1_lam'])} is the largest eigenvalue of XᵀX/n. Learning rates of 0.005–2.1/λ<sub>max</sub> were compared (Fig. 1); convergence was declared when max|gradient| &lt; 10⁻⁴ (cap 50,000 updates). The loop uses the equivalent precomputed form Hw − b with H = XᵀX/n and b = Xᵀy/n, and asserts at the start and end of every fit that both forms give the same gradient.</p>
-<p><b>Results.</b> 2.1/λ<sub>max</sub> diverged after {v['p1_div_iter']} updates; 0.005/λ<sub>max</sub> reached the cap with max|gradient| {f(v['p1_slow_grad'], 4)}; all rates between converged to the same loss. The chosen rate 1.9/λ<sub>max</sub> = {f(v['p1_lr'], 3)} converged in {v['p1_iter']} updates, within {f(v['p1_gap_exact'], 4)} bikes of the exact least-squares solution. Training R² {f(v['p1_train_r2'])}, validation R² {f(v['p1_val_r2'])} (RMSE {f(v['p1_val_rmse'], 1)}): the model underfits. Hours above {v['top_cut']} bikes were under-predicted by {f(v['p1_top_short'], 1)} bikes on average, and even the hours predicted to be busiest by {f(-v['p1_toppred_err'], 1)}; {v['p1_negative']} validation hours were predicted below zero. <b>Passed on:</b> the weight vector, learning rate, update count, feature list and fitted scaler; {f(float(v['resid_between']), 1)}% of the training residual variance lay between hour × working-day cells.</p>
-<img src="fig1.png" width="340" height="163"/>
-<p class="cap">Figure 1. Phase 1 learning-rate sweep: max|gradient| against update (log–log); horizontal line: tolerance.</p>
-
-<h2>3. Phase 2 — Polynomial regression</h2>
-<p><b>Method.</b> Interaction groups were chosen from Phase 1's training residuals, ranked by the share of residual variance lying between groups and re-ranked after removing the confirmed groups. Degree is interpreted as interaction order: degree 2 adds hour × workingday, hour × yr, hour × season, hour-block × weathersit and temp × hum; degree 3 adds hour × workingday × yr and hour × workingday × temp with their lower-order terms. Terms are explicit lists (no products of two levels of one column, no squares of binary columns); every non-hour factor is centred at its training mean before multiplying, which lowered the condition number of the full design from {v['p2_cond_unc']:,} to {v['p2_cond']:,} without changing what it can express. Each group was added in turn, every fit warm-started from the Phase 1 weights (new weights zero, predictions asserted identical) and run with the same 1.9/λ<sub>max</sub> rule.</p>
-<p><b>Results.</b> hour × workingday alone raised validation R² from {f(S.loc['(Phase 1)','val_r2'])} to {f(S.loc['hour x workingday','val_r2'])}; degree 2 reached {f(S.loc['temp x hum','val_r2'])} and degree 3 {f(S.loc[deg3,'val_r2'])} (RMSE {f(S.loc[deg3,'val_rmse'],1)}, {int(S.loc[deg3,'n_features'])} features, {int(S.loc[deg3,'iterations']):,} updates). The train–validation R² gap was {f(S.loc[deg3,'train_val_r2_gap'])}, with near-equal RMSE, i.e. sampling noise. The top-predicted-decile shortfall fell from {f(S.loc['(Phase 1)','top_predicted_decile_shortfall'],1)} to {f(S.loc[deg3,'top_predicted_decile_shortfall'],1)} bikes. temp × hum added only {f(S.loc['temp x hum','val_r2']-S.loc['hour-block x weathersit','val_r2'])} R². <b>Passed on:</b> degree 3, the 242-feature list with lineage, weights and scaler.</p>
-
-<h2>4. Phase 3 — Bias–variance trade-off</h2>
-<p><b>Method.</b> The sweep followed Phase 2's order and continued beyond it (hour × holiday, hour × weekday, hour × month, full hour × weathersit and a degree-4 group hour × workingday × yr × season) to reach the high-variance side; columns that were exact combinations of earlier ones were detected by QR factorisation and dropped. Learning curves were drawn for the degree-3 and the largest design. The one chronological split held out the last 20% of labelled days (from {v['p3_first_day']}, whole days), refitting all preprocessing on the earlier days. The target rule, fixed beforehand, took the converged fit with the fewest features within 0.002 of the best seeded validation R².</p>
-<p><b>Results.</b> Seeded validation R² rose from {f(S.loc[deg3,'val_r2'])} to a plateau of {f(S.loc[deg4,'val_r2'])} at {int(S.loc[deg4,'n_features'])} features while the gap widened from {f(S.loc[deg3,'train_val_r2_gap'])} to {f(S.loc[deg4,'train_val_r2_gap'])} (Fig. 2). The degree-3 learning curve was flat with train ≈ validation RMSE (bias-limited); the largest design showed a gap of {f(lc.loc[(big,0.25),'val_rmse']-lc.loc[(big,0.25),'train_rmse'],1)} bikes at 25% of the data, closing to {f(lc.loc[(big,1.0),'val_rmse']-lc.loc[(big,1.0),'train_rmse'],1)} (variance-limited). Chronologically, degree 3 scored R² {f(C.loc[deg3,'val_r2'])} (RMSE {f(C.loc[deg3,'val_rmse'],1)}); the extensions up to full hour × weathersit improved it to {f(C.loc['hour x weathersit','val_r2'])}, but degree 4 fell to {f(C.loc[deg4,'val_r2'])}, because no 2012-autumn hour exists in the earlier days. <b>Diagnosis:</b> degree 3 is bias-limited; variance appears only at degree 4. <b>Passed on:</b> the {v['p3_target_n']}-feature design up to {target.replace(' x ', ' × ')} (seeded R² {f(S.loc[target,'val_r2'])}, chronological {f(C.loc[target,'val_r2'])}) and the noise candidate temp × hum.</p>
-<img src="fig2.png" width="250" height="174"/>
-<p class="cap">Figure 2. Phase 3 complexity sweep; vertical line: the {v['p3_target_n']}-feature target.</p>
-
-<h2>5. Phase 4 — Regularisation</h2>
-<p><b>Method.</b> One objective was used for all methods, J(w) = ‖Xw − y‖²/(2n) + λ[ρΣ|w<sub>j</sub>| + (1 − ρ)Σw<sub>j</sub>²/2] with the intercept unpenalised; Ridge (ρ = 0), Lasso (ρ = 1) and Elastic Net (ρ ∈ {{0.1, 0.5, 0.9}}). Each update takes a gradient step on the smooth part (the Ridge term adds λ(1 − ρ) to the diagonal of H) and then soft-thresholds: every penalised weight is moved towards zero by ηλρ and set to exactly zero if it would cross it. The step is 1.9/L for Ridge and 1/L with an L1 part (L = λ<sub>max</sub> + λ(1 − ρ)), so the objective never increases. Each method was fitted along a log-spaced λ path from its largest value downwards, every fit warm-started from the previous one; selection used the seeded validation set alone (no k-fold, as the brief fixes one holdout): Ridge by best R², Lasso and Elastic Net by the largest λ within 0.002 of the path's best.</p>
-<p><b>Results.</b> All L1-type paths first peaked at the last grid value, so they were extended to λ = 10⁻⁵ at the same spacing; the first 30 values reproduced exactly and only the Elastic Net choice changed. Ridge was best (λ = {ridge['lambda']:.2g}, R² {f(ridge['val_r2'],6)}, equal to the unpenalised fit); Lasso (λ = {f(lasso['lambda'],3)}) kept {int(lasso['nonzero'])} of 564 weights at R² {f(lasso['val_r2'])}; Elastic Net chose ρ = {enet['l1_ratio']:g} (λ = {f(enet['lambda'],4)}, R² {f(enet['val_r2'])}, {int(enet['nonzero'])} nonzero). With no variance left to remove, the penalty only added bias, and it raised the top-decile shortfall from {f(S.loc[target,'top_decile_shortfall'],1)} to {f(lasso['top_decile_shortfall'],1)} (Lasso) bikes (Fig. 3). Column verdicts (Table 1) combine a grouped ablation — the design rebuilt without the column and every term derived from it, refitted with Ridge — or an add-back test, the R² of the column alone in its full encoding, and Lasso survival: <i>useful</i> if removing it costs at least 0.002 R²; otherwise <i>redundant</i> if alone R² ≥ 0.01; otherwise <i>uninformative</i>. Holiday keeps most of its terms under Lasso yet costs nothing when removed: a surviving coefficient is not evidence of usefulness. <b>Passed on:</b> the {v['p4_survivors']} Lasso survivors (from {len(v['p4_columns'])} original columns) with lineage, and Ridge as the recommended regression model.</p>
-<img src="fig3.png" width="500" height="162"/>
-<p class="cap">Figure 3. Phase 4 regularisation paths: validation R² and number of nonzero weights against λ.</p>
-<table>
-<tr><th>column</th><th>test</th><th>ΔR²</th><th>alone R²</th><th>Lasso kept</th><th>verdict</th></tr>
-{verdict_rows()}
-</table>
-<p class="cap">Table 1. Column verdicts (validation; ΔR² relative to the Ridge model).</p>
-
-<h2>6. Phase 5 — Logistic regression</h2>
-<p><b>Method.</b> An hour is labelled high demand if its count exceeds the 75th percentile of training hours in the same hour × working-day × year group (96 cutoffs from the training portion, applied unchanged to validation). A global cutoff would label eight hours of the day as never high, and a cutoff without year would label 2011 and 2012 hours very differently. {v['p5_pos']:,} training hours ({f(v['p5_pos_rate'],1)}%) are positive ({f(v['p5_val_pos'],1)}% in validation). The inputs are exactly the {v['p4_survivors']} Lasso survivors with the fitted scaler. The log-loss was minimised by gradient descent with gradient Xᵀ(p − y)/m computed explicitly at each step; since its curvature is at most λ<sub>max</sub>(XᵀX/m)/4 = {f(v['p5_curv'])}, the step 1.9/L = {f(v['p5_lr'],3)} is safe. The probability cutoff maximises validation F1 over 0.05–0.95.</p>
-<p><b>Results.</b> The fit converged in {v['p5_iter']:,} updates. ROC-AUC {f(tuned['roc_auc'],3)}; at the tuned cutoff {f(v['p5_cut'],2)}: accuracy {f(tuned['accuracy'],3)} (always-0 baseline {f(tuned['always_0_accuracy'],3)}), precision {f(tuned['precision'],3)}, recall {f(tuned['recall'],3)}, F1 {f(tuned['f1'],3)}; confusion matrix TN {tuned['tn']}, FP {tuned['fp']}, FN {tuned['fn']}, TP {tuned['tp']}. At 0.5 accuracy is higher ({f(half['accuracy'],3)}) but F1 lower ({f(half['f1'],3)}, recall {f(half['recall'],3)}): with a quarter of the hours positive, accuracy rewards missing busy hours (Fig. 4). Temperature has the largest odds ratio (×{odds_top.iloc[0]['odds']:.2f} per standard deviation), followed by month dummies. The label still carries seasonality ({f(v['p5_jan'],1)}% of January but {f(v['p5_jun'],1)}% of June training hours are positive): a calendar-only ranking reaches ROC-AUC {f(v['p5_auc_cal'],3)}, and within a month the classifier reaches {f(v['p5_auc_month'],3)} (within a season {f(v['p5_auc_season_lo'],3)}–{f(v['p5_auc_season_hi'],3)}), which measures its skill beyond the calendar.</p>
-<img src="fig4.png" width="250" height="174"/>
-<p class="cap">Figure 4. Phase 5 precision, recall and F1 against the probability cutoff; vertical line: tuned cutoff.</p>
-
-<h2>7. Bonus — asymmetric cost</h2>
-<p>Under-prediction was taken to cost three times as much as over-prediction of the same size, keeping the squared error: ℓ(r) = ½c(r)r² with r = ŷ − y and c = 3 if r &lt; 0, else 1. Its derivative c(r)r is continuous, so the gradient is Xᵀ(c ⊙ r)/n = Xᵀr/n + 2Xᵀmin(r, 0)/n, and the gradient's Lipschitz constant is 3λ<sub>max</sub>; the minimiser is the 0.75 expectile rather than the mean. (A cost linear in the number of bikes would give the 75th percentile, but it has no gradient at zero, so fixed-step gradient descent could not converge on it.) On Phase 1's features the Phase 1 learning rate diverged within {v['b_div_iter']} updates, while the rate divided by three ({f(v['b_lr'],3)}) converged in {v['b_iter']} updates. Predictions rose by {f(v['b_shift'],1)} bikes per hour on average; R² fell from {f(cmp_.loc['r2',mse_col],3)} to {f(cmp_.loc['r2',asym_col],3)} while the asymmetric cost fell from {cmp_.loc['asymmetric_cost',mse_col]:,.0f} to {cmp_.loc['asymmetric_cost',asym_col]:,.0f}; bikes short per hour fell from {f(cmp_.loc['mean_shortfall_bikes',mse_col],1)} to {f(cmp_.loc['mean_shortfall_bikes',asym_col],1)} and idle bikes rose from {f(cmp_.loc['mean_surplus_bikes',mse_col],1)} to {f(cmp_.loc['mean_surplus_bikes',asym_col],1)}; the top-decile shortfall fell from {f(v['b_top_mse'],1)} to {f(v['b_top_asym'],1)}. Much of the lift went to hours already over-predicted, a consequence of Phase 1's underfitting. On Phase 2's features the same loss shifted predictions by only {f(v['f_shift'],1)} bikes, cost {f(v['f_r2']-v['f_r2_asym'],3)} R² (from {f(v['f_r2'],3)}) and reduced the top-decile shortfall from {f(v['f_top'],1)} to {f(v['f_top_asym'],1)} bikes.</p>
-
-<h2>8. Limitations</h2>
-<p>(i) <b>Seasonal label leakage:</b> the Phase 5 label removes slot and year levels but not the season, so a large part of the classifier's ROC-AUC is reproducible from the calendar alone. (ii) <b>Chronological shortfall:</b> on later, busier days the models under-predict their own busiest hours (top-predicted-decile mean error {f(C.loc[target,'top_predicted_decile_mean_error'],1)} bikes for the target design, against {f(S.loc[target,'top_predicted_decile_mean_error'],1)} on the seeded split); growth beyond the training period is not extrapolated. (iii) <b>One validation set:</b> λ, the Phase 3 target and the Phase 5 cutoff were tuned and scored on the same seeded validation set, so those scores are slightly optimistic. (iv) <b>Grid revision:</b> the Phase 4 L1 paths were extended after the first official run because their best values lay at the grid edge; the revision is recorded in the notebook and changed only the Elastic Net choice. (v) The Phase 1 and bonus expectations were reconstructed after their runs and are labelled as such.</p>
-
-<h2>9. Final submission</h2>
-<p>The submitted predictions come from Phase 4's Ridge model (λ = {ridge['lambda']:.2g}) on the {v['p3_target_n']}-feature design. With every choice frozen on the seeded split, the model was refitted on all {v['n_all']:,} labelled hours with the same procedure (encoder, scaler and centring means refitted on the combined rows; the same {v['s_dropped']} exact combinations dropped). The final fit converged in {v['s_iter']:,} updates (training R² {f(v['s_r2'])}, RMSE {f(v['s_rmse'],2)}). The {v['n_test']} test hours were predicted in the sample file's order; {v['s_clipped']} negative predictions were set to zero (mean {f(v['s_mean'],1)}, maximum {f(v['s_max'],1)} bikes).</p>
-"""
-
-CSS = """
-body { font-family: serif; font-size: 9.6pt; line-height: 1.32; color: black; }
-h1 { font-size: 14pt; text-align: center; margin: 0 0 2pt 0; }
-p.sub { text-align: center; font-size: 9.5pt; margin: 0 0 6pt 0; }
-h2 { font-size: 11pt; margin: 7pt 0 2pt 0; }
-p { text-align: justify; margin: 0 0 4pt 0; }
-p.cap { font-size: 8.3pt; text-align: center; margin: 1pt 0 5pt 0; }
-img { display: block; margin: 2pt auto 0 auto; }
-table { border-collapse: collapse; margin: 3pt auto 0 auto; font-size: 8.3pt; }
-th, td { border: 0.5pt solid black; padding: 1pt 4pt; text-align: center; }
-"""
-
-
-def build_pdf(path: Path) -> int:
-    story = fitz.Story(html=HTML, user_css=CSS, archive=fitz.Archive(str(FIGURES)))
-    writer = fitz.DocumentWriter(str(path))
-    page_rect = fitz.paper_rect("a4")
-    body = page_rect + (54, 50, -54, -50)
-    more = True
-    while more:
-        device = writer.begin_page(page_rect)
-        more, _ = story.place(body)
-        story.draw(device)
-        writer.end_page()
-    writer.close()
-    doc = fitz.open(str(path))
-    for number, page in enumerate(doc, start=1):
-        page.insert_text((page_rect.width / 2 - 8, page_rect.height - 28), f"{number}",
-                         fontsize=9, fontname="tiro")
-    doc.saveIncr()
-    count = doc.page_count
-    doc.close()
-    return count
+def compile_pdf():
+    tex_bin = Path.home() / "AppData" / "Roaming" / "TinyTeX" / "bin" / "windows" / "pdflatex.exe"
+    pdflatex = str(tex_bin) if tex_bin.exists() else "pdflatex"
+    for _ in range(2):
+        run = subprocess.run([pdflatex, "-interaction=nonstopmode", "-halt-on-error", "report.tex"],
+                             cwd=OUT, capture_output=True, text=True, encoding="latin-1")
+        if run.returncode != 0:
+            print(run.stdout[-3000:])
+            raise RuntimeError("pdflatex failed")
+    log = (OUT / "report.log").read_text(encoding="latin-1")
+    overfull = re.findall(r"Overfull \\[hv]box.*", log)
+    assert not overfull, "overfull boxes:\n" + "\n".join(overfull)
+    assert "There were undefined references" not in log, "undefined references"
+    pages = int(re.search(r"Output written on report\.pdf \((\d+) pages?", log).group(1))
+    assert pages <= 6, f"the report has {pages} pages; the limit is 6"
+    return pages, len(re.findall(r"Underfull \\[hv]box", log))
 
 
 if __name__ == "__main__":
-    pages = build_pdf(OUT / "report.pdf")
-    print(f"report/report.pdf: {pages} pages")
-    assert pages <= 6, "the report must not exceed 6 pages"
+    write_numbers()
+    write_tables()
+    for draw in (fig_phase1, fig_phase3, fig_phase4, fig_phase5):
+        draw()
+    used = check_tex_keys()
+    pages, underfull = compile_pdf()
+    print(f"report/report.pdf: {pages} pages; {len(used)} of {len(M)} values used; "
+          f"no overfull boxes; {underfull} underfull warnings")

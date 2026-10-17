@@ -19,3 +19,8 @@ outputs/tables/*
 !outputs/tables/.gitkeep
 data/processed/*
 !data/processed/.gitkeep
+
+# LaTeX build by-products
+report/*.aux
+report/*.log
+report/*.out
